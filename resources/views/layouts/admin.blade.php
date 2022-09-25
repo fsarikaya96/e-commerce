@@ -39,7 +39,8 @@
 
 <script src="{{ asset("admin/js/off-canvas.js") }}"></script>
 <script src="{{ asset("admin/js/hoverable-collapse.js") }}"></script>
-<script src="{{ asset("admin/js/template.js") }}"></script>
+
+<script src="{{ asset("admin/js/template2.js") }}"></script>
 
 <script src="{{ asset("admin/js/dashboard.js") }}"></script>
 <script src="{{ asset("admin/js/data-table.js") }}"></script>

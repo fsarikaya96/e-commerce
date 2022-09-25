@@ -25,15 +25,13 @@ class LoginController extends Controller
 
     /**
      * Where to redirect users after login.
-     *
-     * @var string
+     * @return string
      */
-//    protected $redirectTo = RouteServiceProvider::HOME;
     protected function authenticated()
     {
-        if (Auth::user()->role_as == "1")
+        if (Auth::user()->role_as == '1')
         {
-            return redirect("admin/dashboard")->with('message',auth()->user()->name." Admin paneline hoşgeldiniz.");
+            return redirect("admin/dashboard")->with('status',\auth()->user()->name." Hoşgeldiniz.");
         }else {
             return redirect("/home")->with('status',"Giriş Başarılı.");
         }

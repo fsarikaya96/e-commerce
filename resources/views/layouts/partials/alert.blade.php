@@ -1,7 +1,3 @@
-@if(Session::has('message'))
-    <h2>{{ Session::get("message") }}</h2>
-@endif
-
 @if (Session::has('status'))
     <div class="alert alert-success" role="alert">
         {{ Session::get('status') }}
