@@ -17,19 +17,21 @@
     <link rel="stylesheet" href="{{ asset("admin/css/style.css") }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset("admin/images/favicon.png") }}"/>
+
+    @vite(['resources/css/app.css'])
 </head>
 <body>
 <div class="container-scroller">
-    @include('layouts.inc.admin.navbar')
-    <div class="container-fluid page-body-wrapper">
-        @include('layouts.inc.admin.sidebar')
+@include('layouts.inc.admin.navbar')
+<div class="container-fluid page-body-wrapper">
+    @include('layouts.inc.admin.sidebar')
 
-        <div class="main-panel">
-            <div class="content-wrapper">
-                @yield('content')
-            </div>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            @yield('content')
         </div>
     </div>
+</div>
 </div>
 
 <script src="{{ asset("admin/vendors/base/vendor.bundle.base.js") }}"></script>
@@ -46,7 +48,7 @@
 <script src="{{ asset("admin/js/data-table.js") }}"></script>
 <script src="{{ asset("admin/js/jquery.dataTables.js") }}"></script>
 <script src="{{ asset("admin/js/dataTables.bootstrap4.js") }}"></script>
-
+@vite(['resources/js/app.js'])
 </body>
 
 </html>

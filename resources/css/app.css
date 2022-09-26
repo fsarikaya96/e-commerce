@@ -1,0 +1,10 @@
+.popup-msg {
+    position: absolute;
+    top: 5px;
+    width: 250px;
+}
+.popup-msg span{
+    font-size: 14px;
+    display: flex;
+    font-weight: 500;
+}

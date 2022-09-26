@@ -11,7 +11,9 @@
             </button>
         </div>
     </div>
+
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+
         <ul class="navbar-nav mr-lg-4 w-100">
             <li class="nav-item nav-search d-none d-lg-block w-100">
                 <div class="input-group">
@@ -118,6 +120,7 @@
                     </a>
                 </div>
             </li>
+
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                     <img src="images/faces/face5.jpg" alt="profile"/>
@@ -140,8 +143,11 @@
                 </div>
             </li>
         </ul>
+        @include('layouts.partials.alert')
+
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
         </button>
+
     </div>
 </nav>
