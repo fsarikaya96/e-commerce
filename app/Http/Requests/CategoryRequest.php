@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Requests;
+
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
@@ -18,7 +20,9 @@ class CategoryRequest extends FormRequest
 
     /**
      * Failed api custom response
+     *
      * @param Validator $validator
+     *
      * @return object
      */
     public $validator = null;
@@ -35,9 +39,12 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
+        $slug = $this->request->get("slug");
+
         return [
             'name'             => 'required|string',
-            'slug'             => 'nullable|unique:categories,slug',
+            'slug'             => ['nullable', Rule::unique('categories')->ignore($slug, 'slug')],
+//            'slug'             => 'nullable|unique:categories,slug',
             'description'      => 'required',
             'image'            => 'nullable|mimes:jpg,jpeg,png',
             'meta_title'       => 'nullable|string',

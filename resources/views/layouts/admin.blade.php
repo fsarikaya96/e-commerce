@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset("admin/css/style.css") }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset("admin/images/favicon.png") }}"/>
-
+    @livewireStyles
     @vite(['resources/css/app.css'])
 </head>
 <body>
@@ -28,6 +28,7 @@
 
     <div class="main-panel">
         <div class="content-wrapper">
+            @include('layouts.partials.alert')
             @yield('content')
         </div>
     </div>
@@ -49,6 +50,8 @@
 <script src="{{ asset("admin/js/jquery.dataTables.js") }}"></script>
 <script src="{{ asset("admin/js/dataTables.bootstrap4.js") }}"></script>
 @vite(['resources/js/app.js'])
+@livewireScripts
+@stack('script')
 </body>
 
 </html>

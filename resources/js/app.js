@@ -2,6 +2,6 @@ import './bootstrap';
 
 $(document).ready(function () {
     setTimeout(function () {
-        $('.popup-msg').fadeOut();
+        $('.alert').fadeOut();
     },1500);
 });
