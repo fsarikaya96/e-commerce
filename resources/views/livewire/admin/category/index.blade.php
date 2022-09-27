@@ -63,10 +63,10 @@
                                         <span class="status-danger">Yayında Değil</span>
                                     @endif</td>
                                 <td>
-                                    <a href="{{ route('admin.category.edit',$category->id) }}" class="btn btn-success text-white">Düzenle</a>
+                                    <a href="{{ route('admin.category.edit',$category->id) }}" class="btn btn-success">Düzenle</a>
                                     <a href="#" wire:click="deleteCategory({{ $category->id }})"
                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                       class="btn btn-danger text-white">Sil</a>
+                                       class="btn btn-danger">Sil</a>
                                 </td>
                             </tr>
                         @empty

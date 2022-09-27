@@ -68,9 +68,9 @@
 
                                 <div class="mb-3">
                                     <label for="brand">Marka Seçiniz</label>
-                                    <select name="brand" id="brand" class="form-control">
+                                    <select name="brand_id" id="brand" class="form-control">
                                         @foreach($brands as $brand)
-                                            <option value="{{ $brand->name }}">{{ $brand->name }}</option>
+                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

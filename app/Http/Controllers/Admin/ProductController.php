@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -13,7 +14,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('admin.product.index');
+        $products = Product::all();
+
+        return view('admin.product.index', compact('products'));
     }
 
     public function create()
@@ -28,13 +31,13 @@ class ProductController extends Controller
     {
         $validatedData = $request->validated();
 
-        $category      = Category::findOrFail($validatedData['category_id']);
+        $category = Category::findOrFail($validatedData['category_id']);
 
         $product = $category->products()->create([
             'category_id'       => $validatedData['category_id'],
             'name'              => $validatedData['name'],
             'slug'              => Str::slug($validatedData['slug']),
-            'brand'             => $validatedData['brand'],
+            'brand_id'          => $validatedData['brand_id'],
             'small_description' => $validatedData['small_description'],
             'description'       => $validatedData['description'],
             'original_price'    => $validatedData['original_price'],
@@ -53,7 +56,7 @@ class ProductController extends Controller
             foreach ($request->file('image') as $imageFile) {
                 $extension = $imageFile->getClientOriginalExtension();
                 $fileName  = time() . $i++ . '.' . $extension;
-                $imageFile->move($uploadPath , $fileName);
+                $imageFile->move($uploadPath, $fileName);
                 $imagePathName = $uploadPath . $fileName;
 
                 $product->productImages()->create([

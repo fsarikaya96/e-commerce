@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('name');
             $table->string('slug');
-            $table->string('brand')->nullable();
+            $table->unsignedBigInteger('brand_id');
             $table->mediumText('small_description')->nullable();
             $table->longText('description')->nullable();
 
@@ -33,6 +33,7 @@ return new class extends Migration
             $table->mediumText('meta_description')->nullable();
 
             $table->foreign('category_id')->on('categories')->references('id')->cascadeOnDelete();
+            $table->foreign('brand_id')->on('brands')->references('id')->cascadeOnDelete();
             $table->timestamps();
         });
     }

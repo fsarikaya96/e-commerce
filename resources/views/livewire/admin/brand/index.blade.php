@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Markalar
-                        <a class="btn btn-primary btn-sm float-end" data-bs-toggle="modal"
+                        <a class="btn btn-primary float-end text-white" data-bs-toggle="modal"
                            data-bs-target="#addBrandModal">Marka Ekle</a>
                     </h3>
                 </div>

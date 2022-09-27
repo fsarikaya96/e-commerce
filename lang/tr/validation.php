@@ -177,7 +177,8 @@ return [
         'meta_title' => 'Meta Başlık',
         'meta_keyword' => 'Meta Kelimeler',
         'meta_description' => 'Meta Açıklama',
-        'category_id' => 'Kategori'
+        'category_id' => 'Kategori',
+        'brand_id' => 'Marka'
     ],
 
 ];
