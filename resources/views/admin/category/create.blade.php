@@ -3,12 +3,11 @@
 @section('content')
 
     <div class="row">
-
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h3>Kategori Ekle
-                        <a href="{{ route('admin.category') }}" class="btn btn-primary btn-sm float-end">Geri</a>
+                        <a href="{{ route('admin.category') }}" class="btn btn-danger float-end text-white">Geri</a>
                     </h3>
                 </div>
                 <div class="card-body">
@@ -62,7 +61,7 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn btn-primary float-end">Kaydet</button>
+                                <button type="submit" class="btn btn-primary float-end text-white">Kaydet</button>
                             </div>
                         </div>
                     </form>

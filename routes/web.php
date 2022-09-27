@@ -22,18 +22,24 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function (){
-
-    Route::get('dashboard',[\App\Http\Controllers\Admin\DashboardController::class,'index'])->name('admin.dashboard');
+Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Category
     Route::controller(\App\Http\Controllers\Admin\CategoryController::class)->group(function () {
         Route::get('category', 'index')->name('admin.category');
         Route::get('category/create', 'create')->name('admin.category.create');
-        Route::post('category/store','store')->name('admin.category.store');
-        Route::get('category/{category}/edit','edit')->name('admin.category.edit');
-        Route::put('category/{category}','update')->name('admin.category.update');
+        Route::post('category/store', 'store')->name('admin.category.store');
+        Route::get('category/{category}/edit', 'edit')->name('admin.category.edit');
+        Route::put('category/{category}', 'update')->name('admin.category.update');
     });
-    Route::get('brands',App\Http\Livewire\Admin\Brand\Index::class)->name('admin.brands');
 
+    // Product
+    Route::controller(\App\Http\Controllers\Admin\ProductController::class)->group(function () {
+        Route::get('products', 'index')->name('admin.products');
+        Route::get('products/create', 'create')->name('admin.products.create');
+        Route::post('products', 'store')->name('admin.products.store');
+    });
+
+        Route::get('brands', App\Http\Livewire\Admin\Brand\Index::class)->name('admin.brands');
 });

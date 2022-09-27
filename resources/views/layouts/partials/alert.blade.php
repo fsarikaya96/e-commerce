@@ -4,15 +4,13 @@
     </div>
 @endif
 
-{{--@if (Session::has('status'))--}}
-{{--    <div class="alert alert-success" role="alert">--}}
-{{--        {{ Session::get('status') }}--}}
-{{--    </div>--}}
-{{--@endif--}}
-
-@if (Session::has('danger'))
-    <div class="alert alert-danger" role="alert">
-        {{ Session::get('danger') }}
+@if ($errors->any())
+    <div class="alert alert-warning" role="alert">
+        <strong>HATA!</strong>
+    @foreach ($errors->all() as $error)
+        <p class="mt-2">{{$error}}</p>
+    @endforeach
     </div>
 @endif
+
 

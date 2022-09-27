@@ -169,7 +169,14 @@ return [
     'attributes' => [
         'name' => 'İsim',
         'description' => 'Açıklama',
-        'slug' => 'Slug'
+        'slug' => 'Slug',
+        'small_description' => 'Kısa Açıklama',
+        'original_price' => 'Gerçek Fiyat',
+        'selling_price' => 'Satış Fiyat',
+        'quantity' => 'Adet',
+        'meta_title' => 'Meta Başlık',
+        'meta_keyword' => 'Meta Kelimeler',
+        'meta_description' => 'Meta Açıklama',
     ],
 
 ];

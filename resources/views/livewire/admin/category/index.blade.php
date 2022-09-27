@@ -7,15 +7,23 @@
                     <h5 class="modal-title" id="exampleModalLabel">Kategori Sil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form wire:submit.prevent="destroyCategory">
-                    <div class="modal-body">
-                        <h6>Kategoriyi silmek istediğinize emin misiniz?</h6>
+                <div wire:loading class="align-self-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Yükleniyor...</span>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                        <button type="submit" class="btn btn-primary">Evet, Sil</button>
-                    </div>
-                </form>
+                    <span class="p-2">Yükleniyor...</span>
+                </div>
+                <div wire:loading.remove>
+                    <form wire:submit.prevent="destroyCategory">
+                        <div class="modal-body">
+                            <h5>Kategoriyi silmek istediğinize emin misiniz?</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-primary">Evet, Sil</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -26,7 +34,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Kategori
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary btn-sm float-end">Ekle</a>
+                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary float-end text-white">Ekle</a>
                     </h3>
                 </div>
                 <div class="card-body">
@@ -42,7 +50,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($categories as $category)
+                        @forelse($categories as $category)
                             <tr>
                                 <td>{{ $category->id }}</td>
                                 <td><img class="category-img" src="{{ asset("/uploads/category/$category->image") }}"
@@ -55,13 +63,17 @@
                                         <span class="status-danger">Yayında Değil</span>
                                     @endif</td>
                                 <td>
-                                    <a href="{{ route('admin.category.edit',$category->id) }}" class="btn btn-success">Düzenle</a>
+                                    <a href="{{ route('admin.category.edit',$category->id) }}" class="btn btn-success text-white">Düzenle</a>
                                     <a href="#" wire:click="deleteCategory({{ $category->id }})"
                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                       class="btn btn-danger">Sil</a>
+                                       class="btn btn-danger text-white">Sil</a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="6">Kategori Bulunamadı.</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                     <div>

@@ -33,13 +33,15 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-success">Düzenle</a>
-                                    <a class="btn btn-danger">Sil</a>
+                                    <a href="#" data-bs-toggle="modal"
+                                       data-bs-target="#updateBrandModal" wire:click="editBrand({{ $brand->id }})" class="btn btn-success">Düzenle</a>
+                                    <a data-bs-toggle="modal"
+                                       data-bs-target="#deleteBrandModal" wire:click="deleteBrand({{ $brand->id }})" class="btn btn-danger">Sil</a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">Veri Bulunamadı.</td>
+                                <td colspan="5">Marka Bulunamadı.</td>
                             </tr>
                         @endforelse
 
