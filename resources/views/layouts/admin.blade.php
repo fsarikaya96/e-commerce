@@ -34,7 +34,6 @@
     </div>
 </div>
 </div>
-<script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
 
 <script src="{{ asset("admin/vendors/base/vendor.bundle.base.js") }}"></script>
 
@@ -47,11 +46,13 @@
 <script src="{{ asset("admin/js/template.js") }}"></script>
 
 <script src="{{ asset("admin/js/dashboard.js") }}"></script>
-<script src="{{ asset("admin/js/data-table.js") }}"></script>
-<script src="{{ asset("admin/js/jquery.dataTables.js") }}"></script>
-<script src="{{ asset("admin/js/dataTables.bootstrap4.js") }}"></script>
+{{--<script src="{{ asset("admin/js/data-table.js") }}"></script>--}}
+{{--<script src="{{ asset("admin/js/jquery.dataTables.js") }}"></script>--}}
+{{--<script src="{{ asset("admin/js/dataTables.bootstrap4.js") }}"></script>--}}
+<script src="{{ asset("admin/vendors/ckeditor/ckeditor.js") }}"></script>
 @vite('resources/js/admin.js')
 @livewireScripts
+@stack('script')
 </body>
 
 </html>

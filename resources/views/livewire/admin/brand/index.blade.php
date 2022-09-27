@@ -6,7 +6,7 @@
                 <div class="card-header">
                     <h3>Markalar
                         <a class="btn btn-primary float-end text-white" data-bs-toggle="modal"
-                           data-bs-target="#addBrandModal">Marka Ekle</a>
+                           data-bs-target="#addBrandModal" wire:click="openModal">Marka Ekle</a>
                     </h3>
                 </div>
                 <div class="card-body">
