@@ -1,68 +1,74 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <i class="mdi mdi-home menu-icon"></i>
-                <span class="menu-title">Dashboard</span>
+                <span class="menu-title">Ana Sayfa</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <i class="mdi mdi-circle-outline menu-icon"></i>
-                <span class="menu-title">UI Elements</span>
+            <a class="nav-link" href="#">
+                <i class="mdi mdi-sale menu-icon"></i>
+                <span class="menu-title">Satışlar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category">
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <span class="menu-title">Kategoriler</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="category">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('admin.category') }}">Kategoriler</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('admin.category.create') }}">Kategori Ekle</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
-                <i class="mdi mdi-view-headline menu-icon"></i>
-                <span class="menu-title">Form elements</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-                <i class="mdi mdi-chart-pie menu-icon"></i>
-                <span class="menu-title">Charts</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-                <i class="mdi mdi-grid-large menu-icon"></i>
-                <span class="menu-title">Tables</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="pages/icons/mdi.html">
-                <i class="mdi mdi-emoticon menu-icon"></i>
-                <span class="menu-title">Icons</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <i class="mdi mdi-account menu-icon"></i>
-                <span class="menu-title">User Pages</span>
+            <a class="nav-link" data-bs-toggle="collapse" href="#product" aria-expanded="false" aria-controls="product">
+                <i class="mdi mdi-plus-circle menu-icon"></i>
+                <span class="menu-title">Ürünler</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
+            <div class="collapse" id="product">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Ürünler</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Ürün Ekle</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="documentation/documentation.html">
-                <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                <span class="menu-title">Documentation</span>
+            <a class="nav-link" href="{{ route('admin.brands') }}">
+                <i class="mdi mdi-format-align-justify menu-icon"></i>
+                <span class="menu-title">Markalar</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
+                <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                <span class="menu-title">Kullanıcılar</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="users">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="#">Kullanıcılar</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="#">Kullanıcı Ekle</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="mdi mdi-cards menu-icon"></i>
+                <span class="menu-title">Slider</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="mdi mdi-settings menu-icon"></i>
+                <span class="menu-title">Ayarlar</span>
             </a>
         </li>
     </ul>

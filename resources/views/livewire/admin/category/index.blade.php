@@ -1,6 +1,6 @@
 <div>
-    <!-- Modal -->
-    <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -49,11 +49,16 @@
                                          alt="Fotoğraf Bulunumadı."></td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>
-                                <td>{{ $category->status ? "Hidden" : "Visible" }}</td>
+                                <td>@if($category->status == 1)
+                                        <span class="status-success">Yayında</span>
+                                    @else
+                                        <span class="status-danger">Yayında Değil</span>
+                                    @endif</td>
                                 <td>
                                     <a href="{{ route('admin.category.edit',$category->id) }}" class="btn btn-success">Düzenle</a>
                                     <a href="#" wire:click="deleteCategory({{ $category->id }})"
-                                       data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Sil</a>
+                                       data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                       class="btn btn-danger">Sil</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -67,11 +72,3 @@
         </div>
     </div>
 </div>
-@push('script')
-    <script>
-        window.addEventListener('close-modal',event => {
-            $('#deleteModal').modal('hide');
-        });
-    </script>
-
-@endpush

@@ -18,7 +18,7 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset("admin/images/favicon.png") }}"/>
     @livewireStyles
-    @vite(['resources/css/app.css'])
+    @vite('resources/css/admin.css')
 </head>
 <body>
 <div class="container-scroller">
@@ -49,9 +49,8 @@
 <script src="{{ asset("admin/js/data-table.js") }}"></script>
 <script src="{{ asset("admin/js/jquery.dataTables.js") }}"></script>
 <script src="{{ asset("admin/js/dataTables.bootstrap4.js") }}"></script>
-@vite(['resources/js/app.js'])
+@vite('resources/js/admin.js')
 @livewireScripts
-@stack('script')
 </body>
 
 </html>

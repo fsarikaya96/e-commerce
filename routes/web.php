@@ -24,7 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function (){
 
-    Route::get('dashboard',[\App\Http\Controllers\Admin\DashboardController::class,'index']);
+    Route::get('dashboard',[\App\Http\Controllers\Admin\DashboardController::class,'index'])->name('admin.dashboard');
 
     // Category
     Route::controller(\App\Http\Controllers\Admin\CategoryController::class)->group(function () {
@@ -34,5 +34,6 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function (){
         Route::get('category/{category}/edit','edit')->name('admin.category.edit');
         Route::put('category/{category}','update')->name('admin.category.update');
     });
+    Route::get('brands',App\Http\Livewire\Admin\Brand\Index::class)->name('admin.brands');
 
 });
