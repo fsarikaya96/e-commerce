@@ -11,3 +11,8 @@ window.addEventListener('close-modal',event => {
     $('#deleteModal').modal('hide');
 
 });
+ClassicEditor
+    .create( document.querySelector( '#description' ) )
+    .catch( error => {
+        console.error( error );
+    } );

@@ -34,6 +34,7 @@
     </div>
 </div>
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
 
 <script src="{{ asset("admin/vendors/base/vendor.bundle.base.js") }}"></script>
 

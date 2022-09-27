@@ -15,28 +15,38 @@
                         @csrf
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#home-tab-pane" type="button" role="tab"
+                                        aria-controls="home-tab-pane" aria-selected="true">
                                     Ürün
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="seo-tab" data-bs-toggle="tab" data-bs-target="#seo-tab-pane" type="button" role="tab" aria-controls="seo-tab-pane" aria-selected="false">
+                                <button class="nav-link" id="seo-tab" data-bs-toggle="tab"
+                                        data-bs-target="#seo-tab-pane" type="button" role="tab"
+                                        aria-controls="seo-tab-pane" aria-selected="false">
                                     SEO Etiketleri
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details-tab-pane" type="button" role="tab" aria-controls="details-tab-pane" aria-selected="false">
+                                <button class="nav-link" id="details-tab" data-bs-toggle="tab"
+                                        data-bs-target="#details-tab-pane" type="button" role="tab"
+                                        aria-controls="details-tab-pane" aria-selected="false">
                                     Detaylar
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">
+                                <button class="nav-link" id="image-tab" data-bs-toggle="tab"
+                                        data-bs-target="#image-tab-pane" type="button" role="tab"
+                                        aria-controls="image-tab-pane" aria-selected="false">
                                     Ürün Resimleri
                                 </button>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel"
+                                 aria-labelledby="home-tab" tabindex="0">
+
                                 <div class="mb-3">
                                     <label for="category_id">Kategori Seçiniz</label>
                                     <select name="category_id" id="category_id" class="form-control">
@@ -72,12 +82,13 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="description">Ürün Açıklama</label>
-                                    <input type="text" id="description" name="description" class="form-control">
+                                    <label for="product_description">Ürün Açıklama</label>
+                                    <textarea type="text" id="description" name="description" class="form-control"></textarea>
                                 </div>
 
                             </div>
-                            <div class="tab-pane fade border p-3" id="seo-tab-pane" role="tabpanel" aria-labelledby="seo-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3" id="seo-tab-pane" role="tabpanel"
+                                 aria-labelledby="seo-tab" tabindex="0">
                                 <div class="mb-3">
                                     <label for="meta_title">Meta Başlık</label>
                                     <input type="text" id="meta_title" name="meta_title" class="form-control">
@@ -94,7 +105,8 @@
                                            class="form-control">
                                 </div>
                             </div>
-                            <div class="tab-pane fade border p-3" id="details-tab-pane" role="tabpanel" aria-labelledby="details-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3" id="details-tab-pane" role="tabpanel"
+                                 aria-labelledby="details-tab" tabindex="0">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -118,21 +130,22 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="trending">Trend</label><br>
+                                    <div class="row">
+                                        <div class="mb-3 col-2">
+                                            <label for="trending">Trend olsun mu ? </label><br>
                                             <input type="checkbox" id="trending" name="trending"
                                                    style="width: 25px; height: 25px;">
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="status">Durum</label><br>
+                                        <div class="mb-3 col-2">
+                                            <label for="status">Durum aktif olsun mu?</label><br>
                                             <input type="checkbox" id="status" name="status"
                                                    style="width: 25px; height: 25px;">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel"
+                                 aria-labelledby="image-tab" tabindex="0">
                                 <div class="mb-3">
                                     <label for="image"></label>
                                     <input type="file" id="image" name="image[]" multiple class="form-control">

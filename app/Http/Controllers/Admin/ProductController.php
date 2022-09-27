@@ -27,6 +27,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $validatedData = $request->validated();
+
         $category      = Category::findOrFail($validatedData['category_id']);
 
         $product = $category->products()->create([
