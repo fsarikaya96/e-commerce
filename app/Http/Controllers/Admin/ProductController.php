@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -70,11 +71,14 @@ class ProductController extends Controller
 
     public function edit(int $product_id)
     {
-        $product    = Product::with('category')->findOrFail($product_id);
-        $categories = Category::all();
-        $brands     = Brand::all();
+        $product      = Product::with('category')->findOrFail($product_id);
+        $categories   = Category::all();
+        $brands       = Brand::all();
+        $productColor = $product->productColors->pluck('color_id')->toArray();
 
-        return view('admin.product.edit', compact('product', 'categories', 'brands'));
+        $colors = Color::whereNotIn('id', $productColor)->get();
+
+        return view('admin.product.edit', compact('product', 'categories', 'brands', 'colors', 'productColor'));
     }
 
     public function update(ProductRequest $request, int $product_id)
@@ -103,6 +107,16 @@ class ProductController extends Controller
 
             $this->extracted($request, $product);
 
+            if ($request->colors) {
+                foreach ($request->colors as $key => $color) {
+                    $product->productColors()->updateOrCreate([
+                        'product_id' => $product->id,
+                        'color_id'   => $color,
+                        'quantity'   => $request->color_quantity[$key] ?? 0
+
+                    ]);
+                }
+            }
             return redirect('admin/products')->with('message', 'Ürün Başarıyla Güncellendi.');
         } else {
             return redirect('admin/products')->with('error', 'Böyle Bir Ürün Kimliği Yok.');
@@ -121,6 +135,21 @@ class ProductController extends Controller
         } else {
             return redirect()->back()->with('error', 'Resim Silinemedi.');
         }
+    }
+
+    public function updateProductColor(Request $request, $product_color_id = 0)
+    {
+        $productColorData = Product::findOrFail($request->product_id)
+                                ->productColors()->where('id',$product_color_id)->first();
+        $productColorData->update([ 'quantity' => $request->qty ]);
+
+        return response()->json(['message' => 'Güncelleme Başarılı']);
+    }
+
+    public function deleteProductColor($product_color = 0)
+    {
+        ProductColor::findOrFail($product_color)->delete();
+        return response()->json(['message' => 'Silme Başarılı']);
     }
 
     /**

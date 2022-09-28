@@ -138,7 +138,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="quantity">Adet</label>
-                                            <input type="number" id="quantity" name="quantity" class="form-control"
+                                            <input type="number" min="1" id="quantity" name="quantity" class="form-control"
                                                    value="{{ old('quantity') }}">
                                         </div>
                                     </div>
@@ -162,8 +162,7 @@
                                     <input type="file" id="photo-upload" name="image[]" multiple class="form-control">
                                 </div>
                             </div>
-                            <div class="tab-pane fade border p-3" id="color-tab-pane" role="tabpanel"
-                                 aria-labelledby="color-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3" id="color-tab-pane" role="tabpanel" aria-labelledby="color-tab" tabindex="0">
                                 <div class="mb-3">
                                     <label>Renk Seçin</label>
                                     <hr>
@@ -176,7 +175,7 @@
                                                     {{ $color->name }}
                                                     <br>
                                                     <label for="color_quantity">Adet</label>
-                                                    <input type="number" name="color_quantity[]" id="color_quantity" style="width: 70px; border: 1px solid #CCC">
+                                                    <input type="number" min="1" name="color_quantity[]" id="color_quantity" style="width: 70px; border: 1px solid #CCC">
                                                 </div>
                                             </div>
                                         @empty

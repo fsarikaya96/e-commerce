@@ -37,16 +37,20 @@
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="image-tab" data-bs-toggle="tab"
-                                        data-bs-target="#image-tab-pane" type="button" role="tab"
-                                        aria-controls="image-tab-pane" aria-selected="false">
+                                <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">
                                     Ürün Resimleri
                                 </button>
                             </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="color-tab" data-bs-toggle="tab" data-bs-target="#color-tab-pane" type="button" role="tab" aria-controls="color-tab-pane" aria-selected="false">
+                                    Ürün Renkleri
+                                </button>
+                            </li>
+
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel"
-                                 aria-labelledby="home-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 
                                 <div class="mb-3">
                                     <label for="category_id">Kategori Seçiniz</label>
@@ -87,8 +91,7 @@
                                 </div>
 
                             </div>
-                            <div class="tab-pane fade border p-3" id="seo-tab-pane" role="tabpanel"
-                                 aria-labelledby="seo-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3" id="seo-tab-pane" role="tabpanel" aria-labelledby="seo-tab" tabindex="0">
                                 <div class="mb-3">
                                     <label for="meta_title">Meta Başlık</label>
                                     <input type="text" id="meta_title" name="meta_title" class="form-control" value="{{ $product->meta_title }}">
@@ -104,8 +107,7 @@
                                     <input type="text" id="meta_description" name="meta_description" class="form-control" value="{{ $product->meta_description }}">
                                 </div>
                             </div>
-                            <div class="tab-pane fade border p-3" id="details-tab-pane" role="tabpanel"
-                                 aria-labelledby="details-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3" id="details-tab-pane" role="tabpanel" aria-labelledby="details-tab" tabindex="0">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -123,7 +125,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="quantity">Adet</label>
-                                            <input type="number" id="quantity" name="quantity" class="form-control" value="{{ $product->quantity }}">
+                                            <input type="number" min="1" id="quantity" name="quantity" class="form-control" value="{{ $product->quantity }}">
                                         </div>
                                     </div>
 
@@ -139,8 +141,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel"
-                                 aria-labelledby="image-tab" tabindex="0">
+                            <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
                                 <div class="mb-3">
                                     <label for="image"></label>
                                     <input type="file" id="image" name="image[]" multiple class="form-control">
@@ -158,6 +159,64 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="tab-pane fade border p-3" id="color-tab-pane" role="tabpanel" aria-labelledby="color-tab" tabindex="0">
+                                <div class="mb-3">
+                                    <label>Renk Seçin</label>
+                                    <hr>
+                                    <div class="row">
+                                        @forelse($colors as $color)
+                                            <div class="col-md-3">
+                                                <div class="p-2 border mb-3">
+                                                    <label for="color">Renk</label>
+                                                    <input type="checkbox" name="colors[]" id="color" value="{{ $color->id }}">
+                                                    {{ $color->name }}
+                                                    <br>
+                                                    <label for="color_quantity">Adet</label>
+                                                    <input type="number" min="1" name="color_quantity[]" id="color_quantity" style="width: 70px; border: 1px solid #CCC">
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <div class="col-md-12">
+                                               Daha Fazla Renk Bulunamadı.
+                                            </div>
+                                        @endforelse
+                                    </div>
+                                </div>
+                                Ürüne Ait Olan Renkler
+                                <hr>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Renk Adı</th>
+                                                <th>Adet</th>
+                                                <th>Sil</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @forelse($product->productColors as $productColor)
+                                            <tr>
+                                                <td>{{ $productColor->colors->name }}</td>
+                                                <td>
+                                                    <div class="input-group mb-3" style="width: 150px">
+                                                        <input type="number" min="1" value="{{ $productColor->quantity }}" class="form-control form-control-sm qty">
+                                                        <button class="btn btn-primary btn-sm text-white updateQuantityBtn" value="{{ $productColor->id }}">Güncelle</button>
+                                                        <span class="qty-msg mt-2" style="display: none"></span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-danger btn-sm text-white deleteQuantityBtn" value="{{ $productColor->id }}">Sil</button>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="3">Ürüne Ait Renk Bulunamadı.</td>
+                                            </tr>
+                                        @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary float-end text-white mt-2">Kaydet</button>
@@ -171,10 +230,65 @@
 @push('script')
     <script>
 
-        ClassicEditor
-            .create( document.querySelector( '#description' ) )
-            .catch( error => {
+        $(document).ready(function (){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // Update Product Color
+            $(document).on('click','.updateQuantityBtn',function (e) {
+                e.preventDefault();
+                let product_id = "{{ $product->id }}"
+                let product_color_id = $(this).val();
+                let obj = $(this);
+                let qty = $(this).closest('tbody tr').find('.qty').val();
+
+                if(qty <= 0)
+                {
+                    alert("Adet 0 ve altında olamaz.")
+                    return false;
+                }
+                let data = {
+                    'product_id': product_id,
+                    'qty': qty
+                }
+                $.ajax({
+                   'url' : '{{ route('admin.products.updateProductColor') }}' + '/' + product_color_id ,
+                   'type' : 'POST',
+                   'data' : data,
+                    success:function (result) {
+                        $(obj).closest('tbody tr').find('.qty-msg').text(result.message).show();
+                        setTimeout(function() {
+                            $(obj).closest('tbody tr').find('.qty-msg').text(result.message).fadeOut();
+                        }, 1000);
+                    }
+
+                });
+
+            });
+
+            // Delete Product Color
+            $(document).on('click','.deleteQuantityBtn',function (e) {
+                e.preventDefault();
+                let product_color_id = $(this).val();
+                let obj = $(this);
+                $.ajax({
+                    'url' : '{{ route('admin.products.deleteProductColor') }}' + '/' + product_color_id,
+                    'type' : 'POST',
+                    'data' : { 'product_color_id' : product_color_id },
+                    success:function (result)
+                    {
+                        $(obj).closest('tr').remove();
+                        alert(result.message);
+                    }
+                });
+            });
+
+        });
+
+        ClassicEditor.create( document.querySelector( '#description' ) ).catch( error => {
                 console.error( error );
-            } );
+            });
     </script>
 @endpush

@@ -28,3 +28,9 @@
     width: 150px;
     height: 150px;
 }
+.qty-msg{
+    color: green;
+    position: absolute;
+    top: 35px;
+    FONT-WEIGHT: 700;
+}
