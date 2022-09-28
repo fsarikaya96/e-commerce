@@ -18,19 +18,16 @@
                             <div class="col-md-6 mb-3">
                                 <label for="name">Kategori Adı <small>*</small></label>
                                 <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}">
-                                @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="slug">Slug<small> (İsteğe Bağlı)</small></label>
                                 <input type="text" id="slug" name="slug" class="form-control" value="{{ old('slug') }}">
-                                @error('slug') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
 
                             <div class="col-md-12 mb-3">
                                 <label for="description">Açıklama <small>*</small></label>
                                 <textarea name="description" class="form-control" id="description" rows="3">{{ old('description') }}</textarea>
-                                @error('description') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">

@@ -4,6 +4,12 @@
     </div>
 @endif
 
+@if (Session::has('error'))
+    <div class="alert alert-danger" role="alert">
+        <span class="status-msg">{{ Session::get('error') }}</span>
+    </div>
+@endif
+
 @if ($errors->any())
     <div class="alert alert-warning" role="alert">
         <strong>HATA!</strong>

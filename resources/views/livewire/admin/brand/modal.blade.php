@@ -27,10 +27,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" wire:click="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <button type="button" wire:click="closeModal" class="btn btn-secondary text-white" data-bs-dismiss="modal">
                         Kapat
                     </button>
-                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button type="submit" class="btn btn-primary text-white">Kaydet</button>
                 </div>
             </form>
         </div>
@@ -73,10 +73,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" wire:click="closeModal" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-secondary text-white" wire:click="closeModal" data-bs-dismiss="modal">
                             Kapat
                         </button>
-                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <button type="submit" class="btn btn-primary text-white">Güncelle</button>
                     </div>
                 </form>
             </div>
@@ -105,8 +105,8 @@
                         <h5>Markayı silmek istediğinize emin misiniz?</h5>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                        <button type="submit" class="btn btn-primary">Evet, Sil</button>
+                        <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-primary text-white">Evet, Sil</button>
                     </div>
                 </form>
             </div>
