@@ -71,7 +71,7 @@ class ProductController extends Controller
 
     public function edit(int $product_id)
     {
-        $product      = Product::with('category')->findOrFail($product_id);
+        $product      = Product::findOrFail($product_id);
         $categories   = Category::all();
         $brands       = Brand::all();
         $productColor = $product->productColors->pluck('color_id')->toArray();

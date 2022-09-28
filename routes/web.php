@@ -23,6 +23,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
+
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Category
@@ -46,15 +47,17 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::post('products/delete-product-color/{product?}','deleteProductColor')->name('admin.products.deleteProductColor');
     });
 
-    // Sliders
+    // Slider
     Route::controller(\App\Http\Controllers\Admin\SliderController::class)->group(function () {
         Route::get('sliders', 'index')->name('admin.sliders');
         Route::get('sliders/create', 'create')->name('admin.sliders.create');
         Route::post('sliders', 'store')->name('admin.sliders.store');
+        Route::get('sliders/{slider}/edit', 'edit')->name('admin.sliders.edit');
+        Route::put('sliders/{slider}', 'update')->name('admin.sliders.update');
 
     });
 
-    // Colors
+    // Color
     Route::controller(\App\Http\Controllers\Admin\ColorController::class)->group(function () {
         Route::get('colors', 'index')->name('admin.colors');
         Route::get('colors/create', 'create')->name('admin.colors.create');

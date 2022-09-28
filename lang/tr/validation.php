@@ -179,7 +179,9 @@ return [
         'meta_description' => 'Meta Açıklama',
         'category_id' => 'Kategori',
         'brand_id' => 'Marka',
-        'code' => 'Renk Kodu'
+        'code' => 'Renk Kodu',
+        'title' => 'Başlık',
+        'image' => 'Resim'
     ],
 
 ];
