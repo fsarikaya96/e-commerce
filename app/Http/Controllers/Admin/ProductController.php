@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -21,10 +22,11 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        $brands     = Brand::all();
+        $categories = Category::where('status', 1)->get();
+        $brands     = Brand::where('status', 1)->get();
+        $colors     = Color::where('status', 1)->get();
 
-        return view('admin.product.create', compact('categories', 'brands'));
+        return view('admin.product.create', compact('categories', 'brands', 'colors'));
     }
 
     public function store(ProductRequest $request)
@@ -52,23 +54,36 @@ class ProductController extends Controller
 
         $this->extracted($request, $product);
 
+        if ($request->colors) {
+            foreach ($request->colors as $key => $color) {
+                $product->productColors()->create([
+                    'product_id' => $product->id,
+                    'color_id'   => $color,
+                    'quantity'   => $request->color_quantity[$key] ?? 0
+
+                ]);
+            }
+        }
+
         return redirect('admin/products')->with('message', 'Ürün Başarıyla Eklendi.');
     }
+
     public function edit(int $product_id)
     {
-        $product = Product::with('category')->findOrFail($product_id);
+        $product    = Product::with('category')->findOrFail($product_id);
         $categories = Category::all();
         $brands     = Brand::all();
-        return view('admin.product.edit',compact('product','categories','brands'));
+
+        return view('admin.product.edit', compact('product', 'categories', 'brands'));
     }
+
     public function update(ProductRequest $request, int $product_id)
     {
         $validatedData = $request->validated();
-        $product = Category::findOrFail($validatedData['category_id'])
-                              ->products()->where('id',$product_id)->first();
+        $product       = Category::findOrFail($validatedData['category_id'])
+                                 ->products()->where('id', $product_id)->first();
 
-        if ($product)
-        {
+        if ($product) {
             $product->update([
                 'category_id'       => $validatedData['category_id'],
                 'name'              => $validatedData['name'],
@@ -89,22 +104,21 @@ class ProductController extends Controller
             $this->extracted($request, $product);
 
             return redirect('admin/products')->with('message', 'Ürün Başarıyla Güncellendi.');
-        }else {
+        } else {
             return redirect('admin/products')->with('error', 'Böyle Bir Ürün Kimliği Yok.');
         }
-
-
     }
+
     public function deleteImage(int $image_id)
     {
         $image = ProductImage::findOrFail($image_id);
 
-        if (File::exists($image->image))
-        {
+        if (File::exists($image->image)) {
             File::delete($image->image);
             $image->delete();
+
             return redirect()->back()->with('message', 'Resim Başarıyla Silindi.');
-        }else {
+        } else {
             return redirect()->back()->with('error', 'Resim Silinemedi.');
         }
     }

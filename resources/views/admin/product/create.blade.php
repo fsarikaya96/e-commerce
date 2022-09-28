@@ -42,6 +42,13 @@
                                     Ürün Resimleri
                                 </button>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="color-tab" data-bs-toggle="tab"
+                                        data-bs-target="#color-tab-pane" type="button" role="tab"
+                                        aria-controls="color-tab-pane" aria-selected="false">
+                                    Ürün Renkleri
+                                </button>
+                            </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel"
@@ -58,12 +65,14 @@
 
                                 <div class="mb-3">
                                     <label for="name">Ürün İsim</label>
-                                    <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}">
+                                    <input type="text" id="name" name="name" class="form-control"
+                                           value="{{ old('name') }}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="slug">Ürün Slug</label>
-                                    <input type="text" id="slug" name="slug" class="form-control" value="{{ old('slug') }}">
+                                    <input type="text" id="slug" name="slug" class="form-control"
+                                           value="{{ old('slug') }}">
                                 </div>
 
                                 <div class="mb-3">
@@ -77,12 +86,14 @@
 
                                 <div class="mb-3">
                                     <label for="small_description">Kısaltılmış Açıklama (500 kelime)</label>
-                                    <input type="text" id="small_description" name="small_description" class="form-control" value="{{ old('small_description') }}">
+                                    <input type="text" id="small_description" name="small_description"
+                                           class="form-control" value="{{ old('small_description') }}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_description">Ürün Açıklama</label>
-                                    <textarea type="text" id="description" name="description" class="form-control">{{ old('description') }}</textarea>
+                                    <textarea type="text" id="description" name="description"
+                                              class="form-control">{{ old('description') }}</textarea>
                                 </div>
 
                             </div>
@@ -90,17 +101,20 @@
                                  aria-labelledby="seo-tab" tabindex="0">
                                 <div class="mb-3">
                                     <label for="meta_title">Meta Başlık</label>
-                                    <input type="text" id="meta_title" name="meta_title" class="form-control" value="{{ old('meta_title') }}">
+                                    <input type="text" id="meta_title" name="meta_title" class="form-control"
+                                           value="{{ old('meta_title') }}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="meta_keyword">Meta Kelimeler</label>
-                                    <input type="text" id="meta_keyword" name="meta_keyword" class="form-control" value="{{ old('meta_keyword') }}">
+                                    <input type="text" id="meta_keyword" name="meta_keyword" class="form-control"
+                                           value="{{ old('meta_keyword') }}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="meta_description">Meta Açıklama</label>
-                                    <input type="text" id="meta_description" name="meta_description" class="form-control" value="{{ old('meta_description') }}">
+                                    <input type="text" id="meta_description" name="meta_description"
+                                           class="form-control" value="{{ old('meta_description') }}">
                                 </div>
                             </div>
                             <div class="tab-pane fade border p-3" id="details-tab-pane" role="tabpanel"
@@ -109,27 +123,31 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="original_price">Gerçek Fiyat</label>
-                                            <input type="text" id="original_price" name="original_price" class="form-control" value="{{ old('original_price') }}">
+                                            <input type="text" id="original_price" name="original_price"
+                                                   class="form-control" value="{{ old('original_price') }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="selling_price">Satış Fiyat</label>
-                                            <input type="text" id="selling_price" name="selling_price" class="form-control" value="{{ old('selling_price') }}">
+                                            <input type="text" id="selling_price" name="selling_price"
+                                                   class="form-control" value="{{ old('selling_price') }}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="quantity">Adet</label>
-                                            <input type="number" id="quantity" name="quantity" class="form-control" value="{{ old('quantity') }}">
+                                            <input type="number" id="quantity" name="quantity" class="form-control"
+                                                   value="{{ old('quantity') }}">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="mb-3 col-2">
                                             <label for="trending">Trend olsun mu ? </label><br>
-                                            <input type="checkbox" id="trending" name="trending" class="status-checkbox">
+                                            <input type="checkbox" id="trending" name="trending"
+                                                   class="status-checkbox">
                                         </div>
                                         <div class="mb-3 col-2">
                                             <label for="status">Durum aktif olsun mu?</label><br>
@@ -141,7 +159,32 @@
                             <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel"
                                  aria-labelledby="image-tab" tabindex="0">
                                 <div class="mb-3">
-                                    <input type="file" id="photo-upload" name="image[]" multiple class="form-control" >
+                                    <input type="file" id="photo-upload" name="image[]" multiple class="form-control">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade border p-3" id="color-tab-pane" role="tabpanel"
+                                 aria-labelledby="color-tab" tabindex="0">
+                                <div class="mb-3">
+                                    <label>Renk Seçin</label>
+                                    <hr>
+                                    <div class="row">
+                                        @forelse($colors as $color)
+                                            <div class="col-md-3">
+                                                <div class="p-2 border mb-3">
+                                                    <label for="color">Renk</label>
+                                                    <input type="checkbox" name="colors[]" id="color" value="{{ $color->id }}">
+                                                    {{ $color->name }}
+                                                    <br>
+                                                    <label for="color_quantity">Adet</label>
+                                                    <input type="number" name="color_quantity[]" id="color_quantity" style="width: 70px; border: 1px solid #CCC">
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <div class="col-md-12">
+                                                Renk Bulunamadı.
+                                            </div>
+                                        @endforelse
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -157,9 +200,9 @@
 @push('script')
     <script>
         ClassicEditor
-            .create( document.querySelector( '#description' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endpush
