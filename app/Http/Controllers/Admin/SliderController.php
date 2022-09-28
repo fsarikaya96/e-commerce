@@ -23,21 +23,20 @@ class SliderController extends Controller
     public function store(SliderRequest $request)
     {
         $validatedData = $request->validated();
-
+        $slider = new Slider;
         if ($request->hasFile('image')) {
             $file     = $request->file('image');
             $ext      = $file->getClientOriginalExtension();
             $fileName = time() . '.' . $ext;
             $file->move('uploads/sliders', $fileName);
-            $validatedData['image'] = 'uploads/sliders/' . $fileName;
+            $slider->image = 'uploads/sliders/' . $fileName;
         }
+        $slider->title = $validatedData['title'];
+        $slider->description = $validatedData['description'];
+        $slider->status = $request->status ? "1" : "0";
 
-        Slider::create([
-            'title'       => $validatedData['title'],
-            'description' => $validatedData['description'],
-            'image'       => $validatedData['image'],
-            'status'      => $request->status ? '1' : '0',
-        ]);
+        $slider->save();
+
         return redirect('admin/sliders')->with('message','Slider Başarıyla Oluşturuldu.');
     }
 

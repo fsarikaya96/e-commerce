@@ -13,4 +13,5 @@ window.addEventListener('close-modal',event => {
     $('#addColorModal').modal('hide');
     $('#updateColorModal').modal('hide');
     $('#deleteColorModal').modal('hide');
+    $('#deleteSliderModal').modal('hide');
 });
