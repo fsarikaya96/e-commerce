@@ -10,4 +10,7 @@ window.addEventListener('close-modal',event => {
     $('#deleteBrandModal').modal('hide');
     $('#deleteModal').modal('hide');
     $('#deleteProductModal').modal('hide');
+    $('#addColorModal').modal('hide');
+    $('#updateColorModal').modal('hide');
+    $('#deleteColorModal').modal('hide');
 });

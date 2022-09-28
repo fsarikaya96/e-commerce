@@ -1,24 +1,24 @@
 <!-- Store Brand Modal -->
-<div wire:ignore.self class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self class="modal fade" id="addColorModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Renk Ekle</h5>
                 <button type="button" class="btn-close" wire:click="closeModal" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
-            <form wire:submit.prevent="storeBrand">
+            <form wire:submit.prevent="storeColor">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="name">İsim</label>
+                        <label for="name">Renk Adı</label>
                         <input type="text" id="name" wire:model.defer="name" class="form-control">
                         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="slug">Slug</label>
-                        <input type="text" id="slug" wire:model.defer="slug" class="form-control">
-                        @error('slug') <small class="text-danger">{{ $message }}</small> @enderror
+                        <label for="code">Renk Kodu</label>
+                        <input type="text" id="code" wire:model.defer="code" class="form-control">
+                        @error('code') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="mb-3">
                         <label for="status">Durum</label><br>
@@ -38,7 +38,7 @@
 </div>
 
 <!-- Update Brand Modal -->
-<div wire:ignore.self class="modal fade" id="updateBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self class="modal fade" id="updateColorModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -54,7 +54,7 @@
                 <span class="p-2">Yükleniyor...</span>
             </div>
             <div wire:loading.remove>
-                <form wire:submit.prevent="updateBrand">
+                <form wire:submit.prevent="updateColor">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="name">İsim</label>
@@ -62,9 +62,9 @@
                             @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="slug">Slug</label>
-                            <input type="text" id="slug" wire:model.defer="slug" class="form-control">
-                            @error('slug') <small class="text-danger">{{ $message }}</small> @enderror
+                            <label for="code">Slug</label>
+                            <input type="text" id="code" wire:model.defer="code" class="form-control">
+                            @error('code') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
                         <div class="mb-3">
                             <label for="status">Durum</label><br>
@@ -85,7 +85,7 @@
 </div>
 
 <!-- Delete Brand Modal -->
-<div wire:ignore.self class="modal fade" id="deleteBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div wire:ignore.self class="modal fade" id="deleteColorModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -100,7 +100,7 @@
                 <span class="p-2">Yükleniyor...</span>
             </div>
             <div wire:loading.remove>
-                <form wire:submit.prevent="destroyBrand">
+                <form wire:submit.prevent="destroyColor">
                     <div class="modal-body">
                         <h5>Markayı silmek istediğinize emin misiniz?</h5>
                     </div>

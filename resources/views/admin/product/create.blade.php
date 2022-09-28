@@ -129,11 +129,11 @@
                                     <div class="row">
                                         <div class="mb-3 col-2">
                                             <label for="trending">Trend olsun mu ? </label><br>
-                                            <input type="checkbox" id="trending" name="trending" style="width: 25px; height: 25px;">
+                                            <input type="checkbox" id="trending" name="trending" class="status-checkbox">
                                         </div>
                                         <div class="mb-3 col-2">
                                             <label for="status">Durum aktif olsun mu?</label><br>
-                                            <input type="checkbox" id="status" name="status" style="width: 25px; height: 25px;">
+                                            <input type="checkbox" id="status" name="status" class="status-checkbox">
                                         </div>
                                     </div>
                                 </div>
@@ -141,8 +141,7 @@
                             <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel"
                                  aria-labelledby="image-tab" tabindex="0">
                                 <div class="mb-3">
-                                    <label for="image"></label>
-                                    <input type="file" id="image" name="image[]" multiple class="form-control">
+                                    <input type="file" id="photo-upload" name="image[]" multiple class="form-control" >
                                 </div>
                             </div>
                         </div>

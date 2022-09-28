@@ -5,14 +5,18 @@ namespace App\Http\Livewire\Admin\Product;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+
+    protected string $paginationTheme = 'bootstrap';
     public $product_id;
 
     public function render()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id', 'DESC')->paginate(10);
 
         return view('livewire.admin.product.index', ['products' => $products]);
     }
@@ -33,7 +37,7 @@ class Index extends Component
             }
         }
         $product->delete();
-        session()->flash('message', 'Ürün Başarıyla Silindi');
+        session()->flash('livewire_message', 'Ürün Başarıyla Silindi');
         $this->dispatchBrowserEvent('close-modal');
     }
 }

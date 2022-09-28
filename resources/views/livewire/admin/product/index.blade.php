@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    @include('layouts.partials.alert')
+    @include('layouts.partials.livewire_alert')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -67,12 +67,13 @@
                                         <span class="status-success">Yayında</span>
                                     @else
                                         <span class="status-danger">Yayında Değil</span>
-                                    @endif</td>
-                                <td>
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ route('admin.products.edit',$product->id) }}" class="btn btn-success">Düzenle</a>
                                     <a href="#" data-bs-toggle="modal"
-                                       data-bs-target="#deleteProductModal" wire:click="deleteProduct({{ $product->id }})" class="btn btn-danger">Sil</a>
+                                       data-bs-target="#deleteProductModal"
+                                       wire:click="deleteProduct({{ $product->id }})" class="btn btn-danger">Sil</a>
                                 </td>
                             </tr>
                         @empty
@@ -82,7 +83,7 @@
                         @endforelse
                         </tbody>
                     </table>
-
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

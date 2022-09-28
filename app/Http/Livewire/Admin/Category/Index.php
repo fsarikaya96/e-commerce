@@ -29,12 +29,12 @@ class Index extends Component
             File::delete($path);
         }
         $category->delete();
-        session()->flash("message","Kategori Silindi.");
+        session()->flash("livewire_message","Kategori Silindi.");
         $this->dispatchBrowserEvent('close-modal');
     }
     public function render()
     {
-        $categories = Category::orderBy('id','ASC')->paginate(2);
+        $categories = Category::orderBy('id','ASC')->paginate(10);
         return view('livewire.admin.category.index',['categories' => $categories]);
     }
 

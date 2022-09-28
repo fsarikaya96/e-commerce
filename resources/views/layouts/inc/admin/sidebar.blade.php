@@ -45,6 +45,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.colors') }}">
+                <i class="mdi mdi-format-align-justify menu-icon"></i>
+                <span class="menu-title">Renkler</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
                 <i class="mdi mdi-account-multiple-plus menu-icon"></i>
                 <span class="menu-title">Kullanıcılar</span>

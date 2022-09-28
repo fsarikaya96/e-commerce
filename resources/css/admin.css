@@ -20,3 +20,11 @@
 .ck-editor__editable_inline {
     min-height: 175px;
 }
+.status-checkbox{
+    width: 25px;
+    height: 25px;
+}
+.item-photo__preview {
+    width: 150px;
+    height: 150px;
+}

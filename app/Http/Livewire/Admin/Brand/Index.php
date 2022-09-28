@@ -40,7 +40,7 @@ class Index extends Component
             'slug'   => Str::slug($this->slug),
             'status' => $this->status ? "1" : "0",
         ]);
-        session()->flash('message', 'Marka Başarıyla Eklendi');
+        session()->flash('livewire_message', 'Marka Başarıyla Eklendi');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }
@@ -72,7 +72,7 @@ class Index extends Component
             'slug'   => Str::slug($this->slug),
             'status' => $this->status ? "1" : "0",
         ]);
-        session()->flash('message', 'Marka Başarıyla Güncellendi');
+        session()->flash('livewire_message', 'Marka Başarıyla Güncellendi');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }
@@ -85,7 +85,7 @@ class Index extends Component
     public function destroyBrand()
     {
         Brand::findOrFail($this->brandID)->delete();
-        session()->flash('message', 'Marka Başarıyla Güncellendi');
+        session()->flash('livewire_message', 'Marka Başarıyla Silindi');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }
