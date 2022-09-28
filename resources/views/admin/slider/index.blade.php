@@ -2,7 +2,6 @@
 
 @section('content')
     <div>
-        <livewire:admin.product.index />
+        <livewire:admin.slider.index />
     </div>
 @endsection
-

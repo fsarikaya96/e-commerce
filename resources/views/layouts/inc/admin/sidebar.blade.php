@@ -65,10 +65,17 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" data-bs-toggle="collapse" href="#sliders" aria-expanded="false" aria-controls="sliders">
                 <i class="mdi mdi-cards menu-icon"></i>
                 <span class="menu-title">Slider</span>
+                <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="sliders">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('admin.sliders') }}">Slider</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('admin.sliders.create') }}">Slider Ekle</a></li>
+                </ul>
+            </div>
         </li>
 
         <li class="nav-item">

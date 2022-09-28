@@ -46,6 +46,14 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::post('products/delete-product-color/{product?}','deleteProductColor')->name('admin.products.deleteProductColor');
     });
 
+    // Sliders
+    Route::controller(\App\Http\Controllers\Admin\SliderController::class)->group(function () {
+        Route::get('sliders', 'index')->name('admin.sliders');
+        Route::get('sliders/create', 'create')->name('admin.sliders.create');
+        Route::post('sliders', 'store')->name('admin.sliders.store');
+
+    });
+
     // Colors
     Route::controller(\App\Http\Controllers\Admin\ColorController::class)->group(function () {
         Route::get('colors', 'index')->name('admin.colors');
