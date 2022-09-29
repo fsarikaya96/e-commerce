@@ -24,9 +24,12 @@
                                 <label for="description">Açıklama <small>*</small></label>
                                 <textarea name="description" class="form-control" id="description" rows="3">{{ old('description') }}</textarea>
                             </div>
-
+                            <div class="col-md-12 mb-3">
+                                <label for="link">Link <small>(İsteğe Bağlı)</small></label>
+                                <input type="text" id="link" name="link" class="form-control">
+                            </div>
                             <div class="col-md-6 mb-3">
-                                <label for="image">Resim <small>*</small></label>
+                                <label for="image">Resim <small>(İsteğe Bağlı)</small></label>
                                 <input type="file" id="image" name="image" class="form-control" accept="image/jpg,image/png,image/jpeg">
                             </div>
 

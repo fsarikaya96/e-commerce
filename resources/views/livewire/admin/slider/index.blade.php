@@ -45,6 +45,7 @@
                             <th>ID</th>
                             <th>Başlık</th>
                             <th>Açıklama</th>
+                            <th>Url</th>
                             <th>Durum</th>
                             <th>Eylemler</th>
                         </tr>
@@ -56,7 +57,8 @@
                                     <img class="slider-img" src="{{ asset($slider->image) }}" alt="Fotoğraf Bulunumadı.">
                                 </td>
                                 <td>{{ $slider->title }}</td>
-                                <td>{!! Str::limit($slider->description,85) !!}</td>
+                                <td>{!! Str::limit($slider->description,50) !!}</td>
+                                <td>{{  $slider->link }}</td>
                                 <td>@if($slider->status == 1)
                                         <span class="status-success">Yayında</span>
                                     @else

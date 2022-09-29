@@ -17,8 +17,8 @@
                         <h1><span>{{ $slider->title }}</span></h1>
                         <p>{!! $slider->description !!}</p>
                         <div>
-                            <a href="#" class="btn btn-slider">
-                                Get Now
+                            <a href="{{ $slider->link }}" class="btn btn-slider">
+                                Alışverişe Başla
                             </a>
                         </div>
                     </div>

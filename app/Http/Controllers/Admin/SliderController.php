@@ -33,6 +33,7 @@ class SliderController extends Controller
         Slider::create([
             'title'       => $validatedData['title'],
             'description' => $validatedData['description'],
+            'link'        => $validatedData['link'],
             'image'       => $validatedData['image'] ?? $request->image,
             'status'      => $request->status ? "1" : "0"
         ]);
@@ -65,6 +66,7 @@ class SliderController extends Controller
         Slider::where('id', $slider->id)->update([
             'title'       => $validatedData['title'],
             'description' => $validatedData['description'],
+            'link'        => $validatedData['link'],
             'image'       => $validatedData['image'] ?? $slider->image,
             'status'      => $request->status ? "1" : "0"
         ]);
