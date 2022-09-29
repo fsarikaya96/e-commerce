@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
-Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('frontend.home');
+// Frontend
+Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->group(function () {
+    Route::get('/','index')->name('frontend.home');
+    Route::get('/collections','categories')->name('frontend.category');
+    Route::get('/collections/{category_slug}','products')->name('frontend.products');
+});
 
 Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
 

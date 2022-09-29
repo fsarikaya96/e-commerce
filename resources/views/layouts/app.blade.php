@@ -7,6 +7,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <meta name="meta_title" content="@yield('meta_title')">
+    <meta name="meta_keyword" content="@yield('meta_keyword')">
+    <meta name="meta_description" content="@yield('meta_description')">
+
     <title>@yield('title',config('app.name'))</title>
 
     <!-- Fonts -->
@@ -21,7 +25,7 @@
 <body>
 <div id="app">
     @include('layouts.inc.frontend.navbar')
-    <main class="py-4 container">
+    <main class="container">
         @yield('content')
     </main>
 </div>

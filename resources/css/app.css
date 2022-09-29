@@ -1,3 +1,5 @@
+/* Slider Start */
+
 .carousel-item .custom-carousel-content{
     width: 50%;
     transform: translate(0%, -10%);
@@ -29,6 +31,11 @@
     font-weight: 600;
     letter-spacing: 0.5px;
 }
+
+/* Slider End */
+
+/* Navbar Start */
+
 .main-navbar{
     border-bottom: 1px solid #ccc;
 }
@@ -88,3 +95,105 @@
     transform: scaleX(1);
 }
 
+/* Navbar End */
+
+/* Category Start */
+
+.category-card{
+    border: 1px solid #ddd;
+    margin-bottom: 24px;
+    background-color: #fff;
+    transition: box-shadow 0.3s;
+}
+.category-card a{
+    text-decoration: none;
+}
+.category-card .category-card-img{
+    max-height: 260px;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+.category-card .category-card-body{
+    padding: 10px 16px;
+}
+.category-card .category-card-body h5{
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+}
+/* Category End */
+
+/* Product Card */
+.product-card:hover , .category-card:hover
+{
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+.product-card{
+    border: 1px solid #ccc;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    padding: 10px;
+    transition: box-shadow 0.3s;
+}
+.product-card a{
+    text-decoration: none;
+}
+.product-card .stock{
+    position: absolute;
+    color: #fff;
+    border-radius: 4px;
+    padding: 2px 12px;
+    margin: 8px;
+    font-size: 12px;
+}
+.product-card .product-card-img{
+    max-height: 260px;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+.product-card .product-card-img img{
+    width: 100%;
+    max-height: 260px;
+}
+.product-card .product-card-body{
+    padding: 10px 10px;
+}
+.product-card .product-card-body .product-brand{
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    color: #937979;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.product-card .product-card-body .product-name{
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.product-card .product-card-body .selling-price{
+    font-size: 22px;
+    color: #000;
+    font-weight: 600;
+    margin-right: 8px;
+}
+.product-card .product-card-body .original-price{
+    font-size: 18px;
+    color: #937979;
+    font-weight: 400;
+    text-decoration: line-through;
+}
+.product-card .product-card-body .btn1{
+    border: 1px solid;
+    margin-right: 3px;
+    border-radius: 0px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+/* Product Card End */

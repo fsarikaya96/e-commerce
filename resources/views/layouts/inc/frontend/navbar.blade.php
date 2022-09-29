@@ -82,10 +82,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="#">Ana Sayfa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">All Categories</a>
+                        <a class="nav-link" href="{{ route('frontend.category') }}">Kategoriler</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">New Arrivals</a>
