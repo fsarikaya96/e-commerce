@@ -178,7 +178,7 @@ return [
         'meta_keyword' => 'Meta Kelimeler',
         'meta_description' => 'Meta Açıklama',
         'category_id' => 'Kategori',
-        'brand_id' => 'Marka',
+        'brand' => 'Marka',
         'code' => 'Renk Kodu',
         'title' => 'Başlık',
         'image' => 'Resim'

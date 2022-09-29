@@ -14,7 +14,7 @@ class Product extends Model
       'category_id',
       'name',
       'slug',
-      'brand_id',
+      'brand',
       'small_description',
       'description',
       'original_price',
@@ -38,10 +38,6 @@ class Product extends Model
     public function productColors()
     {
         return $this->hasMany(ProductColor::class,'product_id','id');
-    }
-    public function brands()
-    {
-        return $this->belongsTo(Brand::class,'brand_id','id');
     }
 
 }

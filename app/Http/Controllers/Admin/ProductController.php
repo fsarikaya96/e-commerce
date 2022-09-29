@@ -40,7 +40,7 @@ class ProductController extends Controller
             'category_id'       => $validatedData['category_id'],
             'name'              => $validatedData['name'],
             'slug'              => Str::slug($validatedData['slug']),
-            'brand_id'          => $validatedData['brand_id'],
+            'brand'             => $validatedData['brand'],
             'small_description' => $validatedData['small_description'],
             'description'       => $validatedData['description'],
             'original_price'    => $validatedData['original_price'],
@@ -92,7 +92,7 @@ class ProductController extends Controller
                 'category_id'       => $validatedData['category_id'],
                 'name'              => $validatedData['name'],
                 'slug'              => Str::slug($validatedData['slug']),
-                'brand_id'          => $validatedData['brand_id'],
+                'brand'             => $validatedData['brand'],
                 'small_description' => $validatedData['small_description'],
                 'description'       => $validatedData['description'],
                 'original_price'    => $validatedData['original_price'],
@@ -117,6 +117,7 @@ class ProductController extends Controller
                     ]);
                 }
             }
+
             return redirect('admin/products')->with('message', 'Ürün Başarıyla Güncellendi.');
         } else {
             return redirect('admin/products')->with('error', 'Böyle Bir Ürün Kimliği Yok.');
@@ -140,8 +141,8 @@ class ProductController extends Controller
     public function updateProductColor(Request $request, $product_color_id = 0)
     {
         $productColorData = Product::findOrFail($request->product_id)
-                                ->productColors()->where('id',$product_color_id)->first();
-        $productColorData->update([ 'quantity' => $request->qty ]);
+                                   ->productColors()->where('id', $product_color_id)->first();
+        $productColorData->update(['quantity' => $request->qty]);
 
         return response()->json(['message' => 'Güncelleme Başarılı']);
     }
@@ -149,6 +150,7 @@ class ProductController extends Controller
     public function deleteProductColor($product_color = 0)
     {
         ProductColor::findOrFail($product_color)->delete();
+
         return response()->json(['message' => 'Silme Başarılı']);
     }
 
