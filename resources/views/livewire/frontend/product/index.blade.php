@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-3">
+        @if($category->brands)
         <div class="card">
             <div class="card-header"><h4>Markalar</h4></div>
             <div class="card-body">
@@ -8,6 +9,18 @@
                     <input type="checkbox" wire:model="brandInputs" value="{{ $brand->name }}"/> {{ $brand->name }}
                 </label>
                 @endforeach
+            </div>
+        </div>
+        @endif
+        <div class="card mt-3">
+            <div class="card-header">Fiyat</div>
+            <div class="card-body">
+                <label class="d-block">
+                    <input type="radio" wire:model="priceSort" value="high-to-low"/> Yüksekten Düşüğe
+                </label>
+                <label class="d-block">
+                    <input type="radio" wire:model="priceSort" value="low-to-high"/> Düşükten Yükseğe
+                </label>
             </div>
         </div>
     </div>
