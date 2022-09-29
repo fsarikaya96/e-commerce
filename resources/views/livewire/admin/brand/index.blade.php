@@ -16,6 +16,7 @@
                         <tr>
                             <th>ID</th>
                             <th>İsim</th>
+                            <th>Kategori</th>
                             <th>Slug</th>
                             <th>Durum</th>
                             <th>Eylemler</th>
@@ -26,6 +27,11 @@
                             <tr>
                                 <td>{{ $brand->id }}</td>
                                 <td>{{ $brand->name }}</td>
+                                @if($brand->category)
+                                    <td>{{ $brand->category->name }}</td>
+                                    @else
+                                    <td><span class="status-danger">Kategori bulunamadı.</span></td>
+                                @endif
                                 <td>{{ $brand->slug }}</td>
                                 <td>@if($brand->status == 1)
                                         <span class="status-success">Yayında</span>
@@ -42,7 +48,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">Marka Bulunamadı.</td>
+                                <td colspan="6">Marka Bulunamadı.</td>
                             </tr>
                         @endforelse
 

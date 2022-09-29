@@ -11,6 +11,16 @@
             <form wire:submit.prevent="storeBrand">
                 <div class="modal-body">
                     <div class="mb-3">
+                        <label for="category">Kategori Seçiniz</label>
+                        <select wire:model.defer="category_id" id="category" class="form-control">
+                            <option value="">--Kategori Seçiniz--</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="name">İsim</label>
                         <input type="text" id="name" wire:model.defer="name" class="form-control">
                         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
@@ -56,6 +66,15 @@
             <div wire:loading.remove>
                 <form wire:submit.prevent="updateBrand">
                     <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="category">Kategori Seçiniz</label>
+                            <select wire:model.defer="category_id" id="category" class="form-control">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
                         <div class="mb-3">
                             <label for="name">İsim</label>
                             <input type="text" id="name" wire:model.defer="name" class="form-control">
