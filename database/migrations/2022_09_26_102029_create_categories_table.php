@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('meta_keyword')->nullable();
             $table->mediumText('meta_description')->nullable();
 
-            $table->tinyInteger('status')->default(0)->comment('0=visible,1=hidden');
+            $table->tinyInteger('status')->default(0)->comment('0=hidden,1=visible');
 
             $table->timestamps();
         });

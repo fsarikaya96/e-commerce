@@ -43,7 +43,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="status">Durum</label><br>
-                                <input type="checkbox" id="status" class="status-checkbox"   name="status" {{ $category->status== 1 ? "checked" : "" }}>
+                                <input type="checkbox" id="status" class="status-checkbox"  name="status" {{ $category->status== 1 ? "checked" : "" }}>
                             </div>
                             <div class="col-md-12">
                                 <h3>Seo Etiketleri<small> (İsteğe Bağlı)</small></h3>

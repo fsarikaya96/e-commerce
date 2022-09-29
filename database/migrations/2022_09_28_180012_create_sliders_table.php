@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->mediumText('description');
             $table->string('image')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(0)->comment('0=hidden,1=visible');
             $table->timestamps();
         });
     }

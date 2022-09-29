@@ -56,7 +56,7 @@
                                     <img class="slider-img" src="{{ asset($slider->image) }}" alt="Fotoğraf Bulunumadı.">
                                 </td>
                                 <td>{{ $slider->title }}</td>
-                                <td>{{ $slider->description }}</td>
+                                <td>{!! Str::limit($slider->description,85) !!}</td>
                                 <td>@if($slider->status == 1)
                                         <span class="status-success">Yayında</span>
                                     @else

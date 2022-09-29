@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(0)->comment('0=hidden,1=visible');
             $table->timestamps();
         });
     }

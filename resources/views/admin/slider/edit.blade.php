@@ -34,7 +34,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="status">Durum</label><br>
-                                <input type="checkbox" class="status-checkbox" id="status" name="status">
+                                <input type="checkbox" {{ $slider->status== 1 ? "checked" : "" }} class="status-checkbox" id="status" name="status">
                             </div>
 
                             <div class="col-md-12 mb-3">
