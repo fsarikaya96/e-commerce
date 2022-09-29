@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title','Ana Sayfa')
 @section('content')
-    <div class="container">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">
             @for($i=0; $i<count($sliders); $i++)
@@ -34,6 +33,5 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-    </div>
     </div>
 @endsection
