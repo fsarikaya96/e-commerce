@@ -53,7 +53,7 @@
                         @forelse($categories as $category)
                             <tr>
                                 <td>{{ $category->id }}</td>
-                                <td><img class="category-img" src="{{ asset("/uploads/category/$category->image") }}"
+                                <td><img class="category-img" src="{{ asset($category->image) }}"
                                          alt="Fotoğraf Bulunumadı."></td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>

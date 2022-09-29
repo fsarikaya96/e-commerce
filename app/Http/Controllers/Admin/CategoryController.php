@@ -43,7 +43,7 @@ class CategoryController extends Controller
 
             $fileName = time() . "." . $ext;
             $file->move('uploads/category/', $fileName);
-            $category->image = $fileName;
+            $category->image = "uploads/category/$fileName";
         }
 
         $category->meta_title       = $validatedData['meta_title'];
@@ -71,7 +71,7 @@ class CategoryController extends Controller
         $category->description = $validatedData['description'];
 
         if ($request->hasFile('image')) {
-            $path = "uploads/category/$category->image";
+            $path = $category->image;
             if (File::exists($path)) {
                 File::delete($path);
             }
@@ -81,7 +81,7 @@ class CategoryController extends Controller
 
             $fileName = time() . "." . $ext;
             $file->move('uploads/category/', $fileName);
-            $category->image = $fileName;
+            $category->image = "uploads/category/$fileName";
         }
 
         $category->meta_title       = $validatedData['meta_title'];
