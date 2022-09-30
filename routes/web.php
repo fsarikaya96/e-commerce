@@ -20,6 +20,7 @@ Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->gro
     Route::get('/','index')->name('frontend.home');
     Route::get('/collections','categories')->name('frontend.category');
     Route::get('/collections/{category_slug}','products')->name('frontend.products');
+    Route::get('/collections/{category_slug}/{product_slug}','productView')->name('frontend.products.view');
 });
 
 Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
