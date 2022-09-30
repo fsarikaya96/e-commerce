@@ -14,13 +14,6 @@
                 <div class="product-view">
                     <h4 class="product-name">
                         {{ $product->name }}
-                        @if($product->quantity > 5)
-                            <label class="label-stock bg-success">Stokta Mevcut</label>
-                        @elseif ($product->quantity <= 5 && $product->quantity >=1)
-                            <label class="label-stock bg-warning">Stokta Tükenmek Üzere</label>
-                        @else
-                            <label class="label-stock bg-danger">Stokta Yok</label>
-                        @endif
                     </h4>
                     <hr>
                     <p class="product-path">
@@ -32,10 +25,21 @@
                         <span class="original-price">{{ $product->original_price }}</span>
                     </div>
                     <div>
-                        @if($product->productColors)
+                        @if($product->productColors->count() > 0)
+                          @if($product->productColors)
                             @foreach($product->productColors as $productColor)
-                                <input type="radio" name="productColor" value="{{ $productColor->id }}">{{ $productColor->colors->name }}
+{{--                                <input type="radio" name="productColor" value="{{ $productColor->id }}">{{ $productColor->colors->name }}--}}
+                                    <label class="colorSelectionLabel text-white" style="background: {{ $productColor->colors->code }}">
+
+                                    </label>
                             @endforeach
+                          @endif
+                        @else
+                            @if($product->quantity > 0)
+                                <label class="py-2 mt-2 text-white btn btn-sm bg-success pe-none">Stokta Mevcut</label>
+                            @else
+                                <label class="py-2 mt-2 text-white btn btn-sm bg-danger pe-none">Stokta Yok</label>
+                            @endif
                         @endif
                     </div>
                     <div class="mt-2">
