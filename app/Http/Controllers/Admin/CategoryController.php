@@ -5,11 +5,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Services\Admin\Interfaces\ICategoryService;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\NoReturn;
 
 class CategoryController extends Controller
 {
+    private ICategoryService $categoryService;
+
+    /**
+     * Category construct
+     * @param ICategoryService $ICategoryService
+     */
+    public function __construct(ICategoryService $ICategoryService)
+    {
+        return $this->categoryService = $ICategoryService;
+    }
+
     public function index()
     {
         return view('admin.category.index');

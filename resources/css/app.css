@@ -264,4 +264,7 @@
 }
 .colorSelectionLabel:active{background: #FFF; border:2px solid #000;}
 .colorSelectionLabel:focus{ outline: 0!important; border: 0}
+.brand-crumb-a{
+    color: #333333;
+}
 

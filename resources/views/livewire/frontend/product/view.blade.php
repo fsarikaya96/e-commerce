@@ -12,25 +12,24 @@
             </div>
             <div class="col-md-7 mt-3">
                 <div class="product-view">
-                    <h4 class="product-name">
+                    <h4 class="product-name" style="color: #333333">
                         {{ $product->name }}
                     </h4>
                     <hr>
                     <p class="product-path">
-                        <a href="{{ url('/') }}">Anasayfa</a> / <a href="{{ url("/collections/$category->slug") }}">{{ $category->name}}</a> /
-                        <a href="{{ url("/collections/$category->slug/$product->slug") }}">{{ $product->name }}</a>
+                        <a class="brand-crumb-a" href="{{ url('/') }}">Anasayfa</a> / <a class="brand-crumb-a" href="{{ url("/collections/$category->slug") }}">{{ $category->name}}</a> /
+                        <a class="brand-crumb-a" href="{{ url("/collections/$category->slug/$product->slug") }}">{{ $product->name }}</a>
                     </p>
                     <div>
-                        <span class="selling-price">{{ $product->selling_price }}</span>
-                        <span class="original-price">{{ $product->original_price }}</span>
+                        <span class="selling-price">{{ $product->selling_price }} TL</span>
+                        <span class="original-price">{{ $product->original_price }} TL</span>
                     </div>
+                    <p class="d-inline-block" style="font-size: 14px; font-weight: 600;">Renk Seçin</p>
                     <div>
                         @if($product->productColors->count() > 0)
                           @if($product->productColors)
                             @foreach($product->productColors as $productColor)
-{{--                                <input type="radio" name="productColor" value="{{ $productColor->id }}">{{ $productColor->colors->name }}--}}
                                     <label class="colorSelectionLabel text-white" style="background: {{ $productColor->colors->code }}">
-
                                     </label>
                             @endforeach
                           @endif
