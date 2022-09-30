@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $name, $code, $status, $color_id;
+    public $name, $code, $status, $color_id, $colorInput;
 
     public function render()
     {
@@ -19,7 +19,7 @@ class Index extends Component
     {
         return [
             'name'   => 'required|string',
-            'code'   => 'required|string',
+            'code'   => 'required',
             'status' => 'nullable',
         ];
     }
@@ -36,6 +36,7 @@ class Index extends Component
     {
         $this->name   = null;
         $this->code   = null;
+        $this->colorInput = null;
         $this->status = null;
         $this->color_id = null;
     }
@@ -59,6 +60,7 @@ class Index extends Component
         $color = Color::findOrFail($color_id);
         $this->name = $color->name;
         $this->code = $color->code;
+        $this->colorInput = $color->code;
         $this->status = $color->status;
     }
     public function updateColor()

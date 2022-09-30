@@ -53,4 +53,10 @@
     </div>
 </div>
 
-
+@push('script')
+    <script>
+        $(document).on('change','#colorPicker',function(){
+            $('.code').val($(this).val());
+        });
+    </script>
+@endpush

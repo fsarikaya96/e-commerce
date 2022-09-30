@@ -17,8 +17,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="code">Renk Kodu</label>
-                        <input type="text" id="code" wire:model.defer="code" class="form-control">
+                        <input type="text" wire:model.defer="colorInput" class="form-control code">
                         @error('code') <small class="text-danger">{{ $message }}</small> @enderror
+                        <div class="mt-2">
+                        <input type="color" wire:model.defer="code" class="form-control form-control-color" id="colorPicker" value="#000002">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="status">Durum</label><br>
@@ -62,9 +65,12 @@
                             @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="code">Slug</label>
-                            <input type="text" id="code" wire:model.defer="code" class="form-control">
+                            <label for="code">Renk Kodu</label>
+                            <input type="text" wire:model.defer="colorInput" class="form-control code">
                             @error('code') <small class="text-danger">{{ $message }}</small> @enderror
+                            <div class="mt-2">
+                                <input type="color" wire:model.defer="code" class="form-control form-control-color" id="colorPicker" value="#000002">
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="status">Durum</label><br>
