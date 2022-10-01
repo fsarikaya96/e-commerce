@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
 use App\Services\Admin\Interfaces\ICategoryService;
 
 class CategoryController extends Controller
@@ -34,17 +33,21 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $this->categoryService->create($request);
+
         return redirect('admin/category')->with('message', 'Kategori Başarıyla Oluşturuldu.');
     }
 
-    public function edit(Category $category)
+    public function edit(int $id)
     {
+        $category = $this->categoryService->getCategoryById($id);
+
         return view('admin.category.edit', compact('category'));
     }
 
-    public function update(CategoryRequest $request, $category_id)
+    public function update(CategoryRequest $request, int $id)
     {
-        $this->categoryService->update($request,$category_id);
+        $this->categoryService->update($request, $id);
+
         return redirect('admin/category')->with('message', 'Kategori Başarıyla Güncellendi.');
     }
 

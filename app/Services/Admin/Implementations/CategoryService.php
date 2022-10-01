@@ -6,8 +6,9 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Repository\Admin\Interfaces\ICategoryRepository;
 use App\Services\Admin\Interfaces\ICategoryService;
-use Illuminate\Database\QueryException;
+use Exception;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -25,13 +26,29 @@ class CategoryService implements ICategoryService
         $this->categoryRepository = $ICategoryRepository;
     }
 
+    /**
+     * @return mixed
+     * @throws Exception
+     */
     public function getAllCategories()
     {
-        return $this->categoryRepository->getAllCategories();
+        Log::channel('service')->info("CategoryService called --> Request getAllCategories() function");
+        try {
+            Log::channel('service')->info("CategoryService called --> Return all categories");
+
+            return $this->categoryRepository->getAllCategories();
+        } catch (Exception $exception) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'error' => ['Silme işlemi başarısız.'],
+            ]);
+        }
     }
 
 
     /**
+     * @param CategoryRequest $request
+     *
+     * @return Category
      * @throws ValidationException
      */
     public function create(CategoryRequest $request): Category
@@ -39,14 +56,13 @@ class CategoryService implements ICategoryService
         $category      = new Category;
         $validatedData = $request->validated();
         ! $request->filled('slug') ? $category->slug = Str::slug($validatedData['name'])
-          : $category->slug = Str::slug($validatedData['slug']);
+            : $category->slug = Str::slug($validatedData['slug']);
 
-            if(Category::where('slug', $category->slug)->count() > 0){
-                throw \Illuminate\Validation\ValidationException::withMessages([
-                    'slug' => ['Slug daha önceden kayıt edilmiş.'],
-                ]);
-            }
-
+        if (Category::where('slug', $category->slug)->count() > 0) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'slug' => ['Slug daha önceden kayıt edilmiş.'],
+            ]);
+        }
 
         $category->name        = $validatedData['name'];
         $category->description = $validatedData['description'];
@@ -65,13 +81,52 @@ class CategoryService implements ICategoryService
         $category->meta_description = $validatedData['meta_description'];
 
         $category->status = $request->status ? 1 : 0;
+        Log::channel('service')->info("CategoryService called --> Request create() function");
 
-        return $this->categoryRepository->create($category);
+
+        try {
+            Log::channel('service')->info("CategoryService called --> Insert category " . $category);
+
+            return $this->categoryRepository->create($category);
+        } catch (\Exception $exception) {
+            throw ValidationException::withMessages([
+                'error' => ['Kayıt işlemi başarısız..'],
+            ]);
+        }
     }
-    public function update(CategoryRequest $request, $category_id): Category
+
+
+    /**
+     * @param int $id
+     *
+     * @return Category
+     * @throws ValidationException
+     */
+    public function getCategoryById(int $id): Category
+    {
+        Log::channel('service')->info("CategoryService called --> Request edit() function");
+        try {
+            Log::channel('service')->info('CategoryService Called ---> Return get category by id : ' . $id);
+
+            return $this->categoryRepository->getCategoryById($id);
+        } catch (Exception $exception) {
+            throw ValidationException::withMessages([
+                'error' => ['Böyle Bir Kategori Bulunamadı.'],
+            ]);
+        }
+    }
+
+    /**
+     * @param CategoryRequest $request
+     * @param int $id
+     *
+     * @return Category
+     * @throws ValidationException
+     */
+    public function update(CategoryRequest $request, int $id): Category
     {
         $validatedData         = $request->validated();
-        $category              = Category::findOrFail($category_id);
+        $category              = $this->categoryRepository->getCategoryById($id);
         $category->slug        = Str::slug($validatedData['slug']);
         $category->name        = $validatedData['name'];
         $category->description = $validatedData['description'];
@@ -96,18 +151,40 @@ class CategoryService implements ICategoryService
 
         $category->status = $request->status ? 1 : 0;
 
-        return $this->categoryRepository->update($category,$category_id);
+        Log::channel('service')->info("CategoryService called --> Request update() function");
+        try {
+            Log::channel('service')->info("CategoryService called --> Update category " . $category);
+            return $this->categoryRepository->update($category, $id);
+        } catch (\Exception $exception) {
+            throw ValidationException::withMessages([
+                'error' => ['Güncelleme işlemi başarısız..'],
+            ]);
+        }
     }
-    public function delete($category_id)
+
+    /**
+     * @param int $id
+     *
+     * @return mixed
+     * @throws ValidationException
+     */
+    public function delete(int $id): bool
     {
-        $category = Category::findOrFail($category_id);
+        Log::channel('service')->info("CategoryService called --> Request delete() function");
+        try {
+            $category = $this->categoryRepository->getCategoryById($id);
+        } catch (Exception $exception) {
+            Log::channel('service')->info("CategoryService called --> Delete category by id :" . $id);
+            throw ValidationException::withMessages([
+                'error' => ['Silme işlemi başarısız.'],
+            ]);
+        }
 
         $path = "uploads/category/$category->image";
-        if (File::exists($path))
-        {
+        if (File::exists($path)) {
             File::delete($path);
         }
-       return $this->categoryRepository->delete($category_id);
 
+        return $this->categoryRepository->delete($category);
     }
 }

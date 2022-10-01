@@ -9,22 +9,38 @@ interface ICategoryService
 {
     /**
      * Get All Categories Service
+     * @return mixed
      */
     public function getAllCategories();
 
     /**
+     * @param CategoryRequest $request
      * Insert Category
+     *
+     * @return Category
      */
-    public function create(CategoryRequest $request) : Category;
+    public function create(CategoryRequest $request): Category;
 
     /**
-     * Update Category
+     * @param int $id
+     *
+     * @return Category
      */
-    public function update(CategoryRequest $request,$category_id) : Category;
+    public function getCategoryById(int $id): Category;
 
     /**
-     * Delete Category
+     * @param CategoryRequest $request
+     * @param int $id
+     *
+     * @return Category
      */
-    public function delete($category_id);
+    public function update(CategoryRequest $request, int $id): Category;
+
+    /**
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function delete(int $id):bool;
 
 }

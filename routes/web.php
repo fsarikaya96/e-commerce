@@ -32,8 +32,8 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('category', 'index')->name('admin.category');
         Route::get('category/create', 'create')->name('admin.category.create');
         Route::post('category/store', 'store')->name('admin.category.store');
-        Route::get('category/{category}/edit', 'edit')->name('admin.category.edit');
-        Route::put('category/{category}', 'update')->name('admin.category.update');
+        Route::get('category/{id}/edit', 'edit')->name('admin.category.edit');
+        Route::put('category/{id}', 'update')->name('admin.category.update');
     });
 
     // Product
@@ -41,8 +41,8 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('products', 'index')->name('admin.products');
         Route::get('products/create', 'create')->name('admin.products.create');
         Route::post('products', 'store')->name('admin.products.store');
-        Route::get('products/{product}/edit','edit')->name('admin.products.edit');
-        Route::put('products/{product}','update')->name('admin.products.update');
+        Route::get('products/{id}/edit','edit')->name('admin.products.edit');
+        Route::put('products/{id}','update')->name('admin.products.update');
         Route::get('products/product-image/{product}/delete','deleteImage')->name('admin.products.deleteImage');
         Route::post('products/update-product-color/{product?}','updateProductColor')->name('admin.products.updateProductColor');
         Route::post('products/delete-product-color/{product?}','deleteProductColor')->name('admin.products.deleteProductColor');
@@ -53,8 +53,8 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('sliders', 'index')->name('admin.sliders');
         Route::get('sliders/create', 'create')->name('admin.sliders.create');
         Route::post('sliders', 'store')->name('admin.sliders.store');
-        Route::get('sliders/{slider}/edit', 'edit')->name('admin.sliders.edit');
-        Route::put('sliders/{slider}', 'update')->name('admin.sliders.update');
+        Route::get('sliders/{id}/edit', 'edit')->name('admin.sliders.edit');
+        Route::put('sliders/{id}', 'update')->name('admin.sliders.update');
 
     });
 

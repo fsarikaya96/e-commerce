@@ -9,7 +9,9 @@ class CategoryRepository implements ICategoryRepository
 {
     /**
      * Get All Categories
+     * @return mixed
      */
+
     public function getAllCategories()
     {
         return Category::orderBy('id', 'DESC')->paginate(10);
@@ -18,22 +20,50 @@ class CategoryRepository implements ICategoryRepository
     /**
      * @param Category $category
      * Insert Category
+     *
      * @return Category
      */
-    public function create(Category $category) : Category
+
+    public function create(Category $category): Category
     {
         $category->save();
+
         return $category;
     }
 
-    public function update(Category $category, $category_id): Category
+    /**
+     * @param int $id
+     *
+     * @return Category
+     */
+    public function getCategoryById(int $id): Category
     {
-       $category->save();
-       return $category;
+        return Category::findOrFail($id);
     }
 
-    public function delete($category_id)
+    /**
+     * @param Category $category
+     * Update Category
+     * @param $id
+     *
+     * @return Category
+     */
+
+    public function update(Category $category, $id): Category
     {
-        return Category::find($category_id)->delete();
+        $category->save();
+
+        return $category;
+    }
+
+    /**
+     * @param $category
+     * Delete Category
+     *
+     * @return mixed
+     */
+    public function delete(Category $category): bool
+    {
+        return $category->delete();
     }
 }

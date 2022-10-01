@@ -41,15 +41,19 @@ class CategoryRequest extends FormRequest
     {
         $slug = $this->request->get("slug");
 
-        return [
+        $rules = [
             'name'             => 'required|string',
-            'slug'             => ['nullable', Rule::unique('categories')->ignore($slug, 'slug')],
-//            'slug'             => 'nullable|unique:categories,slug',
+//            'slug'             => ['nullable', Rule::unique('categories')->ignore($slug, 'slug')],
+            'slug'             => 'nullable|unique:categories,slug,'.$this->id,
             'description'      => 'required',
-            'image'            => 'nullable|mimes:jpg,jpeg,png',
+            'image'            => 'nullable|mimes:jpeg,png,jpg',
             'meta_title'       => 'nullable|string',
             'meta_keyword'     => 'nullable|string',
             'meta_description' => 'nullable|string',
         ];
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+            $rules['slug'] = ['required','unique:categories,slug,'.$this->id];
+        }
+        return $rules;
     }
 }

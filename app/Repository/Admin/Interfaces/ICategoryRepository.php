@@ -2,30 +2,45 @@
 
 namespace App\Repository\Admin\Interfaces;
 
-use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Model;
 
 interface ICategoryRepository
 {
     /**
      * Get All Categories Repository
+     * @return mixed
      */
     public function getAllCategories();
 
     /**
+     * @param Category $category
      * Insert Category
+     *
+     * @return Category
      */
-    public function create(Category $category) : Category;
+    public function create(Category $category): Category;
 
     /**
-     * Update Category
+     * @param int $id
+     *
+     * @return Category
      */
-    public function update(Category $category, $category_id) : Category;
+    public function getCategoryById(int $id): Category;
 
     /**
+     * @param Category $category
+     * @param int $id
+     *
+     * @return Category
+     */
+    public function update(Category $category, int $id): Category;
+
+    /**
+     * @param Category $category
      * Delete Category
+     *
+     * @return mixed
      */
-    public function delete($category_id);
+    public function delete(Category $category):bool;
 
 }

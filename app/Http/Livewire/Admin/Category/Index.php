@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Admin\Category;
 
-use App\Models\Category;
 use App\Services\Admin\Interfaces\ICategoryService;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -20,6 +19,7 @@ class Index extends Component
 
     /**
      * Category construct
+     *
      * @param ICategoryService $ICategoryService
      */
     public function boot(ICategoryService $ICategoryService)
@@ -31,17 +31,20 @@ class Index extends Component
     {
         $this->category_id = $category_id;
     }
+
     public function destroyCategory()
     {
         $this->categoryService->delete($this->category_id);
 
-        session()->flash("livewire_message","Kategori Silindi.");
+        session()->flash("livewire_message", "Kategori Silindi.");
         $this->dispatchBrowserEvent('close-modal');
     }
+
     public function render()
     {
         $categories = $this->categoryService->getAllCategories();
-        return view('livewire.admin.category.index',['categories' => $categories]);
+
+        return view('livewire.admin.category.index', ['categories' => $categories]);
     }
 
 }
