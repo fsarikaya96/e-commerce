@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Services\Admin\Interfaces\ICategoryService;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
-use JetBrains\PhpStorm\NoReturn;
 
 class CategoryController extends Controller
 {
@@ -16,6 +13,7 @@ class CategoryController extends Controller
 
     /**
      * Category construct
+     *
      * @param ICategoryService $ICategoryService
      */
     public function __construct(ICategoryService $ICategoryService)
@@ -35,39 +33,8 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        $category      = new Category;
-        $validatedData = $request->validated();
-        ! $request->filled('slug') ? $category->slug = Str::slug($validatedData['name']) : $category->slug = Str::slug(
-            $validatedData['slug']
-        );
-        if (Category::where('slug', $category->slug)->count() > 0) {
-            return back()
-                ->withInput()
-                ->withErrors(['slug' => 'Slug daha önceden kayıt edilmiş.']);
-        }
-
-        $category->name        = $validatedData['name'];
-        $category->description = $validatedData['description'];
-
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-
-            $ext = $file->getClientOriginalExtension();
-
-            $fileName = time() . "." . $ext;
-            $file->move('uploads/category/', $fileName);
-            $category->image = "uploads/category/$fileName";
-        }
-
-        $category->meta_title       = $validatedData['meta_title'];
-        $category->meta_keyword     = $validatedData['meta_keyword'];
-        $category->meta_description = $validatedData['meta_description'];
-
-        $category->status = $request->status ? 1 : 0;
-
-        $category->save();
-
-        return redirect('admin/category')->with('message', 'Category Başarıyla Oluşturuldu.');
+        $this->categoryService->create($request);
+        return redirect('admin/category')->with('message', 'Kategori Başarıyla Oluşturuldu.');
     }
 
     public function edit(Category $category)
@@ -75,37 +42,10 @@ class CategoryController extends Controller
         return view('admin.category.edit', compact('category'));
     }
 
-    public function update(CategoryRequest $request, $category)
+    public function update(CategoryRequest $request, $category_id)
     {
-        $validatedData         = $request->validated();
-        $category              = Category::findOrFail($category);
-        $category->slug        = Str::slug($validatedData['slug']);
-        $category->name        = $validatedData['name'];
-        $category->description = $validatedData['description'];
-
-        if ($request->hasFile('image')) {
-            $path = $category->image;
-            if (File::exists($path)) {
-                File::delete($path);
-            }
-            $file = $request->file('image');
-
-            $ext = $file->getClientOriginalExtension();
-
-            $fileName = time() . "." . $ext;
-            $file->move('uploads/category/', $fileName);
-            $category->image = "uploads/category/$fileName";
-        }
-
-        $category->meta_title       = $validatedData['meta_title'];
-        $category->meta_keyword     = $validatedData['meta_keyword'];
-        $category->meta_description = $validatedData['meta_description'];
-
-        $category->status = $request->status ? 1 : 0;
-
-        $category->save();
-
-        return redirect('admin/category')->with('message', 'Category Başarıyla Güncellendi.');
+        $this->categoryService->update($request,$category_id);
+        return redirect('admin/category')->with('message', 'Kategori Başarıyla Güncellendi.');
     }
 
 

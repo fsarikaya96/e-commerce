@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Admin\Category;
 
 use App\Models\Category;
 use App\Services\Admin\Interfaces\ICategoryService;
-use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,19 +14,18 @@ class Index extends Component
 
     protected string $paginationTheme = 'bootstrap';
 
-    private ICategoryService $categoryService;
+    public $category_id;
+
+    protected ICategoryService $categoryService;
 
     /**
      * Category construct
      * @param ICategoryService $ICategoryService
-     * @return ICategoryService
      */
-    public function mount(ICategoryService $ICategoryService)
+    public function boot(ICategoryService $ICategoryService)
     {
-        return $this->categoryService = $ICategoryService;
+        $this->categoryService = $ICategoryService;
     }
-
-    public $category_id;
 
     public function deleteCategory($category_id)
     {
@@ -35,14 +33,8 @@ class Index extends Component
     }
     public function destroyCategory()
     {
-        $category = Category::find($this->category_id);
+        $this->categoryService->delete($this->category_id);
 
-        $path = "uploads/category/$category->image";
-        if (File::exists($path))
-        {
-            File::delete($path);
-        }
-        $category->delete();
         session()->flash("livewire_message","Kategori Silindi.");
         $this->dispatchBrowserEvent('close-modal');
     }

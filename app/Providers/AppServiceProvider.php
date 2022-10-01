@@ -17,7 +17,6 @@ class AppServiceProvider extends ServiceProvider
     {
         RepositoryIoCRegister::register();
         ServiceIoCRegister::register();
-
     }
 
     /**
