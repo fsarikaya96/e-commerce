@@ -27,7 +27,7 @@ class BrandService implements IBrandService
      * @return mixed
      * @throws ValidationException
      */
-    public function getAllBrands()
+    public function getAllBrands(): mixed
     {
         Log::channel('service')->info("BrandService called --> Request getAllBrands() function");
         try {

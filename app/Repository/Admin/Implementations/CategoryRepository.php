@@ -12,7 +12,7 @@ class CategoryRepository implements ICategoryRepository
      * @return mixed
      */
 
-    public function getAllCategories()
+    public function getAllCategories(): mixed
     {
         return Category::orderBy('id', 'DESC')->paginate(10);
     }
@@ -33,7 +33,7 @@ class CategoryRepository implements ICategoryRepository
 
     /**
      * @param int $id
-     *
+     * Fetch category by id
      * @return Category
      */
     public function getCategoryById(int $id): Category

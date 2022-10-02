@@ -11,10 +11,10 @@ interface IBrandService
      * Get All Brands
      * @return mixed
      */
-    public function getAllBrands();
+    public function getAllBrands(): mixed;
 
     /**
-     * fetch categories by status
+     * Fetch categories by status
      * @return mixed
      */
     public function getAllCategories():Collection;
@@ -30,7 +30,7 @@ interface IBrandService
 
     /**
      * @param int $id
-     * Get Brand By ID
+     * Fetch Brand by ID
      * @return Brand
      */
     public function getBrandById(int $id) :Brand;

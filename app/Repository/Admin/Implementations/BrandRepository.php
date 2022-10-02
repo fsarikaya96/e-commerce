@@ -13,7 +13,7 @@ class BrandRepository implements IBrandRepository
      * Get All Brands
      * @return mixed
      */
-    public function getAllBrands()
+    public function getAllBrands(): mixed
     {
         return Brand::orderBy('id', 'DESC')->paginate(10);
     }
@@ -45,7 +45,7 @@ class BrandRepository implements IBrandRepository
 
     /**
      * @param int $id
-     *
+     * Fetch Brand by ID
      * @return Brand
      */
     public function getBrandById(int $id): Brand
@@ -56,7 +56,7 @@ class BrandRepository implements IBrandRepository
     /**
      * @param Brand $brand
      * @param int $id
-     *
+     * Update Brand
      * @return Brand
      */
     public function update(Brand $brand, int $id): Brand
@@ -66,6 +66,11 @@ class BrandRepository implements IBrandRepository
         return $brand;
     }
 
+    /**
+     * @param Brand $brand
+     * Delete Brand
+     * @return bool
+     */
     public function delete(Brand $brand): bool
     {
         return $brand->delete();

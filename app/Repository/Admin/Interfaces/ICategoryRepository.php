@@ -10,7 +10,7 @@ interface ICategoryRepository
      * Get All Categories Repository
      * @return mixed
      */
-    public function getAllCategories();
+    public function getAllCategories(): mixed;
 
     /**
      * @param Category $category
@@ -22,7 +22,7 @@ interface ICategoryRepository
 
     /**
      * @param int $id
-     *
+     * Fetch Category by ID
      * @return Category
      */
     public function getCategoryById(int $id): Category;

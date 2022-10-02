@@ -11,7 +11,7 @@ interface IBrandRepository
      * Get All Brands Repository
      * @return mixed
      */
-    public function getAllBrands();
+    public function getAllBrands(): mixed;
 
     /**
      * Fetch categories by status
@@ -20,9 +20,8 @@ interface IBrandRepository
     public function getAllCategories(): Collection;
 
     /**
-     * Insert Brand
-     *
      * @param Brand $brand
+     * Insert Brand
      *
      * @return Brand
      */
@@ -30,10 +29,11 @@ interface IBrandRepository
 
     /**
      * @param int $id
-     * Get Brand By ID
+     * Fetch Brand by ID
+     *
      * @return Brand
      */
-    public function getBrandById(int $id) :Brand;
+    public function getBrandById(int $id): Brand;
 
     /**
      * @param Brand $brand
@@ -42,12 +42,13 @@ interface IBrandRepository
      *
      * @return Brand
      */
-    public function update(Brand $brand, int $id) :Brand;
+    public function update(Brand $brand, int $id): Brand;
 
     /**
      * @param Brand $brand
      * Delete Brand
+     *
      * @return bool
      */
-    public function delete(Brand $brand) : bool;
+    public function delete(Brand $brand): bool;
 }

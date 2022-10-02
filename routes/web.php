@@ -64,6 +64,6 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('colors/create', 'create')->name('admin.colors.create');
 
     });
-
-    Route::get('brands', App\Http\Livewire\Admin\Brand\Index::class)->name('admin.brands');
+    Route::get('brands',[\App\Http\Controllers\Admin\BrandController::class,'index'])->name('admin.brands');
+//    Route::get('brands', App\Http\Livewire\Admin\Brand\Index::class)->name('admin.brands');
 });

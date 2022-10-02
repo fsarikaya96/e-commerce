@@ -10,7 +10,6 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
-
     protected string $paginationTheme = 'bootstrap';
 
     public $name, $slug, $status, $category_id, $brandID;
@@ -18,13 +17,14 @@ class Index extends Component
     private IBrandService $brandService;
 
     /**
-     * Category construct
+     * Brand construct
      *
      * @param IBrandService $IBrandService
      */
     public function boot(IBrandService $IBrandService)
     {
         $this->brandService = $IBrandService;
+
     }
 
     public function rules()
@@ -107,8 +107,6 @@ class Index extends Component
         $brands     = $this->brandService->getAllBrands();
         $categories = $this->brandService->getAllCategories();
 
-        return view('livewire.admin.brand.index', ['brands' => $brands, 'categories' => $categories])
-            ->extends('layouts.admin')
-            ->section('content');
+        return view('livewire.admin.brand.index', ['brands' => $brands, 'categories' => $categories]);
     }
 }

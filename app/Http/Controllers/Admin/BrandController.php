@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ColorController extends Controller
+class BrandController extends Controller
 {
     public function __construct()
     {
@@ -14,6 +14,7 @@ class ColorController extends Controller
 
     public function index()
     {
-        return view('admin.color.index');
+        return view('admin.brand.index');
     }
+
 }

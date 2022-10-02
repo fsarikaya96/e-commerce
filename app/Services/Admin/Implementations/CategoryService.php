@@ -30,7 +30,7 @@ class CategoryService implements ICategoryService
      * @return mixed
      * @throws Exception
      */
-    public function getAllCategories()
+    public function getAllCategories(): mixed
     {
         Log::channel('service')->info("CategoryService called --> Request getAllCategories() function");
         try {
