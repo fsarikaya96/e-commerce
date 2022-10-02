@@ -180,7 +180,7 @@ class CategoryService implements ICategoryService
             ]);
         }
 
-        $path = "uploads/category/$category->image";
+        $path = $category->image;
         if (File::exists($path)) {
             File::delete($path);
         }

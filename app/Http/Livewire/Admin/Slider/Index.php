@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Slider;
 
 use App\Models\Slider;
+use App\Services\Admin\Interfaces\ISliderService;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,11 +16,18 @@ class Index extends Component
 
     public $slider_id;
 
+    private ISliderService $sliderService;
+
+    public function boot(ISliderService $ISliderService)
+    {
+        $this->sliderService = $ISliderService;
+    }
+
     public function render()
     {
-        $slider = Slider::orderBy('id', 'DESC')->paginate(10);
+        $sliders = $this->sliderService->getAllSliders();
 
-        return view('livewire.admin.slider.index', ['sliders' => $slider]);
+        return view('livewire.admin.slider.index', ['sliders' => $sliders]);
     }
 
     public function deleteSlider($slider_id)
@@ -29,13 +37,8 @@ class Index extends Component
 
     public function destroySlider()
     {
-        $slider = Slider::findOrFail($this->slider_id);
-        $path   = $slider->image;
-        if (File::exists($path)) {
-            File::delete($path);
-        }
-        $slider->delete();
-        session()->flash("livewire_message","Slider Silindi.");
+        $this->sliderService->delete($this->slider_id);
+        session()->flash("livewire_message", "Slider Silindi.");
         $this->dispatchBrowserEvent('close-modal');
     }
 }

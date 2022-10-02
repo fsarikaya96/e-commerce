@@ -71,6 +71,9 @@
                                 </td>
                             </tr>
                         @empty
+                            <tr>
+                                <td colspan="6">Slider Bulunamadı.</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>
