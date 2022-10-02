@@ -17,7 +17,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="code">Renk Kodu</label>
-                        <input type="text" wire:model.defer="colorInput" class="form-control code">
+                        <input type="text" wire:model.defer="colorInput" class="form-control code" disabled>
                         @error('code') <small class="text-danger">{{ $message }}</small> @enderror
                         <div class="mt-2">
                         <input type="color" wire:model.defer="code" class="form-control form-control-color" id="colorPicker" value="#000002">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="code">Renk Kodu</label>
-                            <input type="text" wire:model.defer="colorInput" class="form-control code">
+                            <input type="text" wire:model.defer="colorInput" class="form-control code" disabled>
                             @error('code') <small class="text-danger">{{ $message }}</small> @enderror
                             <div class="mt-2">
                                 <input type="color" wire:model.defer="code" class="form-control form-control-color" id="colorPicker" value="#000002">

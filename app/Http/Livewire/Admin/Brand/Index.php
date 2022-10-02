@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
+
     protected string $paginationTheme = 'bootstrap';
 
     public $name, $slug, $status, $category_id, $brandID;
@@ -24,17 +25,11 @@ class Index extends Component
     public function boot(IBrandService $IBrandService)
     {
         $this->brandService = $IBrandService;
-
     }
 
     public function rules()
     {
-        return [
-            'name'        => 'required|string',
-            'slug'        => 'required|unique:brands,slug,' . $this->brandID,
-            'status'      => 'nullable',
-            'category_id' => 'required|integer'
-        ];
+        return Brand::rules($this->brandID);
     }
 
     public function resetForm()

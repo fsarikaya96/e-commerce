@@ -15,4 +15,13 @@ class Color extends Model
         'code',
         'status'
     ];
+
+    public static function rules()
+    {
+        return [
+            'name'   => 'required|string',
+            'code'   => 'required',
+            'status' => 'nullable',
+        ];
+    }
 }
