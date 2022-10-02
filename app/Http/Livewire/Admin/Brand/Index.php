@@ -3,8 +3,7 @@
 namespace App\Http\Livewire\Admin\Brand;
 
 use App\Models\Brand;
-use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Services\Admin\Interfaces\IBrandService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,11 +15,23 @@ class Index extends Component
 
     public $name, $slug, $status, $category_id, $brandID;
 
+    private IBrandService $brandService;
+
+    /**
+     * Category construct
+     *
+     * @param IBrandService $IBrandService
+     */
+    public function boot(IBrandService $IBrandService)
+    {
+        $this->brandService = $IBrandService;
+    }
+
     public function rules()
     {
         return [
             'name'        => 'required|string',
-            'slug'        => 'required|string|unique:brands,slug,' . $this->brandID,
+            'slug'        => 'required|unique:brands,slug,' . $this->brandID,
             'status'      => 'nullable',
             'category_id' => 'required|integer'
         ];
@@ -35,15 +46,12 @@ class Index extends Component
         $this->brandID     = null;
     }
 
-    public function storeBrand()
+    public function storeBrand(Brand $brand)
     {
-        $this->validate();
-        Brand::create([
-            'name'        => $this->name,
-            'slug'        => Str::slug($this->slug),
-            'status'      => $this->status ? "1" : "0",
-            'category_id' => $this->category_id
-        ]);
+        $validatedData = $this->validate();
+        $data          = $brand->fill($validatedData);
+        $this->brandService->create($data);
+
         session()->flash('livewire_message', 'Marka Başarıyla Eklendi');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
@@ -62,7 +70,7 @@ class Index extends Component
     public function editBrand(int $brandID)
     {
         $this->brandID     = $brandID;
-        $brand             = Brand::findOrFail($brandID);
+        $brand             = $this->brandService->getBrandById($brandID);
         $this->name        = $brand->name;
         $this->slug        = $brand->slug;
         $this->status      = $brand->status;
@@ -71,13 +79,11 @@ class Index extends Component
 
     public function updateBrand()
     {
-        $this->validate();
-        Brand::findOrFail($this->brandID)->update([
-            'name'        => $this->name,
-            'slug'        => Str::slug($this->slug),
-            'status'      => $this->status ? "1" : "0",
-            'category_id' => $this->category_id
-        ]);
+        $validatedData = $this->validate();
+        $brand         = $this->brandService->getBrandById($this->brandID);
+        $data          = $brand->fill($validatedData);
+        $this->brandService->update($data, $this->brandID);
+
         session()->flash('livewire_message', 'Marka Başarıyla Güncellendi');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
@@ -90,7 +96,7 @@ class Index extends Component
 
     public function destroyBrand()
     {
-        Brand::findOrFail($this->brandID)->delete();
+        $this->brandService->delete($this->brandID);
         session()->flash('livewire_message', 'Marka Başarıyla Silindi');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
@@ -98,8 +104,8 @@ class Index extends Component
 
     public function render()
     {
-        $brands     = Brand::orderBy('id', 'DESC')->paginate(10);
-        $categories = Category::where('status', 1)->get();
+        $brands     = $this->brandService->getAllBrands();
+        $categories = $this->brandService->getAllCategories();
 
         return view('livewire.admin.brand.index', ['brands' => $brands, 'categories' => $categories])
             ->extends('layouts.admin')

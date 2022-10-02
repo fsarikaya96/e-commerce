@@ -38,8 +38,8 @@ class CategoryService implements ICategoryService
 
             return $this->categoryRepository->getAllCategories();
         } catch (Exception $exception) {
-            throw \Illuminate\Validation\ValidationException::withMessages([
-                'error' => ['Silme işlemi başarısız.'],
+            throw ValidationException::withMessages([
+                'error' => ['Kategori Bulunamadı.'],
             ]);
         }
     }
@@ -83,14 +83,13 @@ class CategoryService implements ICategoryService
         $category->status = $request->status ? 1 : 0;
         Log::channel('service')->info("CategoryService called --> Request create() function");
 
-
         try {
             Log::channel('service')->info("CategoryService called --> Insert category " . $category);
 
             return $this->categoryRepository->create($category);
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
-                'error' => ['Kayıt işlemi başarısız..'],
+                'error' => ['Kayıt işlemi başarısız.'],
             ]);
         }
     }
@@ -154,6 +153,7 @@ class CategoryService implements ICategoryService
         Log::channel('service')->info("CategoryService called --> Request update() function");
         try {
             Log::channel('service')->info("CategoryService called --> Update category " . $category);
+
             return $this->categoryRepository->update($category, $id);
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
@@ -172,9 +172,9 @@ class CategoryService implements ICategoryService
     {
         Log::channel('service')->info("CategoryService called --> Request delete() function");
         try {
+            Log::channel('service')->info("CategoryService called --> Delete category by id :" . $id);
             $category = $this->categoryRepository->getCategoryById($id);
         } catch (Exception $exception) {
-            Log::channel('service')->info("CategoryService called --> Delete category by id :" . $id);
             throw ValidationException::withMessages([
                 'error' => ['Silme işlemi başarısız.'],
             ]);

@@ -15,7 +15,7 @@ class Index extends Component
 
     public $category_id;
 
-    protected ICategoryService $categoryService;
+    private ICategoryService $categoryService;
 
     /**
      * Category construct

@@ -3,4 +3,3 @@
         <span class="status-msg">{{ Session::get('livewire_message') }}</span>
     </div>
 @endif
-

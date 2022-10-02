@@ -2,7 +2,9 @@
 
 namespace App\Repository\Admin;
 
+use App\Repository\Admin\Implementations\BrandRepository;
 use App\Repository\Admin\Implementations\CategoryRepository;
+use App\Repository\Admin\Interfaces\IBrandRepository;
 use App\Repository\Admin\Interfaces\ICategoryRepository;
 
 class RepositoryIoCRegister
@@ -15,5 +17,6 @@ class RepositoryIoCRegister
     public static function register() : void
     {
         app()->bind(ICategoryRepository::class,CategoryRepository::class);
+        app()->bind(IBrandRepository::class,BrandRepository::class);
     }
 }

@@ -8,7 +8,7 @@ use App\Models\Category;
 interface ICategoryService
 {
     /**
-     * Get All Categories Service
+     * Get All Categories
      * @return mixed
      */
     public function getAllCategories();
