@@ -104,7 +104,7 @@ class Index extends Component
     public function render()
     {
         $brands     = $this->brandService->getBrandsWithPaginate();
-        $categories = $this->categoryService->getAllCategories();
+        $categories = $this->categoryService->getCategoriesByCondition([]);
 
         return view('livewire.admin.brand.index', ['brands' => $brands, 'categories' => $categories]);
     }

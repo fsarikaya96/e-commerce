@@ -19,12 +19,12 @@ class BrandRepository implements IBrandRepository
     }
 
     /**
-     * Fetch categories by status
+     * Fetch categories by Condition
      * @return mixed
      */
-    public function getAllBrands(): Collection
+    public function getBrandsByCondition(array $condition): Collection
     {
-        return Category::where('status', 1)->get();
+        return Brand::where($condition)->get();
     }
 
     /**

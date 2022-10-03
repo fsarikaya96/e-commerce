@@ -14,10 +14,13 @@ interface ICategoryRepository
     public function getCategoriesWithPaginate(): mixed;
 
     /**
-     * Get All Categories
+     * Fetch Categories by Condition
+     *
+     * @param array $condition
+     *
      * @return Collection
      */
-    public function getAllCategories():Collection;
+    public function getCategoriesByCondition(array $condition):Collection;
 
     /**
      * @param Category $category

@@ -14,10 +14,10 @@ interface IBrandService
     public function getBrandsWithPaginate(): mixed;
 
     /**
-     * Fetch categories by status
+     * Fetch categories by Condition
      * @return mixed
      */
-    public function getAllBrands():Collection;
+    public function getBrandsByCondition(array $condition): Collection;
 
     /**
      * Insert Brand

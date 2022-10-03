@@ -4,6 +4,7 @@ namespace App\Repository\Admin\Implementations;
 
 use App\Models\Color;
 use App\Repository\Admin\Interfaces\IColorRepository;
+use Illuminate\Support\Collection;
 
 class ColorRepository implements IColorRepository
 {
@@ -14,6 +15,16 @@ class ColorRepository implements IColorRepository
     public function getColorsWithPaginate(): mixed
     {
         return Color::orderBy('id', 'DESC')->paginate(10);
+    }
+
+    /**
+     * @param array $condition
+     * Fetch Colors by Condition
+     * @return Collection
+     */
+    public function getColorsByCondition(array $condition): Collection
+    {
+        return Color::where($condition)->get();
     }
 
     /**

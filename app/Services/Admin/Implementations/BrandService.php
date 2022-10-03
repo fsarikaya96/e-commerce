@@ -42,16 +42,18 @@ class BrandService implements IBrandService
     }
 
     /**
+     * @param array $condition
+     *
      * @return Collection
      * @throws ValidationException
      */
-    public function getAllBrands(): Collection
+    public function getBrandsByCondition(array $condition): Collection
     {
-        Log::channel('service')->info("BrandService called --> Request getAllCategories() function");
+        Log::channel('service')->info("BrandService called --> Request getBrandsByCondition() function");
         try {
-            Log::channel('service')->info("BrandService called --> Return all categories");
+            Log::channel('service')->info("BrandService called --> Return all categories by condition");
 
-            return $this->brandRepository->getAllBrands();
+            return $this->brandRepository->getBrandsByCondition($condition);
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Kategori Bulunamadı.'],

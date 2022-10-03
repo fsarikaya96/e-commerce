@@ -90,9 +90,8 @@ class ProductController extends Controller
     public function edit(int $product_id)
     {
         $product    = $this->productService->getProductById($product_id);
-        $categories = $this->categoryService->getAllCategories();
-        $brands     = $this->brandService->getAllBrands();
-
+        $categories = $this->categoryService->getCategoriesByCondition(['status' => 1]);
+        $brands     = $this->brandService->getBrandsByCondition(['status' => 1]);
         $productColor = $product->productColors->pluck('color_id')->toArray();
 
         $colors = $this->colorService->getColorByProductID($productColor);

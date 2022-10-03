@@ -46,16 +46,18 @@ class CategoryService implements ICategoryService
     }
 
     /**
+     * @param array $condition
+     *
      * @return Collection
      * @throws ValidationException
      */
-    public function getAllCategories(): Collection
+    public function getCategoriesByCondition(array $condition): Collection
     {
-        Log::channel('service')->info("CategoryService called --> Request getAllCategories() function");
+        Log::channel('service')->info("CategoryService called --> Request getCategoriesByCondition() function");
         try {
-            Log::channel('service')->info("CategoryService called --> Return all categories");
+            Log::channel('service')->info("CategoryService called --> Return all categories by condition");
 
-            return $this->categoryRepository->getAllCategories();
+            return $this->categoryRepository->getCategoriesByCondition($condition);
         } catch (Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Kategori Bulunamadı.'],

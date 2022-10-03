@@ -14,10 +14,10 @@ interface IBrandRepository
     public function getBrandsWithPaginate(): mixed;
 
     /**
-     * Fetch categories by status
+     * Fetch Brands by Condition
      * @return mixed
      */
-    public function getAllBrands(): Collection;
+    public function getBrandsByCondition(array $condition): Collection;
 
     /**
      * @param Brand $brand

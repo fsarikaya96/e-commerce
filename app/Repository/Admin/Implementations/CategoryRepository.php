@@ -19,12 +19,15 @@ class CategoryRepository implements ICategoryRepository
     }
 
     /**
-     * Get All Categories
+     * Fetch Categories by Condition
+     *
+     * @param array $condition
+     *
      * @return Collection
      */
-    public function getAllCategories(): Collection
+    public function getCategoriesByCondition(array $condition): Collection
     {
-        return Category::all();
+        return Category::where($condition)->get();
     }
 
     /**

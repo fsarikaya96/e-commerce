@@ -3,6 +3,7 @@
 namespace App\Repository\Admin\Interfaces;
 
 use App\Models\Color;
+use Illuminate\Support\Collection;
 
 interface IColorRepository
 {
@@ -13,11 +14,13 @@ interface IColorRepository
     public function getColorsWithPaginate(): mixed;
 
     /**
-     * @param Color $color
-     * Insert Color
+     * Fetch Colors by Condition
      *
-     * @return Color
+     * @param array $condition
+     *
+     * @return Collection
      */
+    public function getColorsByCondition(array $condition):Collection;
 
     /**
      * Get Color By Product ID
@@ -27,6 +30,12 @@ interface IColorRepository
      * @return mixed
      */
     public function getColorByProductID($productColor): mixed;
+    /**
+     * @param Color $color
+     * Insert Color
+     *
+     * @return Color
+     */
 
     public function create(Color $color): Color;
 

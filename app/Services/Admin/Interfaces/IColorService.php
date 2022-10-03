@@ -3,6 +3,7 @@
 namespace App\Services\Admin\Interfaces;
 
 use App\Models\Color;
+use Illuminate\Support\Collection;
 
 interface IColorService
 {
@@ -10,7 +11,16 @@ interface IColorService
      * @return mixed
      * Get All Colors with Paginate
      */
-    public function getColorsWithPaginate():mixed;
+    public function getColorsWithPaginate(): mixed;
+
+    /**
+     * Fetch Colors by Condition
+     *
+     * @param array $condition
+     *
+     * @return Collection
+     */
+    public function getColorsByCondition(array $condition): Collection;
 
     /**
      * Get Color By Product ID
@@ -32,18 +42,20 @@ interface IColorService
     /**
      * @param int $id
      * Fetch Color by ID
+     *
      * @return Color
      */
-    public function getColorById(int $id):Color;
+    public function getColorById(int $id): Color;
 
 
     /**
      * @param Color $color
      * @param int $id
      * Update Color
+     *
      * @return Color
      */
-    public function update(Color $color, int $id) :Color;
+    public function update(Color $color, int $id): Color;
 
     /**
      * @param int $id
@@ -51,5 +63,5 @@ interface IColorService
      *
      * @return bool
      */
-    public function delete(int $id) : bool;
+    public function delete(int $id): bool;
 }

@@ -5,6 +5,7 @@ namespace App\Services\Admin\Implementations;
 use App\Models\Color;
 use App\Repository\Admin\Interfaces\IColorRepository;
 use App\Services\Admin\Interfaces\IColorService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
@@ -40,6 +41,26 @@ class ColorService implements IColorService
             ]);
         }
 
+    }
+
+    /**
+     * @param array $condition
+     *
+     * @return Collection
+     * @throws ValidationException
+     */
+    public function getColorsByCondition(array $condition): Collection
+    {
+        Log::channel('service')->info("ColorService called --> Request getColorsByCondition() function");
+        try {
+            Log::channel('service')->info("ColorService called --> Return all colors by condition");
+
+            return $this->colorRepository->getColorsByCondition($condition);
+        } catch (\Exception $exception) {
+            throw ValidationException::withMessages([
+                'error' => ['Renk Bulunamadı.'],
+            ]);
+        }
     }
 
     /**
