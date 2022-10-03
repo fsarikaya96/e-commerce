@@ -51,12 +51,12 @@ class BrandService implements IBrandService
     {
         Log::channel('service')->info("BrandService called --> Request getBrandsByCondition() function");
         try {
-            Log::channel('service')->info("BrandService called --> Return all categories by condition");
+            Log::channel('service')->info("BrandService called --> Return all brands by condition");
 
             return $this->brandRepository->getBrandsByCondition($condition);
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
-                'error' => ['Kategori Bulunamadı.'],
+                'error' => ['Marka Bulunamadı.'],
             ]);
         }
     }

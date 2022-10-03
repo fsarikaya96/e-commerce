@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-// Frontend
+// ---------------------------------------------------------------------- //
+// ----------------------- Frontend Start ------------------------------- //
+// ---------------------------------------------------------------------- //
+
 Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->group(function () {
     Route::get('/','index')->name('frontend.home');
     Route::get('/collections','categories')->name('frontend.category');
@@ -23,6 +26,14 @@ Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->gro
     Route::get('/collections/{category_slug}/{product_slug}','productView')->name('frontend.products.view');
 });
 
+// ---------------------------------------------------------------------- //
+// ----------------------- Frontend End --------------------------------- //
+// ---------------------------------------------------------------------- //
+
+
+// ---------------------------------------------------------------------- //
+// ----------------------- Backend Start ------------------------------- //
+// ---------------------------------------------------------------------- //
 Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
 
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
@@ -64,5 +75,9 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('colors/create', 'create')->name('admin.colors.create');
 
     });
+    // Brand
     Route::get('brands',[\App\Http\Controllers\Admin\BrandController::class,'index'])->name('admin.brands');
 });
+// ---------------------------------------------------------------------- //
+// ----------------------- Backend End ------------------------------- //
+// ---------------------------------------------------------------------- //

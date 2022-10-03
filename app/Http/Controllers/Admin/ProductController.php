@@ -25,8 +25,12 @@ class ProductController extends Controller
     private IBrandService $brandService;
     private IColorService $colorService;
 
-    public function __construct(IProductService $IProductService, ICategoryService $ICategoryService, IBrandService $IBrandService, IColorService $IColorService)
-    {
+    public function __construct(
+        IProductService $IProductService,
+        ICategoryService $ICategoryService,
+        IBrandService $IBrandService,
+        IColorService $IColorService
+    ) {
         $this->productService  = $IProductService;
         $this->categoryService = $ICategoryService;
         $this->brandService    = $IBrandService;
@@ -41,15 +45,19 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::where('status', 1)->get();
-        $brands     = Brand::where('status', 1)->get();
-        $colors     = Color::where('status', 1)->get();
+        $categories = $this->categoryService->getCategoriesByCondition(['status' => 1]);
+        $brands     = $this->brandService->getBrandsByCondition(['status' => 1]);
+        $colors     = $this->colorService->getColorsByCondition(['status' => 1]);
 
         return view('admin.product.create', compact('categories', 'brands', 'colors'));
     }
 
     public function store(ProductRequest $request)
     {
+        $this->productService->create($request);
+
+        return redirect('admin/products')->with('message', 'Ürün Başarıyla Eklendi.');
+        /*
         $validatedData = $request->validated();
 
         $category = Category::findOrFail($validatedData['category_id']);
@@ -79,19 +87,19 @@ class ProductController extends Controller
                     'product_id' => $product->id,
                     'color_id'   => $color,
                     'quantity'   => $request->color_quantity[$key] ?? 0
-
                 ]);
             }
         }
 
         return redirect('admin/products')->with('message', 'Ürün Başarıyla Eklendi.');
+        */
     }
 
     public function edit(int $product_id)
     {
-        $product    = $this->productService->getProductById($product_id);
-        $categories = $this->categoryService->getCategoriesByCondition(['status' => 1]);
-        $brands     = $this->brandService->getBrandsByCondition(['status' => 1]);
+        $product      = $this->productService->getProductById($product_id);
+        $categories   = $this->categoryService->getCategoriesByCondition(['status' => 1]);
+        $brands       = $this->brandService->getBrandsByCondition(['status' => 1]);
         $productColor = $product->productColors->pluck('color_id')->toArray();
 
         $colors = $this->colorService->getColorByProductID($productColor);
@@ -99,47 +107,11 @@ class ProductController extends Controller
         return view('admin.product.edit', compact('product', 'categories', 'brands', 'colors', 'productColor'));
     }
 
-    public function update(ProductRequest $request, int $product_id)
+    public function update(ProductRequest $request, int $id)
     {
-        $validatedData = $request->validated();
-        $product       = Category::findOrFail($validatedData['category_id'])
-                                 ->products()->where('id', $product_id)->first();
+        $this->productService->update($request, $id);
 
-        if ($product) {
-            $product->update([
-                'category_id'       => $validatedData['category_id'],
-                'name'              => $validatedData['name'],
-                'slug'              => Str::slug($validatedData['slug']),
-                'brand'             => $validatedData['brand'],
-                'small_description' => $validatedData['small_description'],
-                'description'       => $validatedData['description'],
-                'original_price'    => $validatedData['original_price'],
-                'selling_price'     => $validatedData['selling_price'],
-                'quantity'          => $validatedData['quantity'],
-                'trending'          => $request->trending ? "1" : "0",
-                'status'            => $request->status ? "1" : "0",
-                'meta_title'        => $validatedData['meta_title'],
-                'meta_keyword'      => $validatedData['meta_keyword'],
-                'meta_description'  => $validatedData['meta_description'],
-            ]);
-
-            $this->extracted($request, $product);
-
-            if ($request->colors) {
-                foreach ($request->colors as $key => $color) {
-                    $product->productColors()->updateOrCreate([
-                        'product_id' => $product->id,
-                        'color_id'   => $color,
-                        'quantity'   => $request->color_quantity[$key] ?? 0
-
-                    ]);
-                }
-            }
-
-            return redirect('admin/products')->with('message', 'Ürün Başarıyla Güncellendi.');
-        } else {
-            return redirect('admin/products')->with('error', 'Böyle Bir Ürün Kimliği Yok.');
-        }
+        return redirect('admin/products')->with('message', 'Ürün Başarıyla Güncellendi.');
     }
 
     public function deleteImage(int $image_id)
@@ -172,28 +144,5 @@ class ProductController extends Controller
         return response()->json(['message' => 'Silme Başarılı']);
     }
 
-    /**
-     * @param ProductRequest $request
-     * @param $product
-     *
-     * @return void
-     */
-    public function extracted(ProductRequest $request, $product): void
-    {
-        if ($request->hasFile('image')) {
-            $uploadPath = "uploads/products/";
-            $i          = 1;
-            foreach ($request->file('image') as $imageFile) {
-                $extension = $imageFile->getClientOriginalExtension();
-                $fileName  = time() . $i++ . '.' . $extension;
-                $imageFile->move($uploadPath, $fileName);
-                $imagePathName = $uploadPath . $fileName;
 
-                $product->productImages()->create([
-                    'product_id' => $product->id,
-                    'image'      => $imagePathName
-                ]);
-            }
-        }
-    }
 }

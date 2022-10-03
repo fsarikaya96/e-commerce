@@ -46,10 +46,20 @@ class SliderService implements ISliderService
      * @param int $id
      *
      * @return Slider
+     * @throws ValidationException
      */
     public function getSliderById(int $id): Slider
     {
-        return $this->sliderRepository->getSliderById($id);
+        Log::channel('service')->info("SliderService called --> Request getSliderById() function");
+        try {
+            Log::channel('service')->info("SliderService called --> Return slider by ID: " .$id);
+            return $this->sliderRepository->getSliderById($id);
+        } catch (\Exception $exception) {
+            throw ValidationException::withMessages([
+                'error' => ['Böyle Bir Slider Bulunamadı.'],
+            ]);
+        }
+
     }
 
     /**

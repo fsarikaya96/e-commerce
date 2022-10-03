@@ -40,7 +40,6 @@ class ColorService implements IColorService
                 'error' => ['Renk Bulunamadı.'],
             ]);
         }
-
     }
 
     /**
@@ -71,7 +70,10 @@ class ColorService implements IColorService
     public function getColorByProductID($productColor): mixed
     {
         Log::channel('service')->info("ColorService called --> Request getColorByProductID() function");
-        Log::channel('service')->info("ColorService called --> ReturnColor By Product ID :" .json_encode($productColor));
+        Log::channel('service')->info(
+            "ColorService called --> ReturnColor By Product ID :" . json_encode($productColor)
+        );
+
         return $this->colorRepository->getColorByProductID($productColor);
     }
 
@@ -81,7 +83,7 @@ class ColorService implements IColorService
      * @return Color
      * @throws ValidationException
      */
-    public function create(Color $color):Color
+    public function create(Color $color): Color
     {
         Log::channel('service')->info("ColorService called --> Request create() function");
         try {
@@ -93,7 +95,6 @@ class ColorService implements IColorService
                 'error' => ['Kayıt işlemi başarısız.'],
             ]);
         }
-
     }
 
     /**
@@ -129,7 +130,7 @@ class ColorService implements IColorService
         try {
             Log::channel('service')->info("ColorService called --> Return get category by id : " . $id);
 
-            return $this->colorRepository->update($color,$id);
+            return $this->colorRepository->update($color, $id);
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Böyle Bir Renk Bulunamadı.'],
@@ -149,12 +150,13 @@ class ColorService implements IColorService
         try {
             Log::channel('service')->info("ColorService called --> Return get color by id : " . $id);
 
-            $color =  $this->colorRepository->getColorById($id);
+            $color = $this->colorRepository->getColorById($id);
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Silme işlemi başarısız..'],
             ]);
         }
+
         return $color->delete();
     }
 }

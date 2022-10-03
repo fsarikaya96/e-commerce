@@ -23,5 +23,18 @@ interface IProductService
      */
     public function getProductById(int $id): Product;
 
+    /**
+     * @param ProductRequest $request
+     *
+     * @return Product
+     */
+    public function create(ProductRequest $request): Product;
 
+    /**
+     * @param ProductRequest $request
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function update(ProductRequest $request, int $id);
 }

@@ -53,7 +53,6 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel"
                                  aria-labelledby="home-tab" tabindex="0">
-
                                 <div class="mb-3">
                                     <label for="category_id">Kategori Seçiniz</label>
                                     <select name="category_id" id="category_id" class="form-control">
