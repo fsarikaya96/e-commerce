@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Product;
 
 use App\Models\Product;
+use App\Services\Admin\Interfaces\IProductService;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,9 +15,16 @@ class Index extends Component
     protected string $paginationTheme = 'bootstrap';
     public $product_id;
 
+    private IProductService $productService;
+
+    public function boot(IProductService $IProductService)
+    {
+        $this->productService = $IProductService;
+    }
+
     public function render()
     {
-        $products = Product::orderBy('id', 'DESC')->paginate(10);
+        $products = $this->productService->getProductWithPaginate();
 
         return view('livewire.admin.product.index', ['products' => $products]);
     }

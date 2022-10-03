@@ -8,16 +8,16 @@ use Illuminate\Support\Collection;
 interface IBrandService
 {
     /**
-     * Get All Brands
+     * Get All Brands with Paginate Repository
      * @return mixed
      */
-    public function getAllBrands(): mixed;
+    public function getBrandsWithPaginate(): mixed;
 
     /**
      * Fetch categories by status
      * @return mixed
      */
-    public function getAllCategories():Collection;
+    public function getAllBrands():Collection;
 
     /**
      * Insert Brand

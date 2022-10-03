@@ -7,10 +7,19 @@ use App\Models\Color;
 interface IColorService
 {
     /**
-     * Get All Colors
+     * @return mixed
+     * Get All Colors with Paginate
+     */
+    public function getColorsWithPaginate():mixed;
+
+    /**
+     * Get Color By Product ID
+     *
+     * @param $productColor
+     *
      * @return mixed
      */
-    public function getAllColors(): mixed;
+    public function getColorByProductID($productColor): mixed;
 
     /**
      * @param Color $color

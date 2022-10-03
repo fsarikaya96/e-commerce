@@ -27,13 +27,13 @@ class BrandService implements IBrandService
      * @return mixed
      * @throws ValidationException
      */
-    public function getAllBrands(): mixed
+    public function getBrandsWithPaginate(): mixed
     {
         Log::channel('service')->info("BrandService called --> Request getAllBrands() function");
         try {
             Log::channel('service')->info("BrandService called --> Return all brands");
 
-            return $this->brandRepository->getAllBrands();
+            return $this->brandRepository->getBrandsWithPaginate();
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Marka Bulunamadı.'],
@@ -45,13 +45,13 @@ class BrandService implements IBrandService
      * @return Collection
      * @throws ValidationException
      */
-    public function getAllCategories(): Collection
+    public function getAllBrands(): Collection
     {
         Log::channel('service')->info("BrandService called --> Request getAllCategories() function");
         try {
             Log::channel('service')->info("BrandService called --> Return all categories");
 
-            return $this->brandRepository->getAllCategories();
+            return $this->brandRepository->getAllBrands();
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Kategori Bulunamadı.'],

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Repository\Admin\Interfaces\ICategoryRepository;
 use App\Services\Admin\Interfaces\ICategoryService;
 use Exception;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -30,7 +31,25 @@ class CategoryService implements ICategoryService
      * @return mixed
      * @throws Exception
      */
-    public function getAllCategories(): mixed
+    public function getCategoriesWithPaginate(): mixed
+    {
+        Log::channel('service')->info("CategoryService called --> Request getCategoriesWithPaginate() function");
+        try {
+            Log::channel('service')->info("CategoryService called --> Return all categories with paginate");
+
+            return $this->categoryRepository->getCategoriesWithPaginate();
+        } catch (Exception $exception) {
+            throw ValidationException::withMessages([
+                'error' => ['Kategori Bulunamadı.'],
+            ]);
+        }
+    }
+
+    /**
+     * @return Collection
+     * @throws ValidationException
+     */
+    public function getAllCategories(): Collection
     {
         Log::channel('service')->info("CategoryService called --> Request getAllCategories() function");
         try {
@@ -43,7 +62,6 @@ class CategoryService implements ICategoryService
             ]);
         }
     }
-
 
     /**
      * @param CategoryRequest $request

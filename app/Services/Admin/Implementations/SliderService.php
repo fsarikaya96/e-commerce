@@ -28,13 +28,13 @@ class SliderService implements ISliderService
      * @return mixed
      * @throws ValidationException
      */
-    public function getAllSliders(): mixed
+    public function getSlidersWithPaginate(): mixed
     {
         Log::channel('service')->info("SliderService called --> Request getAllSliders() function");
         try {
             Log::channel('service')->info("SliderService called --> Return all sliders");
 
-            return $this->sliderRepository->getAllSliders();
+            return $this->sliderRepository->getSlidersWithPaginate();
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Slider Bulunamadı.'],

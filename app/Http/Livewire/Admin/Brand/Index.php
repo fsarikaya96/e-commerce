@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Brand;
 
 use App\Models\Brand;
 use App\Services\Admin\Interfaces\IBrandService;
+use App\Services\Admin\Interfaces\ICategoryService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,15 +17,18 @@ class Index extends Component
     public $name, $slug, $status, $category_id, $brandID;
 
     private IBrandService $brandService;
+    private ICategoryService $categoryService;
 
     /**
      * Brand construct
      *
      * @param IBrandService $IBrandService
+     * @param ICategoryService $ICategoryService
      */
-    public function boot(IBrandService $IBrandService)
+    public function boot(IBrandService $IBrandService, ICategoryService $ICategoryService)
     {
-        $this->brandService = $IBrandService;
+        $this->categoryService = $ICategoryService;
+        $this->brandService    = $IBrandService;
     }
 
     public function rules()
@@ -99,8 +103,8 @@ class Index extends Component
 
     public function render()
     {
-        $brands     = $this->brandService->getAllBrands();
-        $categories = $this->brandService->getAllCategories();
+        $brands     = $this->brandService->getBrandsWithPaginate();
+        $categories = $this->categoryService->getAllCategories();
 
         return view('livewire.admin.brand.index', ['brands' => $brands, 'categories' => $categories]);
     }

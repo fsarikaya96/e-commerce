@@ -4,17 +4,27 @@ namespace App\Repository\Admin\Implementations;
 
 use App\Models\Category;
 use App\Repository\Admin\Interfaces\ICategoryRepository;
+use Illuminate\Support\Collection;
 
 class CategoryRepository implements ICategoryRepository
 {
     /**
-     * Get All Categories
+     * Get All Categories with Paginate Repository
      * @return mixed
      */
 
-    public function getAllCategories(): mixed
+    public function getCategoriesWithPaginate(): mixed
     {
         return Category::orderBy('id', 'DESC')->paginate(10);
+    }
+
+    /**
+     * Get All Categories
+     * @return Collection
+     */
+    public function getAllCategories(): Collection
+    {
+        return Category::all();
     }
 
     /**

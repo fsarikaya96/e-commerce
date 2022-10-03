@@ -11,7 +11,7 @@ class SliderRepository implements ISliderRepository
      * Get All Sliders
      * @return mixed
      */
-    public function getAllSliders(): mixed
+    public function getSlidersWithPaginate(): mixed
     {
         return Slider::orderBy('id', 'DESC')->paginate(10);
     }

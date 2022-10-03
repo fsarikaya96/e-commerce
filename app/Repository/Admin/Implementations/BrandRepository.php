@@ -10,10 +10,10 @@ use Illuminate\Support\Collection;
 class BrandRepository implements IBrandRepository
 {
     /**
-     * Get All Brands
+     * Get All Brands with Paginate
      * @return mixed
      */
-    public function getAllBrands(): mixed
+    public function getBrandsWithPaginate(): mixed
     {
         return Brand::orderBy('id', 'DESC')->paginate(10);
     }
@@ -22,7 +22,7 @@ class BrandRepository implements IBrandRepository
      * Fetch categories by status
      * @return mixed
      */
-    public function getAllCategories(): Collection
+    public function getAllBrands(): Collection
     {
         return Category::where('status', 1)->get();
     }

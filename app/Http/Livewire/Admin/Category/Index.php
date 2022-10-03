@@ -42,7 +42,7 @@ class Index extends Component
 
     public function render()
     {
-        $categories = $this->categoryService->getAllCategories();
+        $categories = $this->categoryService->getCategoriesWithPaginate();
 
         return view('livewire.admin.category.index', ['categories' => $categories]);
     }

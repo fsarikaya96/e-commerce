@@ -4,14 +4,21 @@ namespace App\Services\Admin\Interfaces;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Collection;
 
 interface ICategoryService
 {
     /**
-     * Get All Categories
+     * Get All Categories with Paginate Repository
      * @return mixed
      */
-    public function getAllCategories(): mixed;
+    public function getCategoriesWithPaginate(): mixed;
+
+    /**
+     * Get All Categories
+     * @return Collection
+     */
+    public function getAllCategories():Collection;
 
     /**
      * @param CategoryRequest $request

@@ -98,7 +98,7 @@ class Index extends Component
 
     public function render()
     {
-        $colors = $this->colorService->getAllColors();
+        $colors = $this->colorService->getColorsWithPaginate();
 
         return view('livewire.admin.color.index', ['colors' => $colors]);
     }

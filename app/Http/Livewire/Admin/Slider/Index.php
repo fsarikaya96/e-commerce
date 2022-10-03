@@ -23,13 +23,6 @@ class Index extends Component
         $this->sliderService = $ISliderService;
     }
 
-    public function render()
-    {
-        $sliders = $this->sliderService->getAllSliders();
-
-        return view('livewire.admin.slider.index', ['sliders' => $sliders]);
-    }
-
     public function deleteSlider($slider_id)
     {
         $this->slider_id = $slider_id;
@@ -40,5 +33,12 @@ class Index extends Component
         $this->sliderService->delete($this->slider_id);
         session()->flash("livewire_message", "Slider Silindi.");
         $this->dispatchBrowserEvent('close-modal');
+    }
+
+    public function render()
+    {
+        $sliders = $this->sliderService->getSlidersWithPaginate();
+
+        return view('livewire.admin.slider.index', ['sliders' => $sliders]);
     }
 }

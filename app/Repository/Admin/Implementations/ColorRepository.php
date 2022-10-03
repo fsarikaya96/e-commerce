@@ -8,12 +8,22 @@ use App\Repository\Admin\Interfaces\IColorRepository;
 class ColorRepository implements IColorRepository
 {
     /**
-     * Get All Colors
+     * Get All Colors with Paginate Repository
      * @return mixed
      */
-    public function getAllColors(): mixed
+    public function getColorsWithPaginate(): mixed
     {
         return Color::orderBy('id', 'DESC')->paginate(10);
+    }
+
+    /**
+     * @param $productColor
+     * Get Color By Product ID
+     * @return mixed
+     */
+    public function getColorByProductID($productColor): mixed
+    {
+        return Color::whereNotIn('id',$productColor)->get();
     }
 
     /**

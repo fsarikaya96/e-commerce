@@ -10,16 +10,30 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductImage;
+use App\Services\Admin\Interfaces\IBrandService;
+use App\Services\Admin\Interfaces\ICategoryService;
+use App\Services\Admin\Interfaces\IColorService;
+use App\Services\Admin\Interfaces\IProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    private IProductService $productService;
+    private ICategoryService $categoryService;
+    private IBrandService $brandService;
+    private IColorService $colorService;
+
+    public function __construct(IProductService $IProductService, ICategoryService $ICategoryService, IBrandService $IBrandService, IColorService $IColorService)
     {
+        $this->productService  = $IProductService;
+        $this->categoryService = $ICategoryService;
+        $this->brandService    = $IBrandService;
+        $this->colorService    = $IColorService;
         $this->middleware('auth');
     }
+
     public function index()
     {
         return view('admin.product.index');
@@ -75,12 +89,13 @@ class ProductController extends Controller
 
     public function edit(int $product_id)
     {
-        $product      = Product::findOrFail($product_id);
-        $categories   = Category::all();
-        $brands       = Brand::all();
+        $product    = $this->productService->getProductById($product_id);
+        $categories = $this->categoryService->getAllCategories();
+        $brands     = $this->brandService->getAllBrands();
+
         $productColor = $product->productColors->pluck('color_id')->toArray();
 
-        $colors = Color::whereNotIn('id', $productColor)->get();
+        $colors = $this->colorService->getColorByProductID($productColor);
 
         return view('admin.product.edit', compact('product', 'categories', 'brands', 'colors', 'productColor'));
     }

@@ -27,19 +27,31 @@ class ColorService implements IColorService
      * @return mixed
      * @throws ValidationException
      */
-    public function getAllColors(): mixed
+    public function getColorsWithPaginate(): mixed
     {
         Log::channel('service')->info("ColorService called --> Request getAllColors() function");
         try {
-            Log::channel('service')->info("ColorService called --> Return all colors");
+            Log::channel('service')->info("ColorService called --> Return all colors with paginate");
 
-            return $this->colorRepository->getAllColors();
+            return $this->colorRepository->getColorsWithPaginate();
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Renk Bulunamadı.'],
             ]);
         }
 
+    }
+
+    /**
+     * @param $productColor
+     *
+     * @return mixed
+     */
+    public function getColorByProductID($productColor): mixed
+    {
+        Log::channel('service')->info("ColorService called --> Request getColorByProductID() function");
+        Log::channel('service')->info("ColorService called --> ReturnColor By Product ID :" .json_encode($productColor));
+        return $this->colorRepository->getColorByProductID($productColor);
     }
 
     /**

@@ -3,14 +3,21 @@
 namespace App\Repository\Admin\Interfaces;
 
 use App\Models\Category;
+use Illuminate\Support\Collection;
 
 interface ICategoryRepository
 {
     /**
-     * Get All Categories Repository
+     * Get All Categories with Paginate Repository
      * @return mixed
      */
-    public function getAllCategories(): mixed;
+    public function getCategoriesWithPaginate(): mixed;
+
+    /**
+     * Get All Categories
+     * @return Collection
+     */
+    public function getAllCategories():Collection;
 
     /**
      * @param Category $category

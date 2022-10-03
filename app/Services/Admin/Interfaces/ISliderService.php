@@ -8,10 +8,10 @@ use App\Models\Slider;
 interface ISliderService
 {
     /**
-     * Get All Sliders
+     * Get All Sliders with Paginate Repository
      * @return mixed
      */
-    public function getAllSliders():mixed;
+    public function getSlidersWithPaginate():mixed;
 
     /**
      * @param int $id
