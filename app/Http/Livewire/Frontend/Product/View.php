@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class View extends Component
 {
-    public $category, $product, $product_id;
+    public $category, $product, $product_id, $quantityCount = 1;
 
     private IWishlistService $wishlistService;
 
@@ -18,6 +18,20 @@ class View extends Component
     {
         $this->wishlistService = $IWishlistService;
     }
+
+    public function incrementQuantity()
+    {
+        if ($this->quantityCount < 20 )
+            $this->quantityCount++;
+    }
+
+    public function decrementQuantity()
+    {
+        if ($this->quantityCount > 1 )
+            $this->quantityCount--;
+    }
+
+
 
     public function addToWishList($product_id)
     {
@@ -29,26 +43,29 @@ class View extends Component
             ];
             if ($this->wishlistService->getWishlistByCondition(['user_id' => auth()->user()->id, 'product_id' => $product_id])->exists()) {
                 $this->dispatchBrowserEvent('message', [
-                    'text' => 'Zaten favorilere eklendi.',
-                    'type' => 'warning',
+                    'text'   => 'Zaten favorilere eklendi.',
+                    'type'   => 'warning',
                     'status' => 409
                 ]);
+
                 return false;
             }
             $this->emit('wishlistAddedUpdated');
             $this->dispatchBrowserEvent('message', [
-                'text' => 'Favorilere eklendi.',
-                'type' => 'success',
+                'text'   => 'Favorilere eklendi.',
+                'type'   => 'success',
                 'status' => 200
             ]);
             $wishlistData = $wishlist->fill($data);
+
             return $this->wishlistService->create($wishlistData);
         } else {
             $this->dispatchBrowserEvent('message', [
-                'text' => 'Lütfen giriş yapınız.',
-                'type' => 'info',
+                'text'   => 'Lütfen giriş yapınız.',
+                'type'   => 'info',
                 'status' => 401
             ]);
+
             return false;
         }
     }

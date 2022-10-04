@@ -22,7 +22,7 @@ class WishlistRepository implements IWishlistRepository
 
     /**
      * @param array $condition
-     * Fetch Wishlist by Condition
+     * Fetch Wishlist by Condition Repository
      *
      * @return mixed
      */

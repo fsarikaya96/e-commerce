@@ -8,13 +8,13 @@ interface IWishlistService
 {
     /**
      * @param Wishlist $wishlist
-     *
+     * Insert Wishlist Service
      * @return Wishlist
      */
     public function create(Wishlist $wishlist):Wishlist;
 
     /**
-     * Fetch Wishlist by Condition
+     * Fetch Wishlist by Condition Service
      *
      * @param array $condition
      *

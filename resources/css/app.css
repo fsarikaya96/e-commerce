@@ -232,12 +232,13 @@
 .product-view .btn1{
     border: 1px solid;
     margin-right: 3px;
-    border-radius: 0px;
+    border-radius: 3px;
     font-size: 14px;
     margin-top: 10px;
+    transition: .2s;
 }
 .product-view .btn1:hover{
-    background-color: #2874f0;
+    background-color: #f27a1a;
     color: #fff;
 }
 .product-view .input-quantity{
@@ -322,7 +323,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 1200px;
     height: 396px;
     background-color: #fff;
     border: 1px solid #eaeaea;
@@ -447,7 +447,8 @@
     text-align: center;
     width: 100%;
     text-decoration: none;
-    color: #333
+    color: #333;
+    transition: .2s;
 }
 .view-product-btn a:hover{
     background: #f27a1a;
@@ -467,13 +468,15 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: .3s;
 }
 .ufvrt-btn-wrppr button
 {
     border:0;
     background: #FFF;
+    transition: .3s;
+    cursor: pointer;
 }
-.ufvrt-btn-wrppr:hover button {
-    color:#f27a1a;
-}
+.ufvrt-btn-wrppr:hover { border-color:#f27a1a; }
+.ufvrt-btn-wrppr:hover span { color:#f27a1a;}
 /* Cart or Wishlist */

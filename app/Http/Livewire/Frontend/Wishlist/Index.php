@@ -2,14 +2,21 @@
 
 namespace App\Http\Livewire\Frontend\Wishlist;
 
-use App\Models\Wishlist;
+use App\Services\Interfaces\IWishlistService;
 use Livewire\Component;
 
 class Index extends Component
 {
+    private IWishlistService $wishlistService;
+
+    public function boot(IWishlistService $IWishlistService)
+    {
+        $this->wishlistService = $IWishlistService;
+    }
+
     public function removeWishlistItem(int $id)
     {
-        $wishlist = Wishlist::where('id', $id)->first();
+        $wishlist = $this->wishlistService->getWishlistByCondition(['id' => $id])->first();
         $this->dispatchBrowserEvent('message', [
             'text'   => 'Favoriden silindi.',
             'type'   => 'success',
@@ -17,12 +24,11 @@ class Index extends Component
         ]);
         $this->emit('wishlistAddedUpdated');
         $wishlist->delete();
-
     }
 
     public function render()
     {
-        $wishlist = Wishlist::where('user_id', auth()->user()->id)->get();
+        $wishlist = $this->wishlistService->getWishlistByCondition(['user_id' => auth()->user()->id])->get();
 
         return view('livewire.frontend.wishlist.index', [
             'wishlist' => $wishlist

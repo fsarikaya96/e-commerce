@@ -32,7 +32,8 @@
                                     <div class="view-product-btn">
                                         <a href="{{"collections/".$list->products->category->slug.'/'.$list->products->slug }}">Ürüne Git</a>
                                     </div>
-                                    <div class="ufvrt-btn-wrppr"><button type="button" wire:click="removeWishlistItem({{ $list->id }})">&#10005;</button></div>
+                                    <div class="ufvrt-btn-wrppr"><span class="removeWishlist" wire:click="removeWishlistItem({{ $list->id }})">&#10005;</span></div>
+
                                 </div>
                             </div>
 

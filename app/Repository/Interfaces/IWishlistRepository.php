@@ -12,14 +12,14 @@ interface IWishlistRepository
      *
      * @return Wishlist
      */
-    public function create(Wishlist $wishlist):Wishlist;
+    public function create(Wishlist $wishlist): Wishlist;
 
     /**
-     * Fetch Wishlist by Condition
+     * Fetch Wishlist by Condition Repository
      *
      * @param array $condition
      *
      * @return mixed
      */
-    public function getWishlistByCondition(array $condition):mixed;
+    public function getWishlistByCondition(array $condition): mixed;
 }
