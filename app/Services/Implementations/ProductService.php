@@ -9,6 +9,7 @@ use App\Repository\Implementations\ProductRepository;
 use App\Repository\Interfaces\ICategoryRepository;
 use App\Repository\Interfaces\IProductRepository;
 use App\Services\Interfaces\IProductService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -155,6 +156,18 @@ class ProductService implements IProductService
                 'error' => ['Silme işlemi başarısız.'],
             ]);
         }
+    }
+
+    /**
+     * @param array $condition
+     * @param array $brand
+     * @param string|null $price
+     *
+     * @return mixed
+     */
+    public function getProductsByCondition(array $condition, array $brand, ?string $price):mixed
+    {
+       return $this->productRepository->getProductsByCondition($condition,$brand,$price);
     }
 
     /**

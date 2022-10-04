@@ -3,6 +3,7 @@
 namespace App\Repository\Interfaces;
 
 use App\Models\Slider;
+use Illuminate\Support\Collection;
 
 interface ISliderRepository
 {
@@ -12,6 +13,12 @@ interface ISliderRepository
      */
     public function getSlidersWithPaginate(): mixed;
 
+    /**
+     * @param array $condition
+     * Fetch sliders by Condition Repository
+     * @return Collection
+     */
+    public function getSlidersByCondition(array $condition): Collection;
 
     /**
      * @param int $id

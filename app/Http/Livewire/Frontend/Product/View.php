@@ -7,6 +7,7 @@ use Livewire\Component;
 class View extends Component
 {
     public $category,$product;
+
     public function mount($category,$product)
     {
         $this->category = $category;

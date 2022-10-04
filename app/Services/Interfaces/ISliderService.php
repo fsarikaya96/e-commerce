@@ -4,6 +4,7 @@ namespace App\Services\Interfaces;
 
 use App\Http\Requests\SliderRequest;
 use App\Models\Slider;
+use Illuminate\Support\Collection;
 
 interface ISliderService
 {
@@ -12,6 +13,13 @@ interface ISliderService
      * @return mixed
      */
     public function getSlidersWithPaginate(): mixed;
+
+    /**
+     * @param array $condition
+     * Fetch sliders by Condition Repository
+     * @return Collection
+     */
+    public function getSlidersByCondition(array $condition): Collection;
 
     /**
      * @param int $id

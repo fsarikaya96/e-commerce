@@ -29,8 +29,10 @@
                         @if($product->productColors->count() > 0)
                           @if($product->productColors)
                             @foreach($product->productColors as $productColor)
+                                    @if($productColor->quantity != 0)
                                     <label class="colorSelectionLabel text-white" style="background: {{ $productColor->colors->code }}">
                                     </label>
+                                    @endif
                             @endforeach
                           @endif
                         @else

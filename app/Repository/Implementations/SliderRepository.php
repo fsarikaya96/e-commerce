@@ -4,6 +4,7 @@ namespace App\Repository\Implementations;
 
 use App\Models\Slider;
 use App\Repository\Interfaces\ISliderRepository;
+use Illuminate\Support\Collection;
 
 class SliderRepository implements ISliderRepository
 {
@@ -14,6 +15,15 @@ class SliderRepository implements ISliderRepository
     public function getSlidersWithPaginate(): mixed
     {
         return Slider::orderBy('id', 'DESC')->paginate(10);
+    }
+
+    /**
+     * Fetch sliders by Condition Repository
+     * @return mixed
+     */
+    public function getSlidersByCondition(array $condition): Collection
+    {
+        return Slider::where($condition)->get();
     }
 
     /**

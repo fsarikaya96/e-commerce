@@ -5,6 +5,7 @@ namespace App\Repository\Implementations;
 use App\Models\Category;
 use App\Models\Product;
 use App\Repository\Interfaces\IProductRepository;
+use Illuminate\Support\Collection;
 
 class ProductRepository implements IProductRepository
 {
@@ -15,6 +16,31 @@ class ProductRepository implements IProductRepository
     public function getProductWithPaginate(): mixed
     {
         return Product::orderBy('id', 'DESC')->paginate(10);
+    }
+
+    /**
+     * Fetch Products by Condition Repository
+     *
+     * @param array $condition
+     * @param array $brand
+     * @param string|null $price
+     *
+     * @return mixed
+     */
+
+    public function getProductsByCondition(array $condition, array $brand, ?string $price): mixed
+    {
+        return Product::where($condition)
+                      ->when($brand, function ($query) use ($brand) {
+                          $query->whereIn('brand', $brand);
+                      })
+                      ->when($price, function ($query) use($price) {
+                          $query->when($price == 'high-to-low', function ($queryPrice) {
+                              $queryPrice->orderBy('selling_price', 'DESC');
+                          })->when($price == 'low-to-high',function ($queryPrice){
+                              $queryPrice->orderBy('selling_price','ASC');
+                          });
+                      });
     }
 
     /**

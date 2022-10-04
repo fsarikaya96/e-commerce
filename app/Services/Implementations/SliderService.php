@@ -6,6 +6,7 @@ use App\Http\Requests\SliderRequest;
 use App\Models\Slider;
 use App\Repository\Interfaces\ISliderRepository;
 use App\Services\Interfaces\ISliderService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
@@ -35,6 +36,26 @@ class SliderService implements ISliderService
             Log::channel('service')->info("SliderService called --> Return all sliders with paginate");
 
             return $this->sliderRepository->getSlidersWithPaginate();
+        } catch (\Exception $exception) {
+            throw ValidationException::withMessages([
+                'error' => ['Slider Bulunamadı.'],
+            ]);
+        }
+    }
+
+    /**
+     * @param array $condition
+     *
+     * @return Collection
+     * @throws ValidationException
+     */
+    public function getSlidersByCondition(array $condition): Collection
+    {
+        Log::channel('service')->info("SliderService called --> Request getSlidersByCondition() function");
+        try {
+            Log::channel('service')->info("SliderService called --> Return all sliders by Condition");
+
+            return $this->sliderRepository->getSlidersByCondition($condition);
         } catch (\Exception $exception) {
             throw ValidationException::withMessages([
                 'error' => ['Slider Bulunamadı.'],

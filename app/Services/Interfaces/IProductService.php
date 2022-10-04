@@ -4,6 +4,7 @@ namespace App\Services\Interfaces;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
+use Illuminate\Support\Collection;
 
 interface IProductService
 {
@@ -12,6 +13,21 @@ interface IProductService
      * @return mixed
      */
     public function getProductWithPaginate(): mixed;
+
+    /**
+     * @param array $brand
+     *
+     * @return Product
+     */
+
+    /**
+     * @param array $condition
+     * @param array $brand
+     * @param string|null $price
+     *
+     * @return mixed
+     */
+    public function getProductsByCondition(array $condition, array $brand, ?string $price):mixed;
 
     /**
      * Fetch Product by ID Service

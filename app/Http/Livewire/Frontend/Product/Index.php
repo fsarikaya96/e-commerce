@@ -2,19 +2,22 @@
 
 namespace App\Http\Livewire\Frontend\Product;
 
-use App\Models\Product;
+use App\Services\Interfaces\IProductService;
 use Livewire\Component;
 
 class Index extends Component
 {
     public $products, $category, $brandInputs = [], $priceSort;
-
+    private IProductService $productService;
 
     protected $queryString = [
         'brandInputs' => ['except' => '', 'as' => 'brand'],
         'priceSort'   => ['except' => '', 'as' => 'price']
     ];
-
+    public function boot(IProductService $IProductService)
+    {
+        $this->productService = $IProductService;
+    }
     public function mount($category)
     {
         $this->category = $category;
@@ -22,21 +25,8 @@ class Index extends Component
 
     public function render()
     {
-        $this->products = Product::where('category_id', $this->category->id)
-                                 ->when($this->brandInputs, function ($query) {
-                                     $query->whereIn('brand', $this->brandInputs);
-                                 })
-                                 ->when($this->priceSort, function ($query) {
-
-                                     $query->when($this->priceSort == 'high-to-low',function ($queryPrice){
-                                            $queryPrice->orderBy('selling_price','DESC');
-                                     })->when($this->priceSort == 'low-to-high',function ($queryPrice){
-                                            $queryPrice->orderBy('selling_price','ASC');
-                                     });
-                                 })
-                                 ->where('status', 1)
-                                 ->get();
-
+        $this->products = $this->productService
+            ->getProductsByCondition(['category_id' => $this->category->id, 'status' => 1],$this->brandInputs,$this->priceSort)->get();
         return view(
             'livewire.frontend.product.index',
             [
