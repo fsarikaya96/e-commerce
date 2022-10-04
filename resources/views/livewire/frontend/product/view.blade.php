@@ -1,5 +1,10 @@
 <div class="py-3 py-md-5 bg-light">
     <div class="container">
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-5 mt-3">
                 <div class="bg-white border">
@@ -24,14 +29,14 @@
                         <span class="selling-price">{{ $product->selling_price }} TL</span>
                         <span class="original-price">{{ $product->original_price }} TL</span>
                     </div>
-                    <p class="d-inline-block" style="font-size: 14px; font-weight: 600;">Renk Seçin</p>
+
                     <div>
                         @if($product->productColors->count() > 0)
+                            <p class="" style="font-size: 14px; font-weight: 600;">Renk Seçin</p>
                           @if($product->productColors)
                             @foreach($product->productColors as $productColor)
                                     @if($productColor->quantity != 0)
-                                    <label class="colorSelectionLabel text-white" style="background: {{ $productColor->colors->code }}">
-                                    </label>
+                                    <label class="colorSelectionLabel text-white" style="background: {{ $productColor->colors->code }}"></label>
                                     @endif
                             @endforeach
                           @endif
@@ -52,7 +57,11 @@
                     </div>
                     <div class="mt-2">
                         <a href="" class="btn btn1"> <i class="fa fa-shopping-cart"></i> Sepete Ekle</a>
-                        <a href="" class="btn btn1"> <i class="fa fa-heart"></i>Favorilere Ekle</a>
+                        <button type="button" wire:click="addToWishList({{ $product->id }})" class="btn btn1">
+                            <i class="fa fa-heart"></i>
+                            <span wire:loading.remove>Favorilere Ekle</span>
+                            <span wire:loading wire:target="addToWishList">Ekleniyor</span>
+                        </button>
                     </div>
                     <div class="mt-3">
                         <h5 class="mb-0">Küçük Açıklama</h5>
