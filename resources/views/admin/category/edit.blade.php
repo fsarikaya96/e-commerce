@@ -37,7 +37,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="image">Resim</label>
-                                <input type="file" id="image" name="image" class="form-control" accept="image/jpg,image/png,image/jpeg">
+                                <input type="file" id="image" name="image" class="form-control" accept="images*">
                                 <img class="mt-3 category-img" src="{{ asset($category->image) }}" alt="Fotoğraf Bulunumadı.">
                             </div>
 

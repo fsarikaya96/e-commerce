@@ -4,19 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductImage;
-use App\Services\Admin\Interfaces\IBrandService;
-use App\Services\Admin\Interfaces\ICategoryService;
-use App\Services\Admin\Interfaces\IColorService;
-use App\Services\Admin\Interfaces\IProductService;
+use App\Services\Interfaces\IBrandService;
+use App\Services\Interfaces\ICategoryService;
+use App\Services\Interfaces\IColorService;
+use App\Services\Interfaces\IProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {

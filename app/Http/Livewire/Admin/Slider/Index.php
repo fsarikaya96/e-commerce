@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Slider;
 
-use App\Models\Slider;
-use App\Services\Admin\Interfaces\ISliderService;
-use Illuminate\Support\Facades\File;
+use App\Services\Interfaces\ISliderService;
 use Livewire\Component;
 use Livewire\WithPagination;
 

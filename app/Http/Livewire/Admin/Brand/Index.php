@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Admin\Brand;
 
 use App\Models\Brand;
-use App\Services\Admin\Interfaces\IBrandService;
-use App\Services\Admin\Interfaces\ICategoryService;
+use App\Services\Interfaces\IBrandService;
+use App\Services\Interfaces\ICategoryService;
 use Livewire\Component;
 use Livewire\WithPagination;
 

@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Product;
 
-use App\Models\Product;
-use App\Services\Admin\Interfaces\IProductService;
-use Illuminate\Support\Facades\File;
+use App\Services\Interfaces\IProductService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -36,15 +34,7 @@ class Index extends Component
 
     public function destroyProduct()
     {
-        $product = Product::findOrFail($this->product_id);
-        if ($product->productImages()) {
-            foreach ($product->productImages as $image) {
-                if (File::exists($image->image)) {
-                    File::delete($image->image);
-                }
-            }
-        }
-        $product->delete();
+        $this->productService->delete($this->product_id);
         session()->flash('livewire_message', 'Ürün Başarıyla Silindi');
         $this->dispatchBrowserEvent('close-modal');
     }

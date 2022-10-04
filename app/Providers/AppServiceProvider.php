@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repository\Admin\RepositoryIoCRegister;
-use App\Services\Admin\ServiceIoCRegister;
+use App\Repository\RepositoryIoCRegister;
+use App\Services\ServiceIoCRegister;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 

@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SliderRequest;
-use App\Models\Slider;
-use App\Services\Admin\Interfaces\ISliderService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use App\Services\Interfaces\ISliderService;
 
 class SliderController extends Controller
 {

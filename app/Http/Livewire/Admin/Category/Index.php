@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Category;
 
-use App\Services\Admin\Interfaces\ICategoryService;
+use App\Services\Interfaces\ICategoryService;
 use Livewire\Component;
 use Livewire\WithPagination;
 

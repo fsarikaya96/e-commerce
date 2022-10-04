@@ -46,7 +46,7 @@ class CategoryRequest extends FormRequest
 //            'slug'             => ['nullable', Rule::unique('categories')->ignore($slug, 'slug')],
             'slug'             => 'nullable|unique:categories,slug,'.$this->id,
             'description'      => 'required',
-            'image'            => 'nullable|image|mimes:jpeg,jpg,png',
+            'image'            => 'nullable|mimes:jpg,jpeg,png',
             'meta_title'       => 'nullable|string',
             'meta_keyword'     => 'nullable|string',
             'meta_description' => 'nullable|string',

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin\Color;
 
 use App\Models\Color;
-use App\Services\Admin\Interfaces\IColorService;
+use App\Services\Interfaces\IColorService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
