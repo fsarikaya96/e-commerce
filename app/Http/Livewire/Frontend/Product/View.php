@@ -28,14 +28,26 @@ class View extends Component
                 'user_id'    => auth()->user()->id,
             ];
             if ($this->wishlistService->getWishlistByCondition(['user_id' => auth()->user()->id, 'product_id' => $product_id])->exists()) {
-                session()->flash('message', 'Zaten istek listesine eklendi.');
+                $this->dispatchBrowserEvent('message', [
+                    'text' => 'Zaten favorilere eklendi.',
+                    'type' => 'warning',
+                    'status' => 409
+                ]);
                 return false;
             }
-            session()->flash('message', 'Favorilere Eklendi.');
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Favorilere eklendi.',
+                'type' => 'success',
+                'status' => 200
+            ]);
             $wishlistData = $wishlist->fill($data);
             return $this->wishlistService->create($wishlistData);
         } else {
-            redirect()->to('login');
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Lütfen giriş yapınız.',
+                'type' => 'info',
+                'status' => 401
+            ]);
             return false;
         }
     }
