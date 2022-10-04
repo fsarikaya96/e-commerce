@@ -40,7 +40,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('wishlist') }}">
-                                    <i class="fa fa-heart"></i> Favorilerim (0)
+                                    <i class="fa fa-heart"></i> Favorilerim (<livewire:frontend.wishlist.wishlist-count>)
                                 </a>
                             </li>
                         <li class="nav-item dropdown">

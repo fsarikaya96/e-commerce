@@ -35,6 +35,7 @@ class View extends Component
                 ]);
                 return false;
             }
+            $this->emit('wishlistAddedUpdated');
             $this->dispatchBrowserEvent('message', [
                 'text' => 'Favorilere eklendi.',
                 'type' => 'success',

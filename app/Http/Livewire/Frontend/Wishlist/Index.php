@@ -15,7 +15,9 @@ class Index extends Component
             'type'   => 'success',
             'status' => 200,
         ]);
+        $this->emit('wishlistAddedUpdated');
         $wishlist->delete();
+
     }
 
     public function render()

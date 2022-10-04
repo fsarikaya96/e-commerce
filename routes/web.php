@@ -20,12 +20,15 @@ Auth::routes();
 // ---------------------------------------------------------------------- //
 
 Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->group(function () {
-    Route::get('/','index')->name('frontend.home');
-    Route::get('/collections','categories')->name('frontend.category');
-    Route::get('/collections/{category_slug}','products')->name('frontend.products');
-    Route::get('/collections/{category_slug}/{product_slug}','productView')->name('frontend.products.view');
+    Route::get('/', 'index')->name('frontend.home');
+    Route::get('/collections', 'categories')->name('frontend.category');
+    Route::get('/collections/{category_slug}', 'products')->name('frontend.products');
+    Route::get('/collections/{category_slug}/{product_slug}', 'productView')->name('frontend.products.view');
 });
-Route::get('/wishlists',[\App\Http\Controllers\Frontend\WishlistController::class,'index'])->name('wishlist');
+Route::middleware('auth')->group(function () {
+
+    Route::get('/wishlists', [\App\Http\Controllers\Frontend\WishlistController::class, 'index'])->name('wishlist');
+});
 
 // ---------------------------------------------------------------------- //
 // ----------------------- Frontend End --------------------------------- //
@@ -36,7 +39,6 @@ Route::get('/wishlists',[\App\Http\Controllers\Frontend\WishlistController::clas
 // ----------------------- Backend Start ------------------------------- //
 // ---------------------------------------------------------------------- //
 Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
-
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Category
@@ -53,11 +55,15 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('products', 'index')->name('admin.products');
         Route::get('products/create', 'create')->name('admin.products.create');
         Route::post('products', 'store')->name('admin.products.store');
-        Route::get('products/{id}/edit','edit')->name('admin.products.edit');
-        Route::put('products/{id}','update')->name('admin.products.update');
-        Route::get('products/product-image/{product}/delete','deleteImage')->name('admin.products.deleteImage');
-        Route::post('products/update-product-color/{product?}','updateProductColor')->name('admin.products.updateProductColor');
-        Route::post('products/delete-product-color/{product?}','deleteProductColor')->name('admin.products.deleteProductColor');
+        Route::get('products/{id}/edit', 'edit')->name('admin.products.edit');
+        Route::put('products/{id}', 'update')->name('admin.products.update');
+        Route::get('products/product-image/{product}/delete', 'deleteImage')->name('admin.products.deleteImage');
+        Route::post('products/update-product-color/{product?}', 'updateProductColor')->name(
+            'admin.products.updateProductColor'
+        );
+        Route::post('products/delete-product-color/{product?}', 'deleteProductColor')->name(
+            'admin.products.deleteProductColor'
+        );
     });
 
     // Slider
@@ -67,17 +73,15 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::post('sliders', 'store')->name('admin.sliders.store');
         Route::get('sliders/{id}/edit', 'edit')->name('admin.sliders.edit');
         Route::put('sliders/{id}', 'update')->name('admin.sliders.update');
-
     });
 
     // Color
     Route::controller(\App\Http\Controllers\Admin\ColorController::class)->group(function () {
         Route::get('colors', 'index')->name('admin.colors');
         Route::get('colors/create', 'create')->name('admin.colors.create');
-
     });
     // Brand
-    Route::get('brands',[\App\Http\Controllers\Admin\BrandController::class,'index'])->name('admin.brands');
+    Route::get('brands', [\App\Http\Controllers\Admin\BrandController::class, 'index'])->name('admin.brands');
 });
 // ---------------------------------------------------------------------- //
 // ----------------------- Backend End ------------------------------- //
