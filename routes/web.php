@@ -25,7 +25,7 @@ Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->gro
     Route::get('/collections/{category_slug}','products')->name('frontend.products');
     Route::get('/collections/{category_slug}/{product_slug}','productView')->name('frontend.products.view');
 });
-Route::get('/wishlist',[\App\Http\Controllers\Frontend\WishlistController::class,'index'])->name('wishlist');
+Route::get('/wishlists',[\App\Http\Controllers\Frontend\WishlistController::class,'index'])->name('wishlist');
 
 // ---------------------------------------------------------------------- //
 // ----------------------- Frontend End --------------------------------- //

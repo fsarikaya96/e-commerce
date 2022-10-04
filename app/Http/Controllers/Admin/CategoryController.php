@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function __construct(ICategoryService $ICategoryService)
     {
         $this->middleware('auth');
-        return $this->categoryService = $ICategoryService;
+        $this->categoryService = $ICategoryService;
     }
 
     public function index()

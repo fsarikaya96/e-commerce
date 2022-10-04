@@ -1,57 +1,49 @@
-<div class="py-3 py-md-5 bg-light">
+<div class="py-3 py-md-5">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="shopping-cart">
 
-                    <div class="cart-header d-none d-sm-none d-mb-block d-lg-block">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4>Ürünler</h4>
-                            </div>
-                            <div class="col-md-2">
-                                <h4>Fiyat</h4>
-                            </div>
-                            <div class="col-md-2">
-                                <h4>Sil</h4>
-                            </div>
-                        </div>
-                    </div>
-                    @forelse($wishlist as $list)
-                        @if($list->products)
-                        <div class="cart-item">
-                            <div class="row">
-                                <div class="col-md-6 my-auto">
-                                    <a href="">
-                                        <label class="product-name">
-                                            <img src="{{ asset($list->products->productImages[0]->image) }}" style="width: 75px; height: 75px" alt="">
-                                            {{ $list->products->name }}
-                                        </label>
-                                    </a>
-                                </div>
-                                <div class="col-md-2 my-auto">
-                                    <label class="price">{{ $list->products->selling_price }} TL </label>
-                                </div>
-                                <div class="col-md-2 col-5 my-auto">
-                                    <div class="remove">
-                                        <button type="button" wire:click="removeWishlistItem({{ $list->id }})" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash"></i>
-                                            <span wire:loading.remove wire:target="removeWishlistItem({{ $list->id }})">Sil</span>
-                                            <span wire:loading wire:target="removeWishlistItem({{ $list->id }})">Siliniyor</span>
-                                        </button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                    @empty
-                        <h4>Favorileriniz Boş.</h4>
-                    @endforelse
-
                 </div>
+                @if($wishlist->count() <1)
+                    <div class="empty-wishlist">
+                        <h5>Favoriler Listeniz Henüz Boş</h5>
+                        <span>Favori listenizde ürün bulunamadı. “Alışverişe Başla” butonuna tıklayarak dilediğiniz ürünleri favoriye ekleyebilirsiniz.</span>
+                        <a href="/">Alışverişe Başla</a>
+                    </div>
+                @else
+                    @foreach($wishlist as $list)
+                        @if($list->products)
+                            <div class="favored-product-container">
+                                <div class="p-card-wrppr">
+                                    <div class="p-card-chldrn-cntnr">
+                                        <div class="img-wrapper">
+                                            <img class="p-card-img" src="{{ asset($list->products->productImages[0]->image) }}">
+                                            <div class="new-promotion-container">
+                                            </div>
+                                        </div>
+                                        <div class="prdct-desc-cntnr-wrppr">
+                                            <span class="product-name-favorite">{{ $list->products->name }}</span>
+                                            <div class="product-price">
+                                                <div class="prc-box-dscntd">{{ $list->products->selling_price }} TL</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="view-product-btn">
+                                        <a href="{{"collections/".$list->products->category->slug.'/'.$list->products->slug }}">Ürüne Git</a>
+                                    </div>
+                                    <div class="ufvrt-btn-wrppr"><button type="button" wire:click="removeWishlistItem({{ $list->id }})">&#10005;</button></div>
+                                </div>
+                            </div>
+
+                        @endif
+
+                    @endforeach
+                @endif
+
+
             </div>
         </div>
-
     </div>
+
 </div>
