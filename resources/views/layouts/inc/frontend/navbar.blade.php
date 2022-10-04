@@ -35,12 +35,12 @@
                         @else
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <i class="fa fa-shopping-cart"></i> Cart (0)
+                                    <i class="fa fa-shopping-cart"></i> Sepet (0)
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fa fa-heart"></i> Wishlist (0)
+                                <a class="nav-link" href="{{ route('wishlist') }}">
+                                    <i class="fa fa-heart"></i> Favorilerim (0)
                                 </a>
                             </li>
                         <li class="nav-item dropdown">
