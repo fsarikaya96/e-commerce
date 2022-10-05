@@ -5,7 +5,8 @@ namespace App\Repository;
 use App\Repository\{
     Implementations\BrandRepository, Interfaces\IBrandRepository, Implementations\CategoryRepository,Interfaces\ICategoryRepository,
     Implementations\ColorRepository, Interfaces\IColorRepository, Implementations\ProductRepository, Interfaces\IProductRepository,
-    Implementations\SliderRepository, Interfaces\ISliderRepository, Implementations\WishlistRepository, Interfaces\IWishlistRepository
+    Implementations\SliderRepository, Interfaces\ISliderRepository, Implementations\WishlistRepository, Interfaces\IWishlistRepository,
+    Implementations\CartRepository, Interfaces\ICartRepository
 };
 class RepositoryIoCRegister
 {
@@ -22,5 +23,6 @@ class RepositoryIoCRegister
         app()->bind(ISliderRepository::class,SliderRepository::class);
         app()->bind(IProductRepository::class,ProductRepository::class);
         app()->bind(IWishlistRepository::class,WishlistRepository::class);
+        app()->bind(ICartRepository::class,CartRepository::class);
     }
 }
