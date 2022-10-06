@@ -20,7 +20,9 @@ class Order extends Model
         'province',
         'county',
         'address',
-        'status_message'
+        'status_message',
+        'payment_mode',
+        'payment_id'
     ];
 
 }

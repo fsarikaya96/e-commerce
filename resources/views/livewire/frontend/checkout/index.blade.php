@@ -45,9 +45,27 @@
                                 <textarea id="address" wire:model.defer="address" class="form-control" placeholder="Lütfen Adres Giriniz."></textarea>
                                 @error('address') <small class="text-danger">{{ $message}}</small> @enderror
                             </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="mb-3">Ödeme Modunu Seçin:: </label>
+                                <div class="d-md-flex align-items-start">
+                                    <div class="nav col-md-3 flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                        <button class="nav-link active"  id="cashOnDeliveryTab-tab" data-bs-toggle="pill" data-bs-target="#cashOnDeliveryTab" type="button" role="tab" aria-controls="cashOnDeliveryTab" aria-selected="true">Kapıda Ödeme</button>
+                                        <button class="nav-link" id="onlinePayment-tab" data-bs-toggle="pill" data-bs-target="#onlinePayment" type="button" role="tab" aria-controls="onlinePayment" aria-selected="false">Kredi Kartı Ödeme</button>
+                                    </div>
+                                    <div class="tab-content col-md-9" id="v-pills-tabContent">
+                                        <div class="tab-pane fade active show" id="cashOnDeliveryTab" role="tabpanel" aria-labelledby="cashOnDeliveryTab-tab" tabindex="0">
+                                            <h6>Kapıda Ödeme Modu</h6>
+                                            <hr/>
+                                            <button type="button" wire:click="codOrder" class="btn btn-primary">Ödeme Yap (Kapıda Ödeme)</button>
 
-                            <div class="col-md-3 mb-3 float-end">
-                                <button type="button" wire:click="payOrder" class="btn btn-primary w-100">Ödeme Yap</button>
+                                        </div>
+                                        <div class="tab-pane fade" id="onlinePayment" role="tabpanel" aria-labelledby="onlinePayment-tab" tabindex="0">
+                                            <h6>Online Ödeme Mode</h6>
+                                            <hr/>
+                                            <button type="button" class="btn btn-warning">Ödeme Yap (Kredi Kartı)</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ class Index extends Component
     public $carts;
     public int $totalPrice = 0;
 
-    public $full_name, $phone, $email, $province, $county, $address;
+    public $full_name, $phone, $email, $province, $county, $address,$paymentMode = null,$payment_id = null;
 
     private ICartService $cartService;
 
@@ -62,7 +62,7 @@ class Index extends Component
         return true;
     }
 
-    public function payOrder()
+    public function placeOrder()
     {
         $this->validate();
 
@@ -75,7 +75,9 @@ class Index extends Component
             'province'       => $this->province,
             'county'         => $this->county,
             'address'        => $this->address,
-            'status_message' => 'in progress'
+            'status_message' => 'in progress',
+            'payment_mode'   => $this->paymentMode,
+            'payment_id'     => $this->payment_id,
         ]);
         foreach ($this->carts as $cart) {
             $orderItem = OrderItem::create([
@@ -92,7 +94,14 @@ class Index extends Component
                 $cart->products()->where('id',$cart->product_id)->decrement('quantity',$cart->quantity);
             }
         }
-        if (  $order && $orderItem) {
+        return $order;
+    }
+
+    public function codOrder()
+    {
+        $this->paymentMode = 'Cash on Delivery';
+        $codOrder = $this->placeOrder();
+        if ($codOrder) {
             $this->cartService->getCartByCondition(['user_id' => auth()->user()->id])->delete();
             $this->dispatchBrowserEvent('message', [
                 'text'   => 'Ödeme Başarılı!',
@@ -107,7 +116,6 @@ class Index extends Component
                 'status' => 500
             ]);
         }
-        return $order;
     }
 
     public function render()
