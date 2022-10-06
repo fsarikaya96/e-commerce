@@ -2,13 +2,12 @@
 
 namespace App\Http\Livewire\Frontend\Cart;
 
-use App\Models\Cart;
 use App\Services\Interfaces\ICartService;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public $carts;
+    public $carts,$totalPrice;
     private ICartService $cartService;
 
     public function boot(ICartService $ICartService)

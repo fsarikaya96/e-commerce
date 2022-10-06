@@ -58,6 +58,8 @@
                                     </div>
                                     <div class="col-md-1 my-auto">
                                         <label class="price">{{ $cart->products->selling_price * $cart->quantity }} TL</label>
+                                        @php $totalPrice+=$cart->products->selling_price * $cart->quantity @endphp
+
                                     </div>
                                     <div class="col-md-2 col-7 my-auto">
                                         <div class="quantity">
@@ -80,6 +82,22 @@
                         @endif
                     @endforeach
                 </div>
+                    <div class="row">
+                        <div class="col-md-8 my-md-auto mt-3">
+                            <h5>
+                                En iyi fırsatları ve teklifleri alın şimdi <a href="{{ url('/collections') }}">Alışverişe Devam Et</a>
+                            </h5>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <div class="shadow-sm bg-white p-3">
+                                <h4>Toplam :
+                                    <span class="float-end">{{ $totalPrice }} TL</span>
+                                </h4>
+                                <hr>
+                                <a href="" class="btn btn-warning w-100">Devam Et</a>
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>
