@@ -368,8 +368,8 @@ html{
 }
  */
 .p-card-wrppr {
-    height: 400px;
-    width: 224px;
+    /*height: 400px;*/
+    width: 270px;
     float: left;
     margin-right: 20px;
     box-sizing: border-box;
@@ -381,7 +381,7 @@ html{
 }
 .p-card-chldrn-cntnr {
     display: flex;
-    width: 224px;
+    /*width: 224px;*/
     flex-direction: column;
     position: relative;
     box-shadow: none;
@@ -401,8 +401,8 @@ html{
 .img-wrapper .p-card-img {
     margin-top: 15px;
     position: relative;
-    width: 155px;
-    height: 232px;
+    /*width: 155px;*/
+    height: 253px;
 }
 .new-promotion-container {
     display: flex;
@@ -427,7 +427,7 @@ html{
     left: 0;
     overflow: hidden;
     height: 122px;
-    width: 220px;
+    /*width: 220px;*/
     padding-left: 10px;
     padding-right: 10px;
     background: #fefefe;

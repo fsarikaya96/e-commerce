@@ -10,7 +10,8 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $carts, $totalPrice;
+    public $carts;
+    public int $totalPrice = 0;
 
     public $full_name, $phone, $email, $province, $county, $address;
 
@@ -84,6 +85,12 @@ class Index extends Component
                 'quantity'         => $cart->quantity,
                 'price'            => $cart->products->selling_price
             ]);
+            if ($cart->product_color_id != null)
+            {
+                $cart->productColors()->where('id',$cart->product_color_id)->decrement('quantity',$cart->quantity);
+            }else {
+                $cart->products()->where('id',$cart->product_id)->decrement('quantity',$cart->quantity);
+            }
         }
         if (  $order && $orderItem) {
             $this->cartService->getCartByCondition(['user_id' => auth()->user()->id])->delete();
@@ -92,6 +99,7 @@ class Index extends Component
                 'type'   => 'success',
                 'status' => 200
             ]);
+            return redirect()->to('thank-you');
         }else {
             $this->dispatchBrowserEvent('message', [
                 'text'   => 'Bir şeyler yanlış gitti!',
@@ -99,6 +107,7 @@ class Index extends Component
                 'status' => 500
             ]);
         }
+        return $order;
     }
 
     public function render()

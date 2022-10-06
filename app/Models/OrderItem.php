@@ -18,4 +18,14 @@ class OrderItem extends Model
         'quantity',
         'price'
     ];
+
+    public function orders()
+    {
+        return $this->belongsTo(Order::class,'order_id','id');
+    }
+    public function products()
+    {
+        return $this->belongsTo(Product::class,'product_id','id');
+    }
+
 }

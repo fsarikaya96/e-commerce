@@ -8,6 +8,7 @@ use Livewire\Component;
 class Index extends Component
 {
     public $carts,$totalPrice;
+
     private ICartService $cartService;
 
     public function boot(ICartService $ICartService)
@@ -60,7 +61,7 @@ class Index extends Component
             return false;
         }
         if ($cart->productColors) {
-            if ($cart->quantity > $cart->productColors->quantity) {
+            if ($cart->quantity >= $cart->productColors->quantity) {
                 $this->dispatchBrowserEvent('message', [
                     'text'   => "Miktar " . $cart->quantity . "'den fazla olamaz",
                     'type'   => 'error',

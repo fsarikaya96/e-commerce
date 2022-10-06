@@ -22,4 +22,5 @@ class Order extends Model
         'address',
         'status_message'
     ];
+
 }

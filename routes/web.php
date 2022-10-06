@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/wishlists', [\App\Http\Controllers\Frontend\WishlistController::class, 'index'])->name('wishlists');
     Route::get('/carts', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('carts');
     Route::get('/checkout', [\App\Http\Controllers\Frontend\CheckoutController::class, 'index'])->name('checkout');
+    Route::get('/thank-you', [\App\Http\Controllers\Frontend\ThankYouController::class, 'index'])->name('thankyou');
 });
 
 // ---------------------------------------------------------------------- //
