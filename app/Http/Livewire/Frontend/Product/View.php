@@ -14,17 +14,20 @@ use Livewire\Component;
 
 class View extends Component
 {
-    public  $category, $product, $product_id, $quantityCount = 1, $productColorSelected, $productColorID;
+    public $category, $product, $product_id, $quantityCount = 1, $productColorSelected, $productColorID;
 
     private IWishlistService $wishlistService;
     private ICartService $cartService;
     private ProductService $productService;
 
-    public function boot(IWishlistService $IWishlistService, ICartService $ICartService,IProductService $IProductService)
-    {
+    public function boot(
+        IWishlistService $IWishlistService,
+        ICartService $ICartService,
+        IProductService $IProductService
+    ) {
         $this->wishlistService = $IWishlistService;
-        $this->cartService = $ICartService;
-        $this->productService = $IProductService;
+        $this->cartService     = $ICartService;
+        $this->productService  = $IProductService;
     }
 
     public function colorSelected($productColorID)
@@ -36,119 +39,121 @@ class View extends Component
 
     public function addToCart($productID)
     {
-        if (Auth::check()) {
-            if ($this->productService->getProductsByCondition(['id' => $productID, 'status' => 1],[],"")->exists()) {
-                // Check product color quantity and add to cart
-                if ($this->product->productColors()->count() > 1) {
-                    // If the color is not blank
-                    if ($this->productColorSelected != null) {
-                        if ($this->cartService->getCartByCondition([
-                             'user_id' => auth()->user()->id,
-                             'product_id' => $productID,
-                             'product_color_id' => $this->productColorID
-                            ])->exists())
-                        {
-                            $this->dispatchBrowserEvent('message', [
-                                'text'   => 'Ürün zaten sepete eklendi.',
-                                'type'   => 'info',
-                                'status' => 401
-                            ]);
-                        }else {
-                            $productColor = $this->product->productColors()->where('id', $this->productColorID)->first();
-                            // If the quantity of colors is greater than 0
-                            if ($productColor->quantity > 0) {
-                                if ($productColor->quantity >= $this->quantityCount) {
-                                    // Insert Product with color
-                                    Cart::create([
-                                        'user_id'          => auth()->user()->id,
-                                        'product_id'       => $productID,
-                                        'product_color_id' => $this->productColorID,
-                                        'quantity'         => $this->quantityCount
-                                    ]);
-                                    $this->dispatchBrowserEvent('message', [
-                                        'text'   => 'Sepete Eklendi.',
-                                        'type'   => 'success',
-                                        'status' => 200
-                                    ]);
-                                } else {
-                                    $this->dispatchBrowserEvent('message', [
-                                        'text'   => $productColor->colors->name . ' Renkten ' . $productColor->quantity . ' adet mevcuttur.',
-                                        'type'   => 'info',
-                                        'status' => 401
-                                    ]);
-                                }
-                            }
-                            else {
-                                $this->dispatchBrowserEvent('message', [
-                                    'text'   => 'Stokta Yok.',
-                                    'type'   => 'info',
-                                    'status' => 401
-                                ]);
-                            }
-
-                        }
-                    } else {
-                        $this->dispatchBrowserEvent('message', [
-                            'text'   => 'Renk Seçiniz.',
-                            'type'   => 'info',
-                            'status' => 401
-                        ]);
-                    }
-                } // Check Product without color add to cart
-                else {
-                    if ($this->cartService->getCartByCondition(['user_id' => auth()->user()->id,'product_id' => $productID])->exists())
-                    {
-                        $this->dispatchBrowserEvent('message', [
-                            'text'   => 'Ürün zaten sepete eklendi.',
-                            'type'   => 'info',
-                            'status' => 401
-                        ]);
-                    }else {
-
-                        if ($this->product->quantity > 0) {
-                            if ($this->product->quantity > $this->quantityCount) {
-                                // Insert Product without color
-                                Cart::create([
-                                    'user_id'    => auth()->user()->id,
-                                    'product_id' => $productID,
-                                    'quantity'   => $this->quantityCount
-                                ]);
-                                $this->dispatchBrowserEvent('message', [
-                                    'text'   => 'Sepete Eklendi.',
-                                    'type'   => 'success',
-                                    'status' => 200
-                                ]);
-                            } else {
-                                $this->dispatchBrowserEvent('message', [
-                                    'text'   => 'sadece' . $this->product->quantity . 'adet mevcuttur.',
-                                    'type'   => 'info',
-                                    'status' => 401
-                                ]);
-                            }
-                        }
-                        else {
-                            $this->dispatchBrowserEvent('message', [
-                                'text'   => 'Stokta Yok.',
-                                'type'   => 'info',
-                                'status' => 401
-                            ]);
-                        }
-                    }
-                }
-            } else {
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => 'Ürün mevcut değil.',
-                    'type'   => 'info',
-                    'status' => 401
-                ]);
-            }
-        } else {
+        // Check user
+        if ( ! Auth::check()) {
             $this->dispatchBrowserEvent('message', [
                 'text'   => 'Lütfen giriş yapınız.',
                 'type'   => 'info',
                 'status' => 401
             ]);
+
+            return false;
         }
+        // Check product
+        if ( ! $this->productService->getProductsByCondition(['id' => $productID, 'status' => 1], [], "")->exists()) {
+            $this->dispatchBrowserEvent('message', [
+                'text'   => 'Ürün mevcut değil.',
+                'type'   => 'info',
+                'status' => 401
+            ]);
+
+            return false;
+        }
+        // Check product color count
+        if ($this->product->productColors()->count() > 1) {
+            // Check product selected
+            if ($this->productColorSelected == null) {
+                $this->dispatchBrowserEvent('message', [
+                    'text'   => 'Renk Seçiniz.',
+                    'type'   => 'info',
+                    'status' => 401
+                ]);
+                return false;
+            }
+            // Check Product with color add to cart
+            if ($this->cartService->getCartByCondition([
+                'user_id' => auth()->user()->id,
+                'product_id' => $productID,
+                'product_color_id' => $this->productColorID
+            ])->exists()) {
+                $this->dispatchBrowserEvent('message', [
+                    'text'   => 'Ürün zaten sepete eklendi.',
+                    'type'   => 'info',
+                    'status' => 401
+                ]);
+                return false;
+            }
+
+            $productColor = $this->product->productColors()->where('id', $this->productColorID)->first();
+            // Check product color to input quantity
+            if(  $productColor->quantity < $this->quantityCount) {
+                $this->dispatchBrowserEvent('message', [
+                    'text'   => $productColor->colors->name . ' Renkten ' . $productColor->quantity . ' adet mevcuttur.',
+                    'type'   => 'info',
+                    'status' => 401
+                ]);
+                return false;
+            }
+            // Insert product with color
+            Cart::create([
+                'user_id'          => auth()->user()->id,
+                'product_id'       => $productID,
+                'product_color_id' => $this->productColorID,
+                'quantity'         => $this->quantityCount
+            ]);
+            $this->dispatchBrowserEvent('message', [
+                'text'   => 'Sepete Eklendi.',
+                'type'   => 'success',
+                'status' => 200
+            ]);
+            if (  $this->product->quantity< 0) {
+                $this->dispatchBrowserEvent('message', [
+                    'text'   => 'Stota Yok.',
+                    'type'   => 'info',
+                    'status' => 401
+                ]);
+                return false;
+            }
+        }else {
+            // Check Product without color add to cart
+            if ($this->cartService->getCartByCondition(['user_id' => auth()->user()->id, 'product_id' => $productID])->exists()) {
+                $this->dispatchBrowserEvent('message', [
+                    'text'   => 'Ürün zaten sepete eklendi.',
+                    'type'   => 'info',
+                    'status' => 401
+                ]);
+                return false;
+            }
+
+            if ( ! $this->product->quantity > 0) {
+                $this->dispatchBrowserEvent('message', [
+                    'text'   => 'Stokta Yok',
+                    'type'   => 'info',
+                    'status' => 401
+                ]);
+                return false;
+            }
+                if ( $this->product->quantity < $this->quantityCount) {
+                    $this->dispatchBrowserEvent('message', [
+                        'text'   => 'Bu üründen sadece  ' . $this->product->quantity . ' adet mevcuttur.',
+                        'type'   => 'info',
+                        'status' => 401
+                    ]);
+                    return false;
+                }
+                // Insert Product without color
+                Cart::create([
+                    'user_id'    => auth()->user()->id,
+                    'product_id' => $productID,
+                    'quantity'   => $this->quantityCount
+                ]);
+                $this->dispatchBrowserEvent('message', [
+                    'text'   => 'Sepete Eklendi.',
+                    'type'   => 'success',
+                    'status' => 200
+                ]);
+        }
+        return true;
     }
 
     public function incrementQuantity()
