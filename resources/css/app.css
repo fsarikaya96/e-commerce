@@ -496,3 +496,21 @@ html{
 .ufvrt-btn-wrppr:hover { border-color:#f27a1a; }
 .ufvrt-btn-wrppr:hover span { color:#f27a1a;}
 /* Cart or Wishlist */
+
+
+/* CheckOut CSS */
+.checkout .form-control{
+    border-radius: 0px !important;
+}
+.checkout .form-control:focus{
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+}
+.checkout .nav-link{
+    border: 1px solid #000;
+    border-radius: 0px;
+    margin-bottom: 8px;
+}
+.checkout .tab-content{
+    padding-right: 10px;
+}

@@ -1,6 +1,5 @@
 <div class="py-3 py-md-5">
     <div class="container">
-
         <div class="row">
             <div class="col-md-12">
                 @if($carts->count() < 1)
@@ -94,7 +93,7 @@
                                     <span class="float-end">{{ $totalPrice }} TL</span>
                                 </h4>
                                 <hr>
-                                <a href="" class="btn btn-warning w-100">Devam Et</a>
+                                <a href="{{ route('checkout') }}" class="btn btn-warning w-100">Devam Et</a>
                             </div>
                         </div>
                     </div>
