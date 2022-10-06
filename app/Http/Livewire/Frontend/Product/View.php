@@ -50,7 +50,7 @@ class View extends Component
             return false;
         }
         // Check product
-        if ( ! $this->productService->getProductsByCondition(['id' => $productID, 'status' => 1], [], "")->exists()) {
+        if ( ! $this->productService->getProductsByCondition(['id' => $productID, 'status' => 1])->exists()) {
             $this->dispatchBrowserEvent('message', [
                 'text'   => 'Ürün mevcut değil.',
                 'type'   => 'info',
@@ -101,6 +101,7 @@ class View extends Component
                 'product_color_id' => $this->productColorID,
                 'quantity'         => $this->quantityCount
             ]);
+            $this->emit('CartAddedUpdated');
             $this->dispatchBrowserEvent('message', [
                 'text'   => 'Sepete Eklendi.',
                 'type'   => 'success',
@@ -147,6 +148,7 @@ class View extends Component
                     'product_id' => $productID,
                     'quantity'   => $this->quantityCount
                 ]);
+                $this->emit('CartAddedUpdated');
                 $this->dispatchBrowserEvent('message', [
                     'text'   => 'Sepete Eklendi.',
                     'type'   => 'success',

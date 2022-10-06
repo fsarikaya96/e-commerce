@@ -35,7 +35,7 @@
                         @else
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <i class="fa fa-shopping-cart"></i> Sepet (0)
+                                    <i class="fa fa-shopping-cart"></i> Sepet (<livewire:frontend.cart.cart-count>)
                                 </a>
                             </li>
                             <li class="nav-item">

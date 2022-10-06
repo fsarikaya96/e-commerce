@@ -31,7 +31,14 @@ interface IProductRepository
      *
      * @return mixed
      */
-    public function getProductsByCondition(array $condition, array $brand, ?string $price): mixed;
+    public function getProductsByFilter(array $condition, array $brand, ?string $price): mixed;
+
+    /**
+     * @param array $condition
+     *
+     * @return mixed
+     */
+    public function getProductsByCondition(array $condition):mixed;
 
     /**
      * @param Category $category

@@ -19,7 +19,7 @@ class ProductRepository implements IProductRepository
     }
 
     /**
-     * Fetch Products by Condition Repository
+     * Fetch Products by Filter Repository
      *
      * @param array $condition
      * @param array $brand
@@ -28,7 +28,7 @@ class ProductRepository implements IProductRepository
      * @return mixed
      */
 
-    public function getProductsByCondition(array $condition, array $brand, ?string $price): mixed
+    public function getProductsByFilter(array $condition, array $brand, ?string $price): mixed
     {
         return Product::where($condition)
                       ->when($brand, function ($query) use ($brand) {
@@ -42,7 +42,14 @@ class ProductRepository implements IProductRepository
                           });
                       });
     }
-
+    /**
+     * @param array $condition
+     *
+     * @return mixed
+     */
+    public function getProductsByCondition(array $condition):mixed{
+        return Product::where($condition);
+    }
     /**
      * @param int $id
      * Fetch Product by ID Repository

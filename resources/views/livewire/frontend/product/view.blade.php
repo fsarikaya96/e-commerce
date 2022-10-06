@@ -61,14 +61,12 @@
                             <span class="btn btn1" wire:click="incrementQuantity"><i class="fa fa-plus"></i></span>
                             <button type="button" wire:click="addToWishList({{ $product->id }})" class="btn btn1">
                                 <i class="fa fa-heart"></i>
-                                <span wire:loading.remove wire:target="addToWishList">Favorilere Ekle</span>
-                                <span wire:loading wire:target="addToWishList">Ekleniyor</span>
+                                Favorilere Ekle
                             </button>
                         </div>
                     </div>
                     <div class="mt-2">
                         <button wire:click="addToCart({{ $product->id }})" class="btn btn1" style="width: 272px"><span>Sepete Ekle</span></button>
-
                     </div>
                     <div class="mt-3">
                         <h5 class="mb-0">Küçük Açıklama</h5>

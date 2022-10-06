@@ -27,7 +27,7 @@ class Index extends Component
     public function render()
     {
         $this->products = $this->productService
-            ->getProductsByCondition(['category_id' => $this->category->id, 'status' => 1],
+            ->getProductsByFilter(['category_id' => $this->category->id, 'status' => 1],
                 $this->brandInputs,
                 $this->priceSort)->get();
 

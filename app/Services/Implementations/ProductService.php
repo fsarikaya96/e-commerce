@@ -165,9 +165,19 @@ class ProductService implements IProductService
      *
      * @return mixed
      */
-    public function getProductsByCondition(array $condition, array $brand, ?string $price):mixed
+    public function getProductsByFilter(array $condition, array $brand, ?string $price):mixed
     {
-       return $this->productRepository->getProductsByCondition($condition,$brand,$price);
+       return $this->productRepository->getProductsByFilter($condition,$brand,$price);
+    }
+
+    /**
+     * @param array $condition
+     *
+     * @return mixed
+     */
+    public function getProductsByCondition(array $condition): mixed
+    {
+        return $this->productRepository->getProductsByCondition($condition);
     }
 
     /**
