@@ -60,7 +60,7 @@ class View extends Component
         if ( ! $this->productService->getProductsByCondition(['id' => $productID, 'status' => 1])->exists()) {
             $this->dispatchBrowserEvent('message', [
                 'text'   => 'Ürün mevcut değil.',
-                'type'   => 'info',
+                'type'   => 'error',
                 'status' => 401
             ]);
 
@@ -72,7 +72,7 @@ class View extends Component
             if ($this->productColorSelected == null) {
                 $this->dispatchBrowserEvent('message', [
                     'text'   => 'Renk Seçiniz.',
-                    'type'   => 'info',
+                    'type'   => 'error',
                     'status' => 401
                 ]);
                 return false;
@@ -96,7 +96,7 @@ class View extends Component
             if(  $productColor->quantity < $this->quantityCount) {
                 $this->dispatchBrowserEvent('message', [
                     'text'   => $productColor->colors->name . ' Renkten ' . $productColor->quantity . ' adet mevcuttur.',
-                    'type'   => 'info',
+                    'type'   => 'error',
                     'status' => 401
                 ]);
                 return false;
@@ -131,7 +131,7 @@ class View extends Component
             if ( ! $this->product->quantity > 0) {
                 $this->dispatchBrowserEvent('message', [
                     'text'   => 'Stokta Yok',
-                    'type'   => 'info',
+                    'type'   => 'error',
                     'status' => 401
                 ]);
                 return false;
@@ -139,7 +139,7 @@ class View extends Component
                 if ( $this->product->quantity < $this->quantityCount) {
                     $this->dispatchBrowserEvent('message', [
                         'text'   => 'Bu üründen sadece  ' . $this->product->quantity . ' adet mevcuttur.',
-                        'type'   => 'info',
+                        'type'   => 'error',
                         'status' => 401
                     ]);
                     return false;

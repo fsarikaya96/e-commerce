@@ -1,8 +1,15 @@
-<div class="py-3 py-md-5 bg-light">
+<div class="py-3 py-md-5">
     <div class="container">
 
         <div class="row">
             <div class="col-md-12">
+                @if($carts->count() < 1)
+                    <div class="empty-wishlist">
+                        <h5>Sepet Listeniz Henüz Boş</h5>
+                        <span>Sepet listenizde ürün bulunamadı. “Alışverişe Başla” butonuna tıklayarak dilediğiniz ürünleri sepete ekleyebilirsiniz.</span>
+                        <a href="/">Alışverişe Başla</a>
+                    </div>
+                @else
                 <div class="shopping-cart">
 
                     <div class="cart-header d-none d-sm-none d-mb-block d-lg-block">
@@ -10,8 +17,11 @@
                             <div class="col-md-6">
                                 <h4>Ürünler</h4>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <h4>Fiyat</h4>
+                            </div>
+                            <div class="col-md-1">
+                                <h4>Toplam</h4>
                             </div>
                             <div class="col-md-2">
                                 <h4>Adet</h4>
@@ -43,8 +53,11 @@
                                             </label>
                                         </a>
                                     </div>
-                                    <div class="col-md-2 my-auto">
+                                    <div class="col-md-1 my-auto">
                                         <label class="price">{{ $cart->products->selling_price }} TL</label>
+                                    </div>
+                                    <div class="col-md-1 my-auto">
+                                        <label class="price">{{ $cart->products->selling_price * $cart->quantity }} TL</label>
                                     </div>
                                     <div class="col-md-2 col-7 my-auto">
                                         <div class="quantity">
@@ -57,9 +70,9 @@
                                     </div>
                                     <div class="col-md-2 col-5 my-auto">
                                         <div class="remove">
-                                            <a href="" class="btn btn-danger btn-sm">
+                                            <button type="button" wire:loading.attr="disabled" wire:click="removeCart({{ $cart->id }})" class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i> Sil
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -67,6 +80,7 @@
                         @endif
                     @endforeach
                 </div>
+                @endif
             </div>
         </div>
 
