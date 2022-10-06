@@ -49,6 +49,13 @@ class View extends Component
 
             return false;
         }
+        $productData   = [
+            'user_id'          => auth()->user()->id,
+            'product_id'       => $productID,
+            'quantity'         => $this->quantityCount
+        ];
+        $productColorData = ['product_color_id' => $this->productColorID];
+        $data = array_merge($productData,$productColorData);
         // Check product
         if ( ! $this->productService->getProductsByCondition(['id' => $productID, 'status' => 1])->exists()) {
             $this->dispatchBrowserEvent('message', [
@@ -95,12 +102,7 @@ class View extends Component
                 return false;
             }
             // Insert product with color
-            Cart::create([
-                'user_id'          => auth()->user()->id,
-                'product_id'       => $productID,
-                'product_color_id' => $this->productColorID,
-                'quantity'         => $this->quantityCount
-            ]);
+            $this->cartService->create($data);
             $this->emit('CartAddedUpdated');
             $this->dispatchBrowserEvent('message', [
                 'text'   => 'Sepete Eklendi.',
@@ -143,11 +145,7 @@ class View extends Component
                     return false;
                 }
                 // Insert Product without color
-                Cart::create([
-                    'user_id'    => auth()->user()->id,
-                    'product_id' => $productID,
-                    'quantity'   => $this->quantityCount
-                ]);
+                $this->cartService->create($data);
                 $this->emit('CartAddedUpdated');
                 $this->dispatchBrowserEvent('message', [
                     'text'   => 'Sepete Eklendi.',

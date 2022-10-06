@@ -27,7 +27,8 @@ Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->gro
 });
 Route::middleware('auth')->group(function () {
 
-    Route::get('/wishlists', [\App\Http\Controllers\Frontend\WishlistController::class, 'index'])->name('wishlist');
+    Route::get('/wishlists', [\App\Http\Controllers\Frontend\WishlistController::class, 'index'])->name('wishlists');
+    Route::get('/carts', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('carts');
 });
 
 // ---------------------------------------------------------------------- //

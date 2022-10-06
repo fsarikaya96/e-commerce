@@ -34,13 +34,13 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fa fa-shopping-cart"></i> Sepet (<livewire:frontend.cart.cart-count>)
+                                <a class="nav-link" href="{{ route('carts') }}">
+                                    <i class="fa fa-shopping-cart"></i> Sepet (<livewire:frontend.cart.cart-count/>)
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('wishlist') }}">
-                                    <i class="fa fa-heart"></i> Favorilerim (<livewire:frontend.wishlist.wishlist-count>)
+                                <a class="nav-link" href="{{ route('wishlists') }}">
+                                    <i class="fa fa-heart"></i> Favorilerim (<livewire:frontend.wishlist.wishlist-count/>)
                                 </a>
                             </li>
                         <li class="nav-item dropdown">

@@ -2,6 +2,8 @@
 
 namespace App\Repository\Interfaces;
 
+use App\Models\Cart;
+
 interface ICartRepository
 {
     /**
@@ -10,4 +12,11 @@ interface ICartRepository
      * @return mixed
      */
     public function getCartByCondition(array $condition):mixed;
+
+    /**
+     * @param Cart $cart
+     *
+     * @return Cart
+     */
+    public function create(Cart $cart): Cart;
 }

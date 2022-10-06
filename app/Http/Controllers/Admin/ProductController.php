@@ -53,42 +53,6 @@ class ProductController extends Controller
         $this->productService->create($request);
 
         return redirect('admin/products')->with('message', 'Ürün Başarıyla Eklendi.');
-        /*
-        $validatedData = $request->validated();
-
-        $category = Category::findOrFail($validatedData['category_id']);
-
-        $product = $category->products()->create([
-            'category_id'       => $validatedData['category_id'],
-            'name'              => $validatedData['name'],
-            'slug'              => Str::slug($validatedData['slug']),
-            'brand'             => $validatedData['brand'],
-            'small_description' => $validatedData['small_description'],
-            'description'       => $validatedData['description'],
-            'original_price'    => $validatedData['original_price'],
-            'selling_price'     => $validatedData['selling_price'],
-            'quantity'          => $validatedData['quantity'],
-            'trending'          => $request->trending ? "1" : "0",
-            'status'            => $request->status ? "1" : "0",
-            'meta_title'        => $validatedData['meta_title'],
-            'meta_keyword'      => $validatedData['meta_keyword'],
-            'meta_description'  => $validatedData['meta_description'],
-        ]);
-
-        $this->extracted($request, $product);
-
-        if ($request->colors) {
-            foreach ($request->colors as $key => $color) {
-                $product->productColors()->create([
-                    'product_id' => $product->id,
-                    'color_id'   => $color,
-                    'quantity'   => $request->color_quantity[$key] ?? 0
-                ]);
-            }
-        }
-
-        return redirect('admin/products')->with('message', 'Ürün Başarıyla Eklendi.');
-        */
     }
 
     public function edit(int $product_id)

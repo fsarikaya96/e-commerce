@@ -12,4 +12,11 @@ class CartRepository implements ICartRepository
     {
         return Cart::where($condition);
     }
+
+    public function create(Cart $cart): Cart
+    {
+        $cart->save();
+
+        return $cart;
+    }
 }

@@ -55,9 +55,7 @@ class FrontendController extends Controller
     {
         $category = $this->categoryService->getCategoriesByCondition(['slug' => $category_slug])->first();
         if ($category) {
-            $product = $this->productService->getProductsByCondition(['slug' => $product_slug, 'status' => 1],
-                [],
-                "")->first();
+            $product = $this->productService->getProductsByCondition(['slug' => $product_slug, 'status' => 1])->first();
 
             return view('frontend.collections.products.view', compact('category', 'product'));
         }
