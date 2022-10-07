@@ -9,6 +9,7 @@ use App\Services\Interfaces\ICartService;
 use App\Services\Interfaces\IProductService;
 use App\Services\Interfaces\IWishlistService;
 
+use Flasher\Prime\FlasherInterface;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -19,15 +20,18 @@ class View extends Component
     private IWishlistService $wishlistService;
     private ICartService $cartService;
     private ProductService $productService;
+    private FlasherInterface $flasher;
 
     public function boot(
         IWishlistService $IWishlistService,
         ICartService $ICartService,
-        IProductService $IProductService
+        IProductService $IProductService,
+        FlasherInterface $IFlasher,
     ) {
         $this->wishlistService = $IWishlistService;
         $this->cartService     = $ICartService;
         $this->productService  = $IProductService;
+        $this->flasher         = $IFlasher;
     }
 
     public function colorSelected($productColorID)
@@ -41,28 +45,20 @@ class View extends Component
     {
         // Check user
         if ( ! Auth::check()) {
-            $this->dispatchBrowserEvent('message', [
-                'text'   => 'Lütfen giriş yapınız.',
-                'type'   => 'info',
-                'status' => 401
-            ]);
+            $this->flasher->addError('Lütfen giriş yapınız!');
 
             return false;
         }
-        $productData   = [
-            'user_id'          => auth()->user()->id,
-            'product_id'       => $productID,
-            'quantity'         => $this->quantityCount
+        $productData      = [
+            'user_id'    => auth()->user()->id,
+            'product_id' => $productID,
+            'quantity'   => $this->quantityCount
         ];
         $productColorData = ['product_color_id' => $this->productColorID];
-        $data = array_merge($productData,$productColorData);
+        $data             = array_merge($productData, $productColorData);
         // Check product
         if ( ! $this->productService->getProductsByCondition(['id' => $productID, 'status' => 1])->exists()) {
-            $this->dispatchBrowserEvent('message', [
-                'text'   => 'Ürün mevcut değil.',
-                'type'   => 'error',
-                'status' => 401
-            ]);
+            $this->flasher->addError('Ürün mevcut değil!');
 
             return false;
         }
@@ -70,89 +66,65 @@ class View extends Component
         if ($this->product->productColors()->count() > 1) {
             // Check product selected
             if ($this->productColorSelected == null) {
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => 'Renk Seçiniz.',
-                    'type'   => 'error',
-                    'status' => 401
-                ]);
+                $this->flasher->addError('Renk Seçiniz!');
+
                 return false;
             }
             // Check Product with color add to cart
             if ($this->cartService->getCartByCondition([
-                'user_id' => auth()->user()->id,
-                'product_id' => $productID,
+                'user_id'          => auth()->user()->id,
+                'product_id'       => $productID,
                 'product_color_id' => $this->productColorID
             ])->exists()) {
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => 'Ürün zaten sepete eklendi.',
-                    'type'   => 'info',
-                    'status' => 401
-                ]);
+                $this->flasher->addError('Ürün zaten sepete eklendi!');
+
                 return false;
             }
 
             $productColor = $this->product->productColors()->where('id', $this->productColorID)->first();
             // Check product color to input quantity
-            if(  $productColor->quantity < $this->quantityCount) {
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => $productColor->colors->name . ' Renkten ' . $productColor->quantity . ' adet mevcuttur.',
-                    'type'   => 'error',
-                    'status' => 401
-                ]);
+            if ($productColor->quantity < $this->quantityCount) {
+                $this->flasher->addError(
+                    $productColor->colors->name . ' Renkten ' . $productColor->quantity . ' adet mevcuttur!'
+                );
+
                 return false;
             }
             // Insert product with color
             $this->cartService->create($data);
             $this->emit('CartAddedUpdated');
-            $this->dispatchBrowserEvent('message', [
-                'text'   => 'Sepete Eklendi.',
-                'type'   => 'success',
-                'status' => 200
-            ]);
-            if (  $this->product->quantity< 0) {
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => 'Stota Yok.',
-                    'type'   => 'info',
-                    'status' => 401
-                ]);
+            $this->flasher->addSuccess('Sepete Eklendi!');
+
+            if ($this->product->quantity < 0) {
+                $this->flasher->addError('Stota Yok!');
+
                 return false;
             }
-        }else {
+        } else {
             // Check Product without color add to cart
-            if ($this->cartService->getCartByCondition(['user_id' => auth()->user()->id, 'product_id' => $productID])->exists()) {
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => 'Ürün zaten sepete eklendi.',
-                    'type'   => 'info',
-                    'status' => 401
-                ]);
+            if ($this->cartService->getCartByCondition(['user_id' => auth()->user()->id, 'product_id' => $productID]
+            )->exists()) {
+                $this->flasher->addError('Ürün zaten sepete eklendi!');
+
                 return false;
             }
 
             if ( ! $this->product->quantity > 0) {
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => 'Stokta Yok',
-                    'type'   => 'error',
-                    'status' => 401
-                ]);
+                $this->flasher->addError('Stokta Yok!');
+
                 return false;
             }
-                if ( $this->product->quantity < $this->quantityCount) {
-                    $this->dispatchBrowserEvent('message', [
-                        'text'   => 'Bu üründen sadece  ' . $this->product->quantity . ' adet mevcuttur.',
-                        'type'   => 'error',
-                        'status' => 401
-                    ]);
-                    return false;
-                }
-                // Insert Product without color
-                $this->cartService->create($data);
-                $this->emit('CartAddedUpdated');
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => 'Sepete Eklendi.',
-                    'type'   => 'success',
-                    'status' => 200
-                ]);
+            if ($this->product->quantity < $this->quantityCount) {
+                $this->flasher->addError('Bu üründen sadece  ' . $this->product->quantity . ' adet mevcuttur!');
+
+                return false;
+            }
+            // Insert Product without color
+            $this->cartService->create($data);
+            $this->emit('CartAddedUpdated');
+            $this->flasher->addSuccess('Sepete Eklendi!');
         }
+
         return true;
     }
 
@@ -172,41 +144,20 @@ class View extends Component
 
     public function addToWishList($product_id)
     {
-        if (Auth::check()) {
-            $wishlist = new Wishlist();
-            $data     = [
-                'product_id' => $product_id,
-                'user_id'    => auth()->user()->id,
-            ];
-            if ($this->wishlistService->getWishlistByCondition(
-                ['user_id' => auth()->user()->id, 'product_id' => $product_id]
-            )->exists()) {
-                $this->dispatchBrowserEvent('message', [
-                    'text'   => 'Zaten favorilere eklendi.',
-                    'type'   => 'warning',
-                    'status' => 409
-                ]);
-
-                return false;
-            }
-            $this->emit('wishlistAddedUpdated');
-            $this->dispatchBrowserEvent('message', [
-                'text'   => 'Favorilere eklendi.',
-                'type'   => 'success',
-                'status' => 200
-            ]);
-            $wishlistData = $wishlist->fill($data);
-
-            return $this->wishlistService->create($wishlistData);
-        } else {
-            $this->dispatchBrowserEvent('message', [
-                'text'   => 'Lütfen giriş yapınız.',
-                'type'   => 'info',
-                'status' => 401
-            ]);
+        if ( ! Auth::check()) {
+            $this->flasher->addError('Lütfen giriş yapınız!');
 
             return false;
         }
+        $wishlist = new Wishlist();
+        $data     = [
+            'product_id' => $product_id,
+            'user_id'    => auth()->user()->id,
+        ];
+        $this->emit('wishlistAddedUpdated');
+        $wishlistData = $wishlist->fill($data);
+
+        return $this->wishlistService->create($wishlistData);
     }
 
     public function mount($category, $product)

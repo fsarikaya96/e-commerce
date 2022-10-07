@@ -19,4 +19,25 @@ interface ICartRepository
      * @return Cart
      */
     public function create(Cart $cart): Cart;
+
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function decrementQuantity(int $id):bool;
+
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function incrementQuantity(int $id):bool;
+
+    /**
+     * @param Cart $cart
+     *
+     * @return bool
+     */
+    public function delete(Cart $cart):bool;
 }

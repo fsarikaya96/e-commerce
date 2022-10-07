@@ -19,4 +19,25 @@ interface ICartService
      * @return Cart
      */
     public function create(array $cartData):Cart;
+
+    /**
+     * @param int $cartID
+     *
+     * @return mixed
+     */
+    public function decrement(int $cartID):bool;
+
+    /**
+     * @param int $cartID
+     *
+     * @return mixed
+     */
+    public function increment(int $cartID):bool;
+
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function delete(int $id):bool;
 }

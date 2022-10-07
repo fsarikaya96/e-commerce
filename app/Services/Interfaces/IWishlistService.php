@@ -3,16 +3,16 @@
 namespace App\Services\Interfaces;
 
 use App\Models\Wishlist;
-use Flasher\Prime\FlasherInterface;
 
 interface IWishlistService
 {
     /**
      * @param Wishlist $wishlist
      * Insert Wishlist Service
-     * @return Wishlist
+     *
+     * @return bool
      */
-    public function create(Wishlist $wishlist):Wishlist;
+    public function create(Wishlist $wishlist):bool;
 
     /**
      * Fetch Wishlist by Condition Service

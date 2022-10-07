@@ -16,22 +16,28 @@ class WishlistService implements IWishlistService
      * Wishlist construct injection
      *
      * @param IWishlistRepository $IWishlistRepository
-     * @param FlasherInterface $flasher
+     * @param FlasherInterface $IFlasher
      */
-    public function __construct(IWishlistRepository $IWishlistRepository, FlasherInterface $flasher)
+    public function __construct(IWishlistRepository $IWishlistRepository, FlasherInterface $IFlasher)
     {
         $this->wishlistRepository = $IWishlistRepository;
-        $this->flasher = $flasher;
+        $this->flasher = $IFlasher;
     }
 
     /**
      * @param Wishlist $wishlist
      *
-     * @return Wishlist
+     * @return bool
      */
-    public function create(Wishlist $wishlist): Wishlist
+    public function create(Wishlist $wishlist): bool
     {
-        return $this->wishlistRepository->create($wishlist);
+        if ($this->wishlistRepository->getWishlistByCondition(['user_id' => auth()->user()->id, 'product_id' => $wishlist->product_id])->exists()) {
+            $this->flasher->addError('Zaten favorilere eklendi!');
+            return false;
+        }
+        $this->flasher->addSuccess('Favorilere eklendi!');
+        $this->wishlistRepository->create($wishlist);
+        return true;
     }
 
     /**
@@ -46,9 +52,8 @@ class WishlistService implements IWishlistService
 
     public function delete(int $id): bool
     {
-        $this->flasher->addSuccess('Favoriden silindi!');
         $wishlist = $this->wishlistRepository->getWishlistByCondition(['id' => $id])->first();
+        $this->flasher->addSuccess('Favoriden silindi!');
         return $this->wishlistRepository->delete($wishlist);
-
     }
 }
