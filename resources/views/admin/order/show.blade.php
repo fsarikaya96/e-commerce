@@ -17,8 +17,18 @@
                         <h6>Takip Numarası : {{ $order->tracking_no }}</h6>
                         <h6>Sipariş Tarihi : {{ $order->created_at }}</h6>
                         <h6 class="border p-2 text-success">
-                            Sipariş Durumu : <span
-                                class="text-uppercase">{{ $order->status_message=='in progress' ? 'İşleniyor' : '' }}</span>
+                            Sipariş Durumu :
+                            @if($order->status_message == 'in progress')
+                                <span class="text-uppercase">İşleniyor</span>
+                            @elseif($order->status_message == 'completed')
+                                <span class="text-uppercase">Tamamlandı</span>
+                            @elseif($order->status_message == 'pending')
+                                <span class="text-uppercase">Bekleniyor</span>
+                            @elseif($order->status_message == 'cancelled')
+                                <span class="text-uppercase">İptal Edildi</span>
+                            @else
+                                <span class="text-uppercase">Dağıtımda</span>
+                            @endif
                         </h6>
 
                     </div>

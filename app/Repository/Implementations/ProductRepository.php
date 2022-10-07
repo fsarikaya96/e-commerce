@@ -4,8 +4,9 @@ namespace App\Repository\Implementations;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductColor;
+use App\Models\ProductImage;
 use App\Repository\Interfaces\IProductRepository;
-use Illuminate\Support\Collection;
 
 class ProductRepository implements IProductRepository
 {
@@ -13,7 +14,7 @@ class ProductRepository implements IProductRepository
      * Get All Products with Paginate Repository
      * @return mixed
      */
-    public function getProductWithPaginate(): mixed
+    public function getProductsWithPaginate(): mixed
     {
         return Product::orderBy('id', 'DESC')->paginate(10);
     }
@@ -34,22 +35,26 @@ class ProductRepository implements IProductRepository
                       ->when($brand, function ($query) use ($brand) {
                           $query->whereIn('brand', $brand);
                       })
-                      ->when($price, function ($query) use($price) {
+                      ->when($price, function ($query) use ($price) {
                           $query->when($price == 'high-to-low', function ($queryPrice) {
                               $queryPrice->orderBy('selling_price', 'DESC');
-                          })->when($price == 'low-to-high',function ($queryPrice){
-                              $queryPrice->orderBy('selling_price','ASC');
+                          })->when($price == 'low-to-high', function ($queryPrice) {
+                              $queryPrice->orderBy('selling_price', 'ASC');
                           });
                       });
     }
+
     /**
      * @param array $condition
+     * Fetch Product by Condition Repository
      *
      * @return mixed
      */
-    public function getProductsByCondition(array $condition):mixed{
+    public function getProductsByCondition(array $condition): mixed
+    {
         return Product::where($condition);
     }
+
     /**
      * @param int $id
      * Fetch Product by ID Repository
@@ -59,6 +64,41 @@ class ProductRepository implements IProductRepository
     public function getProductById(int $id): Product
     {
         return Product::findOrFail($id);
+    }
+
+    /**
+     * @param int $id
+     * Fetch Product Image by Repository
+     *
+     * @return ProductImage
+     */
+    public function getProductImageById(int $id): ProductImage
+    {
+        return ProductImage::findOrFail($id);
+    }
+
+    /**
+     * @param int $id
+     * Fetch Product Color by ID Repository
+     *
+     * @return ProductColor
+     */
+    public function getProductColorById(int $id): ProductColor
+    {
+        return ProductColor::findOrFail($id);
+    }
+
+    /**
+     * Fetch Product Color by Condition Repository
+     *
+     * @param int $productID
+     * @param int $productColorID
+     *
+     * @return ProductColor
+     */
+    public function getProductColorByCondition(int $productID, int $productColorID): ProductColor
+    {
+        return Product::findOrFail($productID)->productColors()->where('id', $productColorID)->first();
     }
 
     /**
@@ -119,12 +159,11 @@ class ProductRepository implements IProductRepository
 
     /**
      * @param Product $product
-     * @param int $id
      * Update Product Repository
      *
      * @return Product
      */
-    public function update(Product $product, int $id)
+    public function update(Product $product): Product
     {
         $product->save();
 
@@ -140,5 +179,37 @@ class ProductRepository implements IProductRepository
     public function delete(Product $product): bool
     {
         return $product->delete();
+    }
+
+    /**
+     * @param ProductImage $productImage
+     * Delete Product Images Repository
+     * @return bool
+     */
+    public function deleteProductImages(ProductImage $productImage): bool
+    {
+        return $productImage->delete();
+    }
+
+    /**
+     * @param ProductColor $productColor
+     * Update Product Colors Repository
+     * @return ProductColor
+     */
+    public function updateProductColors(ProductColor $productColor): ProductColor
+    {
+        $productColor->save();
+
+        return $productColor;
+    }
+
+    /**
+     * @param ProductColor $productColor
+     * Delete Product Color Repository
+     * @return bool
+     */
+    public function deleteProductColor(ProductColor $productColor): bool
+    {
+        return $productColor->delete();
     }
 }

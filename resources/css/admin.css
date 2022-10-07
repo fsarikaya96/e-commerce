@@ -4,11 +4,23 @@
     width: 105px!important;
     height: 105px!important;
 }
+.status-primary{
+    background: #4d83ff;
+    color: #FFF;
+    padding: 5px;
+    border-radius: 4px;
+    width: 100px;
+    display: block;
+    text-align-last: center;
+}
 .status-success {
     background: #71c016;
     color: #FFF;
     padding: 5px;
     border-radius: 4px;
+    width: 100px;
+    display: block;
+    text-align-last: center;
 }
 
 .status-danger{
@@ -16,11 +28,18 @@
     color: #FFF;
     padding: 5px;
     border-radius: 4px;
+    width: 100px;
+    display: block;
+    text-align-last: center;
 }
 .status-warning{
     background: #ffc107;
+    color: #FFF;
     padding: 5px;
     border-radius: 4px;
+    width: 100px;
+    display: block;
+    text-align-last: center;
 }
 .ck-editor__editable_inline {
     min-height: 175px;

@@ -22,7 +22,7 @@ class Index extends Component
 
     public function render()
     {
-        $products = $this->productService->getProductWithPaginate();
+        $products = $this->productService->getProductsWithPaginate();
 
         return view('livewire.admin.product.index', ['products' => $products]);
     }

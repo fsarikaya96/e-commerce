@@ -76,33 +76,23 @@ class ProductController extends Controller
 
     public function deleteImage(int $image_id)
     {
-        $image = ProductImage::findOrFail($image_id);
+        $this->productService->deleteProductImages($image_id);
 
-        if (File::exists($image->image)) {
-            File::delete($image->image);
-            $image->delete();
-
-            return redirect()->back()->with('message', 'Resim Başarıyla Silindi.');
-        } else {
-            return redirect()->back()->with('error', 'Resim Silinemedi.');
-        }
+        return redirect('admin/products')->with('message', 'Resim Başarıyla Silinmiştir.');
     }
 
     public function updateProductColor(Request $request, $product_color_id = 0)
     {
-        $productColorData = Product::findOrFail($request->product_id)
-                                   ->productColors()->where('id', $product_color_id)->first();
-        $productColorData->update(['quantity' => $request->qty]);
+        $this->productService->updateProductColors($request,$product_color_id);
 
         return response()->json(['message' => 'Güncelleme Başarılı']);
     }
 
     public function deleteProductColor($product_color = 0)
     {
-        ProductColor::findOrFail($product_color)->delete();
+        $this->productService->deleteProductColor($product_color);
 
         return response()->json(['message' => 'Silme Başarılı']);
     }
-
 
 }
