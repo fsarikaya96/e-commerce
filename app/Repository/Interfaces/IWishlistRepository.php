@@ -22,4 +22,11 @@ interface IWishlistRepository
      * @return mixed
      */
     public function getWishlistByCondition(array $condition): mixed;
+
+    /**
+     * @param Wishlist $wishlist
+     *
+     * @return bool
+     */
+    public function delete(Wishlist $wishlist):bool;
 }

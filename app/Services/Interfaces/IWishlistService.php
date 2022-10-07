@@ -3,6 +3,7 @@
 namespace App\Services\Interfaces;
 
 use App\Models\Wishlist;
+use Flasher\Prime\FlasherInterface;
 
 interface IWishlistService
 {
@@ -21,5 +22,12 @@ interface IWishlistService
      * @return mixed
      */
     public function getWishlistByCondition(array $condition):mixed;
+
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function delete(int $id):bool;
 
 }

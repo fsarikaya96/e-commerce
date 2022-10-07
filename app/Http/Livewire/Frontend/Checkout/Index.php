@@ -11,6 +11,7 @@ use Livewire\Component;
 class Index extends Component
 {
     public $carts;
+
     public int $totalPrice = 0;
 
     public $full_name, $phone, $email, $province, $county, $address,$paymentMode = null,$payment_id = null;
@@ -110,6 +111,7 @@ class Index extends Component
                 'status' => 500
             ]);
         }
+        return true;
     }
 
     public function render()

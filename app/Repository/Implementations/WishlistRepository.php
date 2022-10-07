@@ -30,4 +30,14 @@ class WishlistRepository implements IWishlistRepository
     {
         return Wishlist::where($condition);
     }
+
+    /**
+     * @param Wishlist $wishlist
+     *
+     * @return bool
+     */
+    public function delete(Wishlist $wishlist): bool
+    {
+        return $wishlist->delete();
+    }
 }

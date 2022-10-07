@@ -16,14 +16,8 @@ class Index extends Component
 
     public function removeWishlistItem(int $id)
     {
-        $wishlist = $this->wishlistService->getWishlistByCondition(['id' => $id])->first();
-        $this->dispatchBrowserEvent('message', [
-            'text'   => 'Favoriden silindi.',
-            'type'   => 'success',
-            'status' => 200,
-        ]);
+        $this->wishlistService->delete($id);
         $this->emit('wishlistAddedUpdated');
-        $wishlist->delete();
     }
 
     public function render()

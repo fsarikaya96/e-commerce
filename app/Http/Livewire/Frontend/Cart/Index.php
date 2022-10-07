@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Frontend\Cart;
 
 use App\Services\Interfaces\ICartService;
+use App\Services\Interfaces\IWishlistService;
 use Livewire\Component;
 
 class Index extends Component
@@ -32,7 +33,7 @@ class Index extends Component
             $this->dispatchBrowserEvent('message', [
                 'text'   => "Miktar 1'den az olamaz",
                 'type'   => 'error',
-                'status' => 200
+                'status' => 400
             ]);
 
             return false;
@@ -65,7 +66,7 @@ class Index extends Component
                 $this->dispatchBrowserEvent('message', [
                     'text'   => "Miktar " . $cart->quantity . "'den fazla olamaz",
                     'type'   => 'error',
-                    'status' => 200
+                    'status' => 400
                 ]);
 
                 return false;
@@ -76,7 +77,7 @@ class Index extends Component
                 $this->dispatchBrowserEvent('message', [
                     'text'   => "Miktar " . $cart->quantity . "'den fazla olamaz",
                     'type'   => 'error',
-                    'status' => 200
+                    'status' => 400
                 ]);
 
                 return false;
