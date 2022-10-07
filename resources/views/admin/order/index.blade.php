@@ -8,6 +8,28 @@
                     <h3>Siparişler</h3>
                 </div>
                 <div class="card-body">
+                    <form action="" method="GET">
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="date">Tarih Seçiniz</label>
+                                <input type="date" id="date" name="date" value="{{ Request::get('date') ?? date('Y-m-d') }}" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="status">Duruma Göre</label>
+                                <select name="status" id="status" class="form-select">
+                                    <option value="">Tüm Durumu Seç</option>
+                                    <option value="in progress" {{ Request::get('status') == 'in progress' ? 'selected' : '' }}>İşleniyor</option>
+                                    <option value="completed" {{ Request::get('status') == 'completed' ? 'selected' : '' }}>Tamamlandı</option>
+                                    <option value="pending" {{ Request::get('status') == 'pending' ? 'selected' : '' }}>Bekleniyor</option>
+                                    <option value="cancelled" {{ Request::get('status') == 'cancelled' ? 'selected' : ''}}>İptal Edildi</option>
+                                    <option value="out-for-delivery" {{ Request::get('status') == 'out-for-delivery' ? 'selected' : '' }}>Dağıtımda</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mt-3">
+                                <button type="submit" class="btn btn-primary text-white">Filtrele</button>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -28,12 +50,19 @@
                                 <td>{{$order->created_at}}</td>
                                 <td>
                                     @if($order->status_message == 'in progress')
-                                        <span class="status-warning p-2">İşleniyor</span>
+                                        İşleniyor
                                     @elseif($order->status_message == 'completed')
-                                        <span class="status-success">Tamamlandı</span>
+                                        Tamamlandı
+                                    @elseif($order->status_message == 'pending')
+                                        Bekleniyor
+                                    @elseif($order->status_message == 'cancelled')
+                                        İptal Edildi
+                                    @else
+                                        Dağıtımda
                                     @endif
                                 </td>
-                                <td><a href="{{ route('admin.shows',$order->id) }}" class="btn btn-sm btn-primary text-white">Görüntüle</a></td>
+                                <td><a href="{{ route('admin.shows',$order->id) }}"
+                                       class="btn btn-sm btn-primary text-white">Görüntüle</a></td>
                             </tr>
                         @empty
                             <tr>
