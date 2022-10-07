@@ -56,7 +56,10 @@
                                         <div class="tab-pane fade active show" id="cashOnDeliveryTab" role="tabpanel" aria-labelledby="cashOnDeliveryTab-tab" tabindex="0">
                                             <h6>Kapıda Ödeme Modu</h6>
                                             <hr/>
-                                            <button type="button" wire:click="codOrder" class="btn btn-primary">Ödeme Yap (Kapıda Ödeme)</button>
+                                            <button type="button" wire:loading.attr="disabled" wire:click="codOrder" class="btn btn-primary">
+                                                <span wire:loading.remove wire:target="codOrder">Ödeme Yap (Kapıda Ödeme)</span>
+                                                <span wire:loading wire:target="codOrder">Gönderiliyor</span>
+                                            </button>
 
                                         </div>
                                         <div class="tab-pane fade" id="onlinePayment" role="tabpanel" aria-labelledby="onlinePayment-tab" tabindex="0">

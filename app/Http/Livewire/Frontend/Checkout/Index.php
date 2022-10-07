@@ -19,14 +19,7 @@ class Index extends Component
 
     public function rules()
     {
-        return [
-            'full_name' => 'required|string',
-            'phone'     => 'required|integer',
-            'email'     => 'required|email',
-            'province'  => 'required|string',
-            'county'    => 'required|string',
-            'address'   => 'required',
-        ];
+        return Order::rules();
     }
 
     public function boot(ICartService $ICartService)
@@ -38,6 +31,7 @@ class Index extends Component
     {
         $this->carts = $this->cartService->getCartByCondition(['user_id' => auth()->user()->id])->get();
     }
+
     public function removeCart($cartID)
     {
         $cart = $this->cartService->getCartByCondition(['id' => $cartID, 'user_id' => auth()->user()->id])->first();

@@ -25,4 +25,16 @@ class Order extends Model
         'payment_id'
     ];
 
+    public static function rules()
+    {
+        return [
+            'full_name' => 'required|string',
+            'phone'     => 'required|integer',
+            'email'     => 'required|email',
+            'province'  => 'required|string',
+            'county'    => 'required|string',
+            'address'   => 'required',
+        ];
+    }
+
 }
