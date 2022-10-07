@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Frontend\Product;
 
-use App\Models\Cart;
 use App\Models\Wishlist;
 use App\Services\Implementations\ProductService;
 use App\Services\Interfaces\ICartService;

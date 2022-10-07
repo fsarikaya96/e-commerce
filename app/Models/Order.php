@@ -21,8 +21,6 @@ class Order extends Model
         'county',
         'address',
         'status_message',
-        'payment_mode',
-        'payment_id'
     ];
 
     public static function rules()

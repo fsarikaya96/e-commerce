@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repository\RepositoryIoCRegister;
 use App\Services\ServiceIoCRegister;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
         Route::pattern('id', '[0-9]+');
     }
 }

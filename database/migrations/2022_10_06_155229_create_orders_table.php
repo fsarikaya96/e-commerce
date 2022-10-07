@@ -24,8 +24,6 @@ return new class extends Migration
             $table->string('county');
             $table->string('address');
             $table->string('status_message');
-            $table->string('payment_mode');
-            $table->string('payment_id')->nullable();
             $table->timestamps();
         });
     }
