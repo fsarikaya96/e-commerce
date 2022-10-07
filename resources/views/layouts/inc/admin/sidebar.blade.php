@@ -7,9 +7,9 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('admin.orders') }}">
                 <i class="mdi mdi-sale menu-icon"></i>
-                <span class="menu-title">Satışlar</span>
+                <span class="menu-title">Siparişler</span>
             </a>
         </li>
         <li class="nav-item">

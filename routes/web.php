@@ -85,8 +85,14 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('colors', 'index')->name('admin.colors');
         Route::get('colors/create', 'create')->name('admin.colors.create');
     });
+
     // Brand
     Route::get('brands', [\App\Http\Controllers\Admin\BrandController::class, 'index'])->name('admin.brands');
+
+    // Order
+    Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders');
+    Route::get('orders/{id}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.shows');
+
 });
 // ---------------------------------------------------------------------- //
 // ----------------------- Backend End ------------------------------- //

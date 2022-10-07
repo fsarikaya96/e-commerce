@@ -19,9 +19,9 @@ class OrderItem extends Model
         'price'
     ];
 
-    public function orders()
+    public function productColors()
     {
-        return $this->belongsTo(Order::class,'order_id','id');
+        return $this->belongsTo(ProductColor::class,'product_color_id','id');
     }
     public function products()
     {
