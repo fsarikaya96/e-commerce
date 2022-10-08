@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset("assets/css/bootstrap.min.css") }}">
     <link rel="stylesheet" href="{{ asset("assets/css/owl.carousel.min.css") }}">
     <link rel="stylesheet" href="{{ asset("assets/css/owl.theme.default.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("assets/exzoom/jquery.exzoom.css") }}">
     @vite('resources/css/app.css')
     @livewireStyles
 
@@ -34,8 +35,11 @@
 <script src="{{ asset("assets/js/bootstrap.bundle.min.js") }}"></script>
 <script src="{{ asset("assets/js/jquery-3.6.1.min.js") }}"></script>
 <script src="{{ asset("assets/js/owl.carousel.min.js") }}"></script>
+<script src="{{ asset("assets/exzoom/jquery.exzoom.js") }}"></script>
 @vite('resources/js/app.js')
 @yield('script')
+
 @livewireScripts
+@stack('scripts')
 </body>
 </html>

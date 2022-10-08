@@ -2,10 +2,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5 mt-3">
-                <div class="bg-white">
+                <div class="bg-white" wire:ignore.self="">
                     @if($product->productImages)
-                        <img src="{{ asset($product->productImages[0]->image) }}" class="w-100" alt="Img"
-                             style="max-height: 440px;border-radius: 6px;border: solid 1px #e6e6e6;overflow: hidden;">
+                        {{--                        <img src="{{ asset($product->productImages[0]->image) }}" class="w-100" alt="Img"--}}
+                        {{--                             style="max-height: 440px;border-radius: 6px;border: solid 1px #e6e6e6;overflow: hidden;">--}}
+                        <div class="exzoom" id="exzoom">
+                            <div class="exzoom_img_box">
+                                <ul class='exzoom_img_ul'>
+                                    @foreach($product->productImages as $image)
+                                        <li><img src="{{ asset($image->image) }}"/></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="exzoom_nav"></div>
+                            <p class="exzoom_btn">
+                                <a href="javascript:void(0);" class="exzoom_prev_btn"> < </a>
+                                <a href="javascript:void(0);" class="exzoom_next_btn"> > </a>
+                            </p>
+                        </div>
                     @else
                         <span>Ürüne Ait Fotoğraf Bulunamadı.</span>
                     @endif
@@ -18,11 +32,11 @@
                     </h4>
                     <hr>
                     <p class="product-path">
-                        <a class="brand-crumb-a" href="{{ url('/') }}">Anasayfa</a> / <a class="brand-crumb-a"
-                                                                                         href="{{ url("/collections/$category->slug") }}">{{ $category->name}}</a>
-                        /
+                        <a class="brand-crumb-a" href="{{ url('/') }}">Anasayfa</a> /
                         <a class="brand-crumb-a"
-                           href="{{ url("/collections/$category->slug/$product->slug") }}">{{ $product->name }}</a>
+                           href="{{ url("/collections/$category->slug") }}">{{ $category->name}}</a>
+                        / <a class="brand-crumb-a"
+                             href="{{ url("/collections/$category->slug/$product->slug") }}">{{ $product->name }}</a>
                     </p>
                     <div>
                         <span class="selling-price">{{ $product->selling_price }} TL</span>
@@ -43,7 +57,9 @@
                                 @endforeach
                             @endif
                             @if($this->productColorSelected)
-                                <div>Seçilen Renk : <span style="font-size: 14px; font-weight: 600">{{ $this->productColorSelected }}</span></div>
+                                <div>Seçilen Renk : <span
+                                        style="font-size: 14px; font-weight: 600">{{ $this->productColorSelected }}</span>
+                                </div>
                             @endif
                         @else
                             @if($product->quantity > 0)
@@ -66,7 +82,8 @@
                         </div>
                     </div>
                     <div class="mt-2">
-                        <button wire:click="addToCart({{ $product->id }})" class="btn btn1" style="width: 272px"><span>Sepete Ekle</span></button>
+                        <button wire:click="addToCart({{ $product->id }})" class="btn btn1" style="width: 272px"><span>Sepete Ekle</span>
+                        </button>
                     </div>
                     <div class="mt-3">
                         <h5 class="mb-0">Küçük Açıklama</h5>
@@ -97,4 +114,19 @@
         {{--        </div>--}}
     </div>
 </div>
+@push('scripts')
+    <script>
+        $(function () {
+            $("#exzoom").exzoom({
+                "navWidth": 60,
+                "navHeight": 60,
+                "navItemNum": 5,
+                "navItemMargin": 7,
+                "navBorder": 1,
+                "autoPlay": false,
+                "autoPlayTimeout": 2000
+            });
+        });
+    </script>
+@endpush
 
