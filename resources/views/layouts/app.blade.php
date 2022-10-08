@@ -17,6 +17,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset("assets/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("assets/css/owl.carousel.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("assets/css/owl.theme.default.min.css") }}">
     @vite('resources/css/app.css')
     @livewireStyles
 
@@ -31,7 +33,9 @@
 
 <script src="{{ asset("assets/js/bootstrap.bundle.min.js") }}"></script>
 <script src="{{ asset("assets/js/jquery-3.6.1.min.js") }}"></script>
-
+<script src="{{ asset("assets/js/owl.carousel.min.js") }}"></script>
+@vite('resources/js/app.js')
+@yield('script')
 @livewireScripts
 </body>
 </html>

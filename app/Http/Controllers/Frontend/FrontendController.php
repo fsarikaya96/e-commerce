@@ -25,9 +25,10 @@ class FrontendController extends Controller
 
     public function index()
     {
-        $sliders = $this->sliderService->getSlidersByCondition(['status' => 1]);
+        $sliders = $this->sliderService->getSlidersByCondition(['status' => 1])->get();
+        $trendingProducts = $this->productService->getProductsByCondition(['trending'=>1])->latest()->take(5)->get();
 
-        return view('frontend.home', compact('sliders'));
+        return view('frontend.home', compact('sliders','trendingProducts'));
     }
 
     public function categories()

@@ -46,10 +46,10 @@ class SliderService implements ISliderService
     /**
      * @param array $condition
      *
-     * @return Collection
+     * @return mixed
      * @throws ValidationException
      */
-    public function getSlidersByCondition(array $condition): Collection
+    public function getSlidersByCondition(array $condition): mixed
     {
         Log::channel('service')->info("SliderService called --> Request getSlidersByCondition() function");
         try {

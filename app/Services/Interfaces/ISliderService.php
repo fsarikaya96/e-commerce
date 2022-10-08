@@ -17,9 +17,9 @@ interface ISliderService
     /**
      * @param array $condition
      * Fetch sliders by Condition Repository
-     * @return Collection
+     * @return mixed
      */
-    public function getSlidersByCondition(array $condition): Collection;
+    public function getSlidersByCondition(array $condition): mixed;
 
     /**
      * @param int $id

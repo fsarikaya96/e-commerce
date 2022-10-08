@@ -19,11 +19,14 @@ class SliderRepository implements ISliderRepository
 
     /**
      * Fetch sliders by Condition Repository
+     *
+     * @param array $condition
+     *
      * @return mixed
      */
-    public function getSlidersByCondition(array $condition): Collection
+    public function getSlidersByCondition(array $condition):mixed
     {
-        return Slider::where($condition)->get();
+        return Slider::where($condition);
     }
 
     /**
