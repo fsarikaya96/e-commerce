@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Frontend\Checkout;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Services\Implementations\OrderService;
 use App\Services\Interfaces\ICartService;
 use Flasher\Prime\FlasherInterface;
 use Illuminate\Support\Str;
@@ -19,16 +20,18 @@ class Index extends Component
 
     private ICartService $cartService;
     private FlasherInterface $flasher;
+    private OrderService $orderService;
 
     public function rules()
     {
         return Order::rules();
     }
 
-    public function boot(ICartService $ICartService, FlasherInterface $IFlasher)
+    public function boot(ICartService $ICartService, FlasherInterface $IFlasher,OrderService $IOrderService)
     {
         $this->cartService = $ICartService;
         $this->flasher = $IFlasher;
+        $this->orderService = $IOrderService;
     }
 
     public function mount()
@@ -44,43 +47,11 @@ class Index extends Component
 
     public function payOrder()
     {
-        $this->validate();
+        $order = new Order();
+        $validatedData = $this->validate();
+        $orderData = $order->fill($validatedData);
+        $this->orderService->createOrderWithOrderItems($orderData,$this->carts);
 
-        $order = Order::create([
-            'user_id'        => auth()->user()->id,
-            'tracking_no'    => 'jfeel-' . Str::random(10),
-            'full_name'      => $this->full_name,
-            'email'          => $this->email,
-            'phone'          => $this->phone,
-            'province'       => $this->province,
-            'county'         => $this->county,
-            'address'        => $this->address,
-            'status_message' => 'in progress',
-        ]);
-        foreach ($this->carts as $cart) {
-              OrderItem::create([
-                'order_id'         => $order->id,
-                'product_id'       => $cart->product_id,
-                'product_color_id' => $cart->product_color_id,
-                'quantity'         => $cart->quantity,
-                'price'            => $cart->products->selling_price
-            ]);
-            if ($cart->product_color_id != null)
-            {
-                $cart->productColors()->where('id',$cart->product_color_id)->decrement('quantity',$cart->quantity);
-            }else {
-                $cart->products()->where('id',$cart->product_id)->decrement('quantity',$cart->quantity);
-            }
-        }
-        if ($order) {
-            $this->cartService->getCartByCondition(['user_id' => auth()->user()->id])->delete();
-            $this->flasher->addSuccess('Ödeme Başarılı!');
-
-            return redirect()->to('thank-you');
-        }else {
-            $this->flasher->addError('Bir şeyler yanlış gitti!');
-        }
-        return true;
     }
 
     public function render()

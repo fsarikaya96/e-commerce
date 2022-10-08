@@ -16,14 +16,14 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = $this->orderService->getBrandsByCondition(['user_id' => auth()->user()->id])->orderBy('created_at', 'DESC')->paginate(10);
+        $orders = $this->orderService->getOrdersByCondition(['user_id' => auth()->user()->id])->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('frontend.order.index', compact('orders'));
     }
 
     public function show($orderID)
     {
-        $order = $this->orderService->getBrandsByCondition(['user_id' => auth()->user()->id, 'id' => $orderID])->first();
+        $order = $this->orderService->getOrdersByCondition(['user_id' => auth()->user()->id, 'id' => $orderID])->first();
         if (count($order->orderItems) == null) {
             return redirect()->back()->with('error', 'Siparişiniz Bulunamadı !');
         }

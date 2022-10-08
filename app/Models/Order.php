@@ -27,7 +27,7 @@ class Order extends Model
     {
         return [
             'full_name' => 'required|string',
-            'phone'     => 'required|integer',
+            'phone'     => 'required|numeric',
             'email'     => 'required|email',
             'province'  => 'required|string',
             'county'    => 'required|string',

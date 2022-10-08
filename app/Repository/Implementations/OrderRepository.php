@@ -3,6 +3,7 @@
 namespace App\Repository\Implementations;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Repository\Interfaces\IOrderRepository;
 use Carbon\Carbon;
 
@@ -35,6 +36,21 @@ class OrderRepository implements IOrderRepository
                 return $query->where('status_message', $status);
             })
             ->paginate(10);
+    }
+    public function createOrderItems(OrderItem $orderItem):OrderItem
+    {
+        $orderItem->save();
+
+        return $orderItem;
+
+    }
+
+    public function createOrder(Order $order):Order
+    {
+        $order->save();
+
+        return $order;
+
     }
 
 }

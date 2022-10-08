@@ -2,6 +2,9 @@
 
 namespace App\Services\Interfaces;
 
+use App\Models\Order;
+use App\Models\OrderItem;
+
 interface IOrderService
 {
     /**
@@ -21,4 +24,5 @@ interface IOrderService
      * @return mixed
      */
     public function getOrdersByFilter(?string $date, string $todayDate, ?string $status):mixed;
+
 }
