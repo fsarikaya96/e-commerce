@@ -1,6 +1,5 @@
 <div>
     @include('livewire.admin.brand.modal')
-    @include('layouts.partials.livewire_alert')
     <div class="row">
         <div class="col-md-12">
             <div class="card">

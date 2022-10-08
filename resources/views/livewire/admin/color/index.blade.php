@@ -1,5 +1,4 @@
 <div>
-    @include('layouts.partials.livewire_alert')
     @include('livewire.admin.color.modal')
     <div class="row">
         <div class="col-md-12">

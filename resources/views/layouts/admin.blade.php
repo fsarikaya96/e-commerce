@@ -30,7 +30,6 @@
 
     <div class="main-panel">
         <div class="content-wrapper">
-            @include('layouts.partials.alert')
             @yield('content')
         </div>
     </div>

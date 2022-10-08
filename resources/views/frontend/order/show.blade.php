@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="shadow bg-white p-3">
                     <h4>
-                        <i class="fa fa-shopping-cart"></i> Sipariş Detayları
+                        <i class="fa fa-shopping-cart"></i> Sipariş Detayı
                         <a href="{{ route('orders') }}" class="btn btn-danger float-end">Geri</a>
                     </h4>
                     <hr>
@@ -53,7 +53,7 @@
                                 <th>Ürün No</th>
                                 <th>Fotoğraf</th>
                                 <th>Ürün Adı ve Renk</th>
-                                <th>Fiyat</th>
+                                <th>Birim Fiyat</th>
                                 <th>Adet</th>
                                 <th>Toplam</th>
                             </tr>
@@ -65,12 +65,14 @@
                                     <td width="5%">{{ $orderItem->id }}</td>
                                     <td width="10%" style="text-align: center">
                                         <label class="product-name">
+                                            <a href="{{ url("collections/".$orderItem->products->category->slug."/".$orderItem->products->slug) }}">
                                             @if($orderItem->products->productImages)
                                                 <img src="{{ asset($orderItem->products->productImages[0]->image) }}"
                                                      style="width: 75px;" alt="">
                                             @else
                                                 <img src="" style="width: 75px; height: 75px" alt="Bulunamadı.">
                                             @endif
+                                            </a>
                                         </label>
                                     </td>
                                     <td width="10%">{{ $orderItem->products->name }}

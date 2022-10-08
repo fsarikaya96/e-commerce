@@ -8,6 +8,7 @@ use App\Repository\Interfaces\ICartRepository;
 use App\Repository\Interfaces\IOrderRepository;
 use App\Services\Interfaces\IOrderService;
 use Flasher\Prime\FlasherInterface;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class OrderService implements IOrderService
@@ -19,6 +20,7 @@ class OrderService implements IOrderService
     /**
      * @param IOrderRepository $IOrderRepository
      * @param FlasherInterface $IFlasher
+     * @param ICartRepository $ICartRepository
      */
     public function __construct(
         IOrderRepository $IOrderRepository,
@@ -85,6 +87,14 @@ class OrderService implements IOrderService
         $this->flasher->addSuccess('Ödeme Başarılı!');
 
         return redirect()->to('thank-you');
+    }
+    public function updateStatusMessage(Request $request,int $id): Order
+    {
+        $order = $this->orderRepository->getOrdersByCondition(['id' => $id])->first();
+        $order->status_message = $request->status_message;
+
+        return $this->orderRepository->updateStatusMessage($order);
+
     }
 
 }

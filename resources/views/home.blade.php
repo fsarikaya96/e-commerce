@@ -8,7 +8,6 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
-                        @include('layouts.partials.alert')
 
                         {{ __('You are logged in!') }}
                     </div>

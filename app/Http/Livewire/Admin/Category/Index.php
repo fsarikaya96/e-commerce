@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Category;
 
 use App\Services\Interfaces\ICategoryService;
+use Flasher\Prime\FlasherInterface;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -17,14 +18,18 @@ class Index extends Component
 
     private ICategoryService $categoryService;
 
+    private FlasherInterface $flasher;
+
     /**
      * Category construct
      *
      * @param ICategoryService $ICategoryService
+     * @param FlasherInterface $IFlasherInterface
      */
-    public function boot(ICategoryService $ICategoryService)
+    public function boot(ICategoryService $ICategoryService,FlasherInterface $IFlasherInterface)
     {
         $this->categoryService = $ICategoryService;
+        $this->flasher = $IFlasherInterface;
     }
 
     public function deleteCategory($category_id)
@@ -35,8 +40,7 @@ class Index extends Component
     public function destroyCategory()
     {
         $this->categoryService->delete($this->category_id);
-
-        session()->flash("livewire_message", "Kategori Silindi.");
+        $this->flasher->addSuccess('Kategori Silindi!');
         $this->dispatchBrowserEvent('close-modal');
     }
 

@@ -19,7 +19,6 @@
     padding: 5px;
     border-radius: 4px;
     width: 100px;
-    display: block;
     text-align-last: center;
 }
 
@@ -29,7 +28,6 @@
     padding: 5px;
     border-radius: 4px;
     width: 100px;
-    display: block;
     text-align-last: center;
 }
 .status-warning{
@@ -38,7 +36,6 @@
     padding: 5px;
     border-radius: 4px;
     width: 100px;
-    display: block;
     text-align-last: center;
 }
 .ck-editor__editable_inline {

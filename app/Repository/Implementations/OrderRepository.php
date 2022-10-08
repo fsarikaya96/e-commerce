@@ -53,4 +53,11 @@ class OrderRepository implements IOrderRepository
 
     }
 
+    public function updateStatusMessage(Order $order): Order
+    {
+        $order->save();
+
+        return $order;
+    }
+
 }

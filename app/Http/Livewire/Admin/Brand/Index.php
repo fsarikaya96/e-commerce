@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Brand;
 use App\Models\Brand;
 use App\Services\Interfaces\IBrandService;
 use App\Services\Interfaces\ICategoryService;
+use Flasher\Prime\FlasherInterface;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,17 +19,20 @@ class Index extends Component
 
     private IBrandService $brandService;
     private ICategoryService $categoryService;
+    private FlasherInterface $flasher;
 
     /**
      * Brand construct
      *
      * @param IBrandService $IBrandService
      * @param ICategoryService $ICategoryService
+     * @param FlasherInterface $IFlasherInterface
      */
-    public function boot(IBrandService $IBrandService, ICategoryService $ICategoryService)
+    public function boot(IBrandService $IBrandService, ICategoryService $ICategoryService, FlasherInterface $IFlasherInterface)
     {
         $this->categoryService = $ICategoryService;
         $this->brandService    = $IBrandService;
+        $this->flasher = $IFlasherInterface;
     }
 
     public function rules()
@@ -51,7 +55,7 @@ class Index extends Component
         $data          = $brand->fill($validatedData);
         $this->brandService->create($data);
 
-        session()->flash('livewire_message', 'Marka Başarıyla Eklendi');
+        $this->flasher->addSuccess('Marka Başarıyla Eklendi!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }
@@ -82,8 +86,7 @@ class Index extends Component
         $brand         = $this->brandService->getBrandById($this->brandID);
         $data          = $brand->fill($validatedData);
         $this->brandService->update($data, $this->brandID);
-
-        session()->flash('livewire_message', 'Marka Başarıyla Güncellendi');
+        $this->flasher->addSuccess('Marka Başarıyla Güncellendi!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }
@@ -96,7 +99,7 @@ class Index extends Component
     public function destroyBrand()
     {
         $this->brandService->delete($this->brandID);
-        session()->flash('livewire_message', 'Marka Başarıyla Silindi');
+        $this->flasher->addSuccess('Marka Başarıyla Silindi!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }

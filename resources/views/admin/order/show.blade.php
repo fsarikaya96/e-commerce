@@ -1,14 +1,15 @@
 @extends('layouts.admin')
-@section('title','Siparişler')
+@section('title','Sipariş Detayı')
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="shadow bg-white p-3">
-                <h4>
-                    <i class="fa fa-shopping-cart"></i> Sipariş Detayı
-                    <a href="{{ route('admin.orders') }}" class="btn btn-danger float-end text-white" style="position: absolute;right: 25px;margin-top: -12px;">Geri</a>
-                </h4>
-                <hr>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sipariş Detayı
+                        <a href="{{ route('admin.orders') }}" class="btn btn-danger float-end text-white">Geri</a>
+                    </h3>
+                </div>
+            <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
                         <h5>Sipariş Detayları</h5>
@@ -95,6 +96,37 @@
                         </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            </div>
+
+            <div class="card border mt-3">
+                <div class="card-body">
+                    <h4>Sipariş süreci (Sipariş durumu güncellemesi)</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <form action="{{ route('admin.orders.update',$order->id) }}" method="post">
+                                @csrf
+                                @method("PUT")
+                                <label for="status" class="mb-3">Sipariş durumunuzu güncelleyin</label>
+                                <div class="input-group">
+                                    <select name="status_message" id="status" class="form-select">
+                                        <option value="in progress" {{ $order->status_message == 'in progress' ? 'selected' : '' }}>İşleniyor</option>
+                                        <option value="completed"  {{ $order->status_message == 'completed' ? 'selected' : '' }}>Tamamlandı</option>
+                                        <option value="pending" {{ $order->status_message == 'pending' ? 'selected' : '' }}>Bekleniyor</option>
+                                        <option value="cancelled" {{ $order->status_message == 'cancelled' ? 'selected' : '' }}>İptal Edildi</option>
+                                        <option value="out-for-delivery" {{ $order->status_message == 'out-for-delivery' ? 'selected' : '' }}>Dağıtımda</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary text-white">Güncelle</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-9">
+                            <br>
+                            <h3 class="mt-4">Sipariş Durumu : <span class="text-uppercase">{{ $order->status_message }}</span></h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

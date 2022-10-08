@@ -29,5 +29,6 @@ interface IOrderRepository
 
     public function createOrder(Order $order):Order;
 
+    public function updateStatusMessage(Order $order):Order;
 
 }

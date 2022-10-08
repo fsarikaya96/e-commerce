@@ -52,7 +52,7 @@ class ProductController extends Controller
     {
         $this->productService->create($request);
 
-        return redirect('admin/products')->with('message', 'Ürün Başarıyla Eklendi.');
+        return redirect('admin/products')->with('success', 'Ürün Başarıyla Eklendi.');
     }
 
     public function edit(int $product_id)
@@ -71,14 +71,14 @@ class ProductController extends Controller
     {
         $this->productService->update($request, $id);
 
-        return redirect('admin/products')->with('message', 'Ürün Başarıyla Güncellendi.');
+        return redirect('admin/products')->with('success', 'Ürün Başarıyla Güncellendi.');
     }
 
     public function deleteImage(int $image_id)
     {
         $this->productService->deleteProductImages($image_id);
 
-        return redirect('admin/products')->with('message', 'Resim Başarıyla Silinmiştir.');
+        return redirect('admin/products')->with('success', 'Resim Başarıyla Silinmiştir.');
     }
 
     public function updateProductColor(Request $request, $product_color_id = 0)

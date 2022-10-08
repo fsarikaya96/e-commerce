@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Color;
 
 use App\Models\Color;
 use App\Services\Interfaces\IColorService;
+use Flasher\Prime\FlasherInterface;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,15 +17,18 @@ class Index extends Component
     public $name, $code, $status, $color_id, $colorInput;
 
     private IColorService $colorService;
+    private FlasherInterface $flasher;
 
     /**
      * Color construct
      *
      * @param IColorService $IColorService
+     * @param FlasherInterface $IFlasherInterface
      */
-    public function boot(IColorService $IColorService)
+    public function boot(IColorService $IColorService, FlasherInterface $IFlasherInterface)
     {
         $this->colorService = $IColorService;
+        $this->flasher = $IFlasherInterface;
     }
 
     public function rules()
@@ -56,8 +60,7 @@ class Index extends Component
         $validatedData = $this->validate();
         $data          = $color->fill($validatedData);
         $this->colorService->create($data);
-
-        session()->flash('livewire_message', 'Renk Başarıyla Oluşturuldu.');
+        $this->flasher->addSuccess('Renk Başarıyla Oluşturuldu!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }
@@ -78,7 +81,8 @@ class Index extends Component
         $color         = $this->colorService->getColorById($this->color_id);
         $data          = $color->fill($validatedData);
         $this->colorService->update($data, $this->color_id);
-        session()->flash('livewire_message', 'Renk Başarıyla Güncellendi.');
+        $this->flasher->addSuccess('Renk Başarıyla Güncellendi!');
+
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }
@@ -91,7 +95,7 @@ class Index extends Component
     public function destroyColor()
     {
         Color::findOrFail($this->color_id)->delete();
-        session()->flash('livewire_message', 'Renk Başarıyla Silindi.');
+        $this->flasher->addSuccess('Renk Başarıyla Silindi!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
     }

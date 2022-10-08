@@ -3,11 +3,8 @@
 namespace App\Http\Livewire\Frontend\Checkout;
 
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Services\Implementations\OrderService;
 use App\Services\Interfaces\ICartService;
-use Flasher\Prime\FlasherInterface;
-use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Index extends Component
@@ -19,7 +16,6 @@ class Index extends Component
     public $full_name, $phone, $email, $province, $county, $address;
 
     private ICartService $cartService;
-    private FlasherInterface $flasher;
     private OrderService $orderService;
 
     public function rules()
@@ -27,10 +23,9 @@ class Index extends Component
         return Order::rules();
     }
 
-    public function boot(ICartService $ICartService, FlasherInterface $IFlasher,OrderService $IOrderService)
+    public function boot(ICartService $ICartService, OrderService $IOrderService)
     {
-        $this->cartService = $ICartService;
-        $this->flasher = $IFlasher;
+        $this->cartService  = $ICartService;
         $this->orderService = $IOrderService;
     }
 
@@ -47,11 +42,10 @@ class Index extends Component
 
     public function payOrder()
     {
-        $order = new Order();
+        $order         = new Order();
         $validatedData = $this->validate();
-        $orderData = $order->fill($validatedData);
-        $this->orderService->createOrderWithOrderItems($orderData,$this->carts);
-
+        $orderData     = $order->fill($validatedData);
+        $this->orderService->createOrderWithOrderItems($orderData, $this->carts);
     }
 
     public function render()

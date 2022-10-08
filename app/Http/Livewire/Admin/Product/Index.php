@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Product;
 
 use App\Services\Interfaces\IProductService;
+use Flasher\Prime\FlasherInterface;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,10 +15,11 @@ class Index extends Component
     public $product_id;
 
     private IProductService $productService;
-
-    public function boot(IProductService $IProductService)
+    private FlasherInterface $flasher;
+    public function boot(IProductService $IProductService, FlasherInterface $IFlasherInterface)
     {
         $this->productService = $IProductService;
+        $this->flasher = $IFlasherInterface;
     }
 
     public function render()
@@ -35,7 +37,7 @@ class Index extends Component
     public function destroyProduct()
     {
         $this->productService->delete($this->product_id);
-        session()->flash('livewire_message', 'Ürün Başarıyla Silindi');
+        $this->flasher->addSuccess('Ürün Başarıyla Silindi!');
         $this->dispatchBrowserEvent('close-modal');
     }
 }

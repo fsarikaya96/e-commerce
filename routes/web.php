@@ -90,8 +90,12 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
     Route::get('brands', [\App\Http\Controllers\Admin\BrandController::class, 'index'])->name('admin.brands');
 
     // Order
-    Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders');
-    Route::get('orders/{id}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.shows');
+    Route::controller(\App\Http\Controllers\Admin\OrderController::class)->group(function () {
+        Route::get('orders', 'index')->name('admin.orders');
+        Route::get('orders/{id}','show')->name('admin.shows');
+        Route::put('orders/{id}','update')->name('admin.orders.update');
+    });
+
 
 });
 // ---------------------------------------------------------------------- //

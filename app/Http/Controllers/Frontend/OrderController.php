@@ -30,4 +30,5 @@ class OrderController extends Controller
 
         return view('frontend.order.show', compact('order'));
     }
+
 }

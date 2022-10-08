@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Slider;
 
 use App\Services\Interfaces\ISliderService;
+use Flasher\Prime\FlasherInterface;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,10 +16,12 @@ class Index extends Component
     public $slider_id;
 
     private ISliderService $sliderService;
+    private FlasherInterface $flasher;
 
-    public function boot(ISliderService $ISliderService)
+    public function boot(ISliderService $ISliderService, FlasherInterface $IFlasherInterface)
     {
         $this->sliderService = $ISliderService;
+        $this->flasher = $IFlasherInterface;
     }
 
     public function deleteSlider($slider_id)
@@ -29,7 +32,7 @@ class Index extends Component
     public function destroySlider()
     {
         $this->sliderService->delete($this->slider_id);
-        session()->flash("livewire_message", "Slider Silindi.");
+        $this->flasher->addSuccess('Slider Silindi!');
         $this->dispatchBrowserEvent('close-modal');
     }
 

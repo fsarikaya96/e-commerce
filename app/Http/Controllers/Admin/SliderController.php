@@ -29,7 +29,7 @@ class SliderController extends Controller
     public function store(SliderRequest $request)
     {
         $this->sliderService->create($request);
-        return redirect('admin/sliders')->with('message', 'Slider Başarıyla Oluşturuldu.');
+        return redirect('admin/sliders')->with('success', 'Slider Başarıyla Oluşturuldu.');
     }
 
     public function edit(int $slider_id)
@@ -43,6 +43,6 @@ class SliderController extends Controller
     {
         $this->sliderService->update($request,$id);
 
-        return redirect('admin/sliders')->with('message', 'Slider Başarıyla Güncellendi.');
+        return redirect('admin/sliders')->with('success', 'Slider Başarıyla Güncellendi.');
     }
 }

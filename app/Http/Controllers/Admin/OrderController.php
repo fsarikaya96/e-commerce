@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     private IOrderService $orderService;
-
     public function __construct(IOrderService $IOrderService)
     {
         $this->orderService = $IOrderService;
@@ -32,5 +31,16 @@ class OrderController extends Controller
         }
 
         return view('admin.order.show', compact('order'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $order = $this->orderService->updateStatusMessage($request,$id);
+
+        if (count($order->orderItems) == null) {
+            return redirect('admin/orders/'.$order->id)->with('error', 'Güncelleme Başarısız!');
+        }
+        return redirect('admin/orders/'.$order->id)->with('success', 'Güncelleme Başarılı!');
+
     }
 }

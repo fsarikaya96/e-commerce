@@ -35,7 +35,7 @@ class CategoryController extends Controller
     {
         $this->categoryService->create($request);
 
-        return redirect('admin/category')->with('message', 'Kategori Başarıyla Oluşturuldu.');
+        return redirect('admin/category')->with('success', 'Kategori Başarıyla Oluşturuldu.');
     }
 
     public function edit(int $id)
@@ -49,7 +49,7 @@ class CategoryController extends Controller
     {
         $this->categoryService->update($request, $id);
 
-        return redirect('admin/category')->with('message', 'Kategori Başarıyla Güncellendi.');
+        return redirect('admin/category')->with('success', 'Kategori Başarıyla Güncellendi.');
     }
 
 

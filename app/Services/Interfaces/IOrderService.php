@@ -4,6 +4,7 @@ namespace App\Services\Interfaces;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Http\Request;
 
 interface IOrderService
 {
@@ -25,4 +26,5 @@ interface IOrderService
      */
     public function getOrdersByFilter(?string $date, string $todayDate, ?string $status):mixed;
 
+    public function updateStatusMessage(Request $request, int $id):Order;
 }
