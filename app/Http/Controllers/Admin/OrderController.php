@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Services\Interfaces\IOrderService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
     private IOrderService $orderService;
+
     public function __construct(IOrderService $IOrderService)
     {
         $this->orderService = $IOrderService;
@@ -42,5 +44,19 @@ class OrderController extends Controller
         }
         return redirect('admin/orders/'.$order->id)->with('success', 'Güncelleme Başarılı!');
 
+    }
+
+    public function viewInvoice($id)
+    {
+        $order = $this->orderService->getOrdersByCondition(['id' => $id])->first();
+        return view('admin.invoice.invoice-generate',compact('order'));
+    }
+    public function generateInvoice($id)
+    {
+        $order = $this->orderService->getOrdersByCondition(['id' => $id])->first();
+        $data = ['order' => $order];
+        $pdf = Pdf::loadView('admin.invoice.invoice-generate', $data);
+        $todayDate = Carbon::now()->format('d-m-Y');
+        return $pdf->download('fatura-'.$order->id.'-'.$todayDate.'.pdf');
     }
 }

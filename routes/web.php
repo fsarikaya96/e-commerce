@@ -94,6 +94,8 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('orders', 'index')->name('admin.orders');
         Route::get('orders/{id}','show')->name('admin.shows');
         Route::put('orders/{id}','update')->name('admin.orders.update');
+        Route::get('invoice/{id}','viewInvoice')->name('admin.viewInvoice');
+        Route::get('invoice/{id}/generate','generateInvoice')->name('admin.generateInvoice');
     });
 
 

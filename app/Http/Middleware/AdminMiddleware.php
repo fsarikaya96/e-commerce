@@ -20,7 +20,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::user()->role_as == '1') {
-            return redirect("/home")->with('danger', 'Yönetici olmadığın için, erişim reddedildi !');
+            return redirect("/")->with('error', 'Yönetici olmadığın için, erişim reddedildi !');
         }
 
         return $next($request);

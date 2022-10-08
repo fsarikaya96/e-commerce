@@ -6,7 +6,9 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Sipariş Detayı
-                        <a href="{{ route('admin.orders') }}" class="btn btn-danger float-end text-white">Geri</a>
+                        <a href="{{ route('admin.orders') }}" class="btn btn-danger float-end text-white mx-1">Geri</a>
+                        <a href="{{ route('admin.generateInvoice',$order->id) }}" target="_blank"  class="btn btn-primary float-end text-white mx-1">Faturayı İndir</a>
+                        <a href="{{ route('admin.viewInvoice',$order->id) }}" class="btn btn-warning float-end mx-1">Faturayı Görüntüle</a>
                     </h3>
                 </div>
             <div class="card-body">

@@ -6,6 +6,7 @@
                 <span class="menu-title">Ana Sayfa</span>
             </a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.orders') }}">
                 <i class="mdi mdi-sale menu-icon"></i>

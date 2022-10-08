@@ -62,16 +62,19 @@ class Index extends Component
 
     public function closeModal()
     {
+        $this->resetValidation();
         $this->resetForm();
     }
 
     public function openModal()
     {
+        $this->resetValidation();
         $this->resetForm();
     }
 
     public function editBrand(int $brandID)
     {
+        $this->resetValidation();
         $this->brandID     = $brandID;
         $brand             = $this->brandService->getBrandById($brandID);
         $this->name        = $brand->name;

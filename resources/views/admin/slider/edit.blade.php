@@ -19,11 +19,15 @@
                             <div class="col-md-12 mb-3">
                                 <label for="title">Başlık <small>*</small></label>
                                 <input type="text" id="title" name="title" class="form-control" value="{{ $slider->title }}">
+                                @error('title') <small class="text-danger">{{ $message }}</small> @enderror
+
                             </div>
 
                             <div class="col-md-12 mb-3">
                                 <label for="description">Açıklama <small>*</small></label>
                                 <textarea name="description" class="form-control" id="description" rows="3">{{ $slider->description }}</textarea>
+                                @error('description') <small class="text-danger">{{ $message }}</small> @enderror
+
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="link">Link <small>(İsteğe Bağlı)</small></label>

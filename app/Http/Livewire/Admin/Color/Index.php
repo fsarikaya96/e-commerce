@@ -38,11 +38,13 @@ class Index extends Component
 
     public function closeModal()
     {
+        $this->resetValidation();
         $this->resetForm();
     }
 
     public function openModal()
     {
+        $this->resetValidation();
         $this->resetForm();
     }
 
@@ -67,6 +69,7 @@ class Index extends Component
 
     public function editColor($color_id)
     {
+        $this->resetValidation();
         $this->color_id   = $color_id;
         $color            = $this->colorService->getColorById($color_id);
         $this->name       = $color->name;

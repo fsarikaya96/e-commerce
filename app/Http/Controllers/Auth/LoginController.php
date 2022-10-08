@@ -31,9 +31,9 @@ class LoginController extends Controller
     {
         if (Auth::user()->role_as == '1')
         {
-            return redirect("admin/dashboard")->with('status',\auth()->user()->name." Hoşgeldiniz.");
+            return redirect("admin/dashboard")->with('success',\auth()->user()->name." Hoşgeldiniz.");
         }else {
-            return redirect("/home")->with('status',"Giriş Başarılı.");
+            return redirect("/")->with('success',"Giriş Başarılı.");
         }
     }
 
