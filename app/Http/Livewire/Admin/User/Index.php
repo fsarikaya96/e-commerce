@@ -57,15 +57,11 @@ class Index extends Component
         $this->userID        = null;
     }
 
-    public function storeUser()
+    public function storeUser(User $user)
     {
         $validatedData = $this->validate();
-        User::create([
-            'name'     => $validatedData['name'],
-            'email'    => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
-            'role_as'  => $validatedData['role_as'],
-        ]);
+        $userData = $user->fill($validatedData);
+        $this->userService->create($userData);
         $this->flasher->addSuccess('Kullanıcı Başarıyla Eklendi!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
@@ -77,8 +73,8 @@ class Index extends Component
         $user                = $this->userService->getUsersByCondition(['id' => $id])->firstOrFail();
         $this->name          = $user->name;
         $this->email         = $user->email;
-        $this->password      = null;
-        $this->passwordAgain = null;
+        $this->password      = $user->password;
+        $this->passwordAgain = $user->password;
         $this->role_as       = $user->role_as;
         $this->userID        = $user->id;
     }
@@ -87,13 +83,8 @@ class Index extends Component
     {
         $validatedData = $this->validate();
         $user = $this->userService->getUsersByCondition(['id' => $this->userID])->firstOrFail();
-
-        $user->update([
-            'name'     => $validatedData['name'],
-            'email'    => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
-            'role_as'  => $validatedData['role_as'],
-        ]);
+        $userData = $user->fill($validatedData);
+        $this->userService->update($userData);
         $this->flasher->addSuccess('Kullanıcı Başarıyla Güncellendi!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
@@ -106,7 +97,7 @@ class Index extends Component
 
     public function destroyUser()
     {
-        User::findOrFail($this->userID)->delete();
+        $this->userService->delete($this->userID);
         $this->flasher->addSuccess('Kullanıcı Başarıyla Silindi!');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetForm();
