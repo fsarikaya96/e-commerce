@@ -9,13 +9,13 @@
 
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.orders') }}">
-                <i class="mdi mdi-sale menu-icon"></i>
+                <i class="mdi mdi-dropbox menu-icon"></i>
                 <span class="menu-title">Siparişler</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category">
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <i class="mdi mdi-menu menu-icon"></i>
                 <span class="menu-title">Kategoriler</span>
                 <i class="menu-arrow"></i>
             </a>
@@ -41,13 +41,13 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.brands') }}">
-                <i class="mdi mdi-format-align-justify menu-icon"></i>
+                <i class="mdi mdi-checkbox-multiple-marked menu-icon"></i>
                 <span class="menu-title">Markalar</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.colors') }}">
-                <i class="mdi mdi-format-align-justify menu-icon"></i>
+                <i class="mdi mdi-border-color menu-icon"></i>
                 <span class="menu-title">Renkler</span>
             </a>
         </li>

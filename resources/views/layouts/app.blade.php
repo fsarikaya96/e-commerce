@@ -27,7 +27,7 @@
 <body>
 <div id="app">
     @include('layouts.inc.frontend.navbar')
-    <main class="container py-4">
+    <main class="container py-3 py-md-5" style="padding: 10px 10px 60px;">
         @yield('content')
     </main>
     @include('layouts.inc.frontend.footer')

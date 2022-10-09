@@ -57,9 +57,9 @@
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>@if($category->status == 1)
-                                        <span class="status-success">Yayında</span>
+                                        <span class="badge btn-success text-white">Yayında</span>
                                     @else
-                                        <span class="status-danger">Yayında Değil</span>
+                                        <span class="badge btn-danger text-white">Yayında Değil</span>
                                     @endif</td>
                                 <td>
                                     <a href="{{ route('admin.category.edit',$category->id) }}" class="btn btn-success">Düzenle</a>

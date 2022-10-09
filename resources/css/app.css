@@ -564,3 +564,19 @@ html{
     right: 0;
     text-align: center;
 }
+.footer-custom{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;   /* Height of the footer */
+}
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+#app{
+    min-height:100%;
+    position:relative;
+}

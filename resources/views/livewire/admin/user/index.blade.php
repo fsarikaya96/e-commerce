@@ -28,9 +28,9 @@
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     @if($user->role_as == 1)
-                                        <span class="badge btn-success">Admin</span>
+                                        <span class="badge btn-success text-white">Admin</span>
                                     @else
-                                        <span class="badge btn-warning">Misafir</span>
+                                        <span class="badge btn-primary text-white">Misafir</span>
                                     @endif
                                 </td>
                                 <td>

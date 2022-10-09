@@ -37,6 +37,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+    </div>
         <div class="py-5 bg-white">
             <div class="container">
                 <div class="row justify-content center">

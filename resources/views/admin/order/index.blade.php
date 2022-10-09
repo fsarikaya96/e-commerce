@@ -50,15 +50,15 @@
                                 <td>{{$order->created_at}}</td>
                                 <td>
                                     @if($order->status_message == 'in progress')
-                                        <span class="status-warning pt-2 text-white">İşleniyor</span>
+                                        <span class="badge btn-warning pt-2 text-white">İşleniyor</span>
                                     @elseif($order->status_message == 'completed')
-                                        <span class="status-success pt-2 text-white">Tamamlandı</span>
+                                        <span class="badge btn-success pt-2 text-white">Tamamlandı</span>
                                     @elseif($order->status_message == 'pending')
-                                        <span class="status-warning pt-2 text-white">Bekleniyor</span>
+                                        <span class="badge btn-primary pt-2 text-white">Bekleniyor</span>
                                     @elseif($order->status_message == 'cancelled')
-                                        <span class="status-danger pt-2 text-white">İptal Edildi</span>
+                                        <span class="badge btn-danger pt-2 text-white">İptal Edildi</span>
                                     @else
-                                        <span class="status-primary pt-2 text-white">Dağıtımda</span>
+                                        <span class="badge btn-primary pt-2 text-white">Dağıtımda</span>
                                     @endif
                                 </td>
                                 <td><a href="{{ route('admin.shows',$order->id) }}"

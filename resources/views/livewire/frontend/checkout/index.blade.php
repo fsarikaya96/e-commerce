@@ -1,4 +1,4 @@
-<div class="py-3 py-md-4 checkout">
+<div class="checkout">
     <div class="container">
         <div class="row">
             @if(count($cartItems) < 1)

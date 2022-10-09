@@ -33,9 +33,9 @@
                                 @endif
                                 <td>{{ $brand->slug }}</td>
                                 <td>@if($brand->status == 1)
-                                        <span class="status-success">Yayında</span>
+                                        <span class="badge btn-success text-white">Yayında</span>
                                     @else
-                                        <span class="status-danger">Yayında Değil</span>
+                                        <span class="badge btn-danger text-white">Yayında Değil</span>
                                     @endif
                                 </td>
                                 <td>

@@ -1,4 +1,4 @@
-<div class="py-3 py-md-5 single-product-page">
+<div class="single-product-page">
     <div class="container">
         <div class="row">
             <div class="col-md-5 mt-3">
