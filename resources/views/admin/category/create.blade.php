@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title','Kategori Kayıt')
 
 @section('content')
 

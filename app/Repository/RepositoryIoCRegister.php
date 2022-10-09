@@ -7,7 +7,7 @@ use App\Repository\{
     Implementations\ColorRepository, Interfaces\IColorRepository, Implementations\ProductRepository, Interfaces\IProductRepository,
     Implementations\SliderRepository, Interfaces\ISliderRepository, Implementations\WishlistRepository, Interfaces\IWishlistRepository,
     Implementations\CartRepository, Interfaces\ICartRepository, Implementations\OrderRepository, Interfaces\IOrderRepository,
-    Implementations\SettingRepository, Interfaces\ISettingRepository
+    Implementations\SettingRepository, Interfaces\ISettingRepository, Implementations\UserRepository, Interfaces\IUserRepository
 };
 class RepositoryIoCRegister
 {
@@ -27,5 +27,6 @@ class RepositoryIoCRegister
         app()->bind(ICartRepository::class,CartRepository::class);
         app()->bind(IOrderRepository::class,OrderRepository::class);
         app()->bind(ISettingRepository::class,SettingRepository::class);
+        app()->bind(IUserRepository::class,UserRepository::class);
     }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title','Slider Düzenle')
 
 @section('content')
 

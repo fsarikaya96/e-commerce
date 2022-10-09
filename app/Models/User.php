@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_as'
     ];
 
     /**
@@ -40,4 +41,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function rules($userID){
+        return  [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$userID],
+            'password' => ['required', 'string', 'min:2'],
+            'passwordAgain' => ['required','same:password'],
+            'role_as' => ['required','integer']
+        ];
+    }
+
 }

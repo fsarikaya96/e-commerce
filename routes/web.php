@@ -24,6 +24,7 @@ Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->gro
     Route::get('/collections', 'categories')->name('frontend.category');
     Route::get('/collections/{category_slug}', 'products')->name('frontend.products');
     Route::get('/collections/{category_slug}/{product_slug}', 'productView')->name('frontend.products.view');
+    Route::get('/trend-products', 'trendProducts')->name('frontend.products.trends');
     Route::get('/new-arrivals', 'newArrivals')->name('frontend.products.newArrival');
     Route::get('/featured-products', 'featuredProducts')->name('frontend.products.featured');
 });
@@ -100,6 +101,10 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::put('orders/{id}','update')->name('admin.orders.update');
         Route::get('invoice/{id}','viewInvoice')->name('admin.viewInvoice');
         Route::get('invoice/{id}/generate','generateInvoice')->name('admin.generateInvoice');
+    });
+    // User
+    Route::controller(\App\Http\Controllers\Admin\UserController::class)->group(function (){
+        Route::get('users','index')->name('admin.users');
     });
 
 

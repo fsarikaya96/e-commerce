@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title','Ürün Kayıt')
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">

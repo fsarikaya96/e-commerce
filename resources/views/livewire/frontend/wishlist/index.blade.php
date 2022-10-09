@@ -20,9 +20,12 @@
                                         </div>
                                     </div>
                                     <div class="prdct-desc-cntnr-wrppr">
+                                        <span class="product-name-favorite">{{ $list->products->brand }}</span>
+                                        <br>
                                         <span class="product-name-favorite">{{ $list->products->name }}</span>
-                                        <div class="product-price">
-                                            <div class="prc-box-dscntd">{{ $list->products->selling_price }} TL</div>
+                                        <div class="product-card-body">
+                                            <span class="selling-price">{{ $list->products->selling_price }} TL</span>
+                                            <span class="original-price"><del>{{ $list->products->original_price }} TL</del></span>
                                         </div>
                                     </div>
                                 </div>

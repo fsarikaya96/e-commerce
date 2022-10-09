@@ -1,9 +1,7 @@
 @extends('layouts.admin')
-@section('title','Ürün')
-
+@section('title','Kullanıcılar')
 @section('content')
     <div>
-        <livewire:admin.product.index />
+        <livewire:admin.user.index />
     </div>
 @endsection
-

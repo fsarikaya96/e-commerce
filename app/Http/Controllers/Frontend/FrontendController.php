@@ -27,8 +27,10 @@ class FrontendController extends Controller
     {
         $sliders = $this->sliderService->getSlidersByCondition(['status' => 1])->get();
         $trendingProducts = $this->productService->getProductsByCondition(['trending'=>1])->latest()->take(5)->get();
+        $newArrivalProducts = $this->productService->getProductsByCondition([])->latest()->take(5)->get();
+        $featuredProducts = $this->productService->getProductsByCondition(['featured' => 1])->latest()->take(5)->get();
 
-        return view('frontend.home', compact('sliders','trendingProducts'));
+        return view('frontend.home', compact('sliders','trendingProducts','newArrivalProducts','featuredProducts'));
     }
 
     public function categories()
@@ -59,6 +61,12 @@ class FrontendController extends Controller
 
         return view('frontend.collections.products.view');
     }
+    public function trendProducts()
+    {
+        $trendProducts = $this->productService->getProductsByCondition(['trending' => 1])->latest()->take(16)->get();
+        return view('frontend.pages.trend-products',compact('trendProducts'));
+    }
+
     public function newArrivals()
     {
         $newArrivalProducts = $this->productService->getProductsByCondition([])->latest()->take(16)->get();

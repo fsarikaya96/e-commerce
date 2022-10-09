@@ -1,9 +1,14 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3" wire:loading.class="opacity-50">
         @if($category->brands)
         <div class="card">
-            <div class="card-header"><h4>Markalar</h4></div>
+            <div class="card-header">Markalar</div>
             <div class="card-body">
+                <div wire:loading class="brands-category-loading">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Yükleniyor...</span>
+                    </div>
+                </div>
                 @foreach($category->brands as $brand)
                 <label class="d-block">
                     <input type="checkbox" wire:model="brandInputs" value="{{ $brand->name }}"/> {{ $brand->name }}
@@ -26,10 +31,10 @@
     </div>
     <div class="col-md-9">
 
+
         <div class="row">
             @forelse($products as $product)
                 <div class="col-md-4">
-
                     <div class="product-card">
                         <div class="product-card-img">
                             @if($product->quantity > 5)

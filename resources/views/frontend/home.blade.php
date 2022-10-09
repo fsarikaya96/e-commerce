@@ -55,11 +55,14 @@
                 </div>
             </div>
         </div>
+        {{--    Trend Ürünler    --}}
         <div class="py-5 bg-white">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>Trend Ürünler</h4>
+                        <h4>Trend Ürünler
+                        <a href="{{ route('frontend.products.trends') }}" class="btn btn-warning float-end">Daha Fazla Görüntüle</a>
+                        </h4>
                         <div class="underline"></div>
                     </div>
                     @if($trendingProducts)
@@ -70,7 +73,7 @@
                                 <div class="item">
                                     <div class="product-card">
                                         <div class="product-card-img">
-                                            <label class="stock bg-danger">Yeni</label>
+                                            <label class="stock bg-danger">Trend</label>
                                             @if($product->productImages->count() > 0)
                                                 <div class="img-hover">
                                                     <img src="{{ asset($product->productImages[0]->image) }}"
@@ -105,13 +108,122 @@
             </div>
         </div>
 
+        {{--    Yeni Gelen Ürünler    --}}
+        <div class="py-5 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                            <a href="{{ route('frontend.products.newArrival') }}" class="btn btn-warning">Daha Fazla Görüntüle</a>
+                        <h4 class="float-end">
+                            Yeni Ürünler
+                            <div class="underline"></div>
+                        </h4>
+
+                    </div>
+                    @if($newArrivalProducts)
+                        <div class="col-md-12">
+                            <div class="owl-carousel owl-theme new-arrivals">
+                                @forelse($newArrivalProducts as $product)
+
+                                    <div class="item">
+                                        <div class="product-card">
+                                            <div class="product-card-img">
+                                                <label class="stock bg-danger float-end">Yeni</label>
+                                                @if($product->productImages->count() > 0)
+                                                    <div class="img-hover">
+                                                        <img src="{{ asset($product->productImages[0]->image) }}"
+                                                             alt="Laptop">
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="product-card-body">
+                                                <a href="{{ url("collections/".$product->category->slug."/".$product->slug) }}">
+                                                    <p class="product-brand">{{ $product->brand }}</p>
+                                                    <h5 class="product-name">{{ $product->name }}</h5>
+                                                </a>
+                                                <div>
+                                                    <span class="selling-price">{{ $product->selling_price }} TL</span>
+                                                    <span class="original-price">{{ $product->original_price }} TL</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                @empty
+                            </div>
+                            <div class="col-md-12">
+                                <div class="p-2">
+                                    <h4>Ürün bulunamadı. </h4>
+                                </div>
+                            </div>
+                            @endforelse
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        {{--    Öne Çıkan Ürünler    --}}
+        <div class="py-5 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Öne Çıkan Ürünler
+                            <a href="{{ route('frontend.products.featured') }}" class="btn btn-warning float-end">Daha Fazla Görüntüle</a>
+
+                        </h4>
+                        <div class="underline"></div>
+                    </div>
+                    @if($featuredProducts)
+                        <div class="col-md-12">
+                            <div class="owl-carousel owl-theme featured-products">
+                                @forelse($featuredProducts as $product)
+
+                                    <div class="item">
+                                        <div class="product-card">
+                                            <div class="product-card-img">
+                                                <label class="stock bg-danger">Öne Çıkan</label>
+                                                @if($product->productImages->count() > 0)
+                                                    <div class="img-hover">
+                                                        <img src="{{ asset($product->productImages[0]->image) }}"
+                                                             alt="Laptop">
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="product-card-body">
+                                                <a href="{{ url("collections/".$product->category->slug."/".$product->slug) }}">
+                                                    <p class="product-brand">{{ $product->brand }}</p>
+                                                    <h5 class="product-name">{{ $product->name }}</h5>
+                                                </a>
+                                                <div>
+                                                    <span class="selling-price">{{ $product->selling_price }} TL</span>
+                                                    <span class="original-price">{{ $product->original_price }} TL</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                @empty
+                            </div>
+                            <div class="col-md-12">
+                                <div class="p-2">
+                                    <h4>Ürün bulunamadı. </h4>
+                                </div>
+                            </div>
+                            @endforelse
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
 @endsection
 @section('script')
     <script>
-        $('.trending-product').owlCarousel({
+        $('.trending-product, .new-arrivals, .featured-products').owlCarousel({
             loop: true,
             margin: 10,
-            nav: true,
+            nav: false,
             responsive: {
                 0: {
                     items: 1

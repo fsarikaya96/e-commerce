@@ -52,19 +52,11 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false" aria-controls="users">
+            <a class="nav-link" href="{{ route('admin.users') }}">
                 <i class="mdi mdi-account-multiple-plus menu-icon"></i>
                 <span class="menu-title">Kullanıcılar</span>
-                <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="users">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Kullanıcılar</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Kullanıcı Ekle</a></li>
-                </ul>
-            </div>
         </li>
-
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#sliders" aria-expanded="false" aria-controls="sliders">
                 <i class="mdi mdi-cards menu-icon"></i>

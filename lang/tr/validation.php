@@ -187,7 +187,10 @@ return [
         'email'             => 'E-mail',
         'province'          => 'İl',
         'county'            => 'İlçe',
-        'address'           => 'Adres'
+        'address'           => 'Adres',
+        'password'          => 'Parola',
+        'passwordAgain'    => 'Parola Tekrarı',
+        'role_as'           => 'Rol'
     ],
 
 ];

@@ -515,7 +515,7 @@ html{
     padding-right: 10px;
 }
 .underline{
-    height: 4px;
+    height: 2px;
     width: 100px;
     background: #f27a1a;
     margin: 10px 0;
@@ -554,4 +554,13 @@ html{
     margin: 0px 10px;
     color: #fff;
     width: 20px;
+}
+.brands-category-loading
+{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
