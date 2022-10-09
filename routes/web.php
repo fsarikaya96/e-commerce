@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
 // ---------------------------------------------------------------------- //
 Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('setting', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin.settings');
+    Route::post('setting', [\App\Http\Controllers\Admin\SettingController::class, 'store'])->name('admin.settings.store');
 
     // Category
     Route::controller(\App\Http\Controllers\Admin\CategoryController::class)->group(function () {

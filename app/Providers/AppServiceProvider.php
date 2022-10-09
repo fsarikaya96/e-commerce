@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use App\Repository\RepositoryIoCRegister;
 use App\Services\ServiceIoCRegister;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        $webSetting = Setting::first();
+        View::share('appSetting',$webSetting);
         Route::pattern('id', '[0-9]+');
     }
 }

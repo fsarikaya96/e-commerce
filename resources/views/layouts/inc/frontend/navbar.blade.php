@@ -4,7 +4,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                    <a href="{{ route('frontend.home') }}"><img src="{{ asset("frontend/images/ty-web.svg") }}" width="149px"></a>
+                    <a href="{{ route('frontend.home') }}">
+                        <img src="{{ asset("frontend/images/ty-web.svg") }}" width="149px">
+                    </a>
                 </div>
                 <div class="col-md-5 my-auto">
                     <form role="search">

@@ -23,8 +23,10 @@
                 <div class="footer-underline"></div>
                 <div class="mb-2"><a href="{{ route('frontend.category') }}" class="text-white">Kategoriler</a></div>
                 <div class="mb-2"><a href="{{ route('frontend.home') }}" class="text-white">Trend Ürünler</a></div>
-                <div class="mb-2"><a href="{{ route('frontend.products.newArrival') }}" class="text-white">Yeni Gelen Ürünler</a></div>
-                <div class="mb-2"><a href="{{ route('frontend.products.featured') }}" class="text-white">Öne Çıkan Ürünler</a></div>
+                <div class="mb-2"><a href="{{ route('frontend.products.newArrival') }}" class="text-white">Yeni Gelen
+                        Ürünler</a></div>
+                <div class="mb-2"><a href="{{ route('frontend.products.featured') }}" class="text-white">Öne Çıkan
+                        Ürünler</a></div>
                 <div class="mb-2"><a href="{{ route('carts') }}" class="text-white">Sepet</a></div>
             </div>
             <div class="col-md-3">
@@ -32,17 +34,17 @@
                 <div class="footer-underline"></div>
                 <div class="mb-2">
                     <p>
-                        <i class="fa fa-map-marker"></i> Ankara
+                        <i class="fa fa-map-marker"></i> {{ $appSetting->address ?? '' }}
                     </p>
                 </div>
                 <div class="mb-2">
                     <a href="" class="text-white">
-                        <i class="fa fa-phone"></i> +90 505 505 55 55
+                        <i class="fa fa-phone"></i> {{ $appSetting->phone1 ?? '' }}
                     </a>
                 </div>
                 <div class="mb-2">
                     <a href="" class="text-white">
-                        <i class="fa fa-envelope"></i> fsarikaya96@hotmail.com
+                        <i class="fa fa-envelope"></i> {{ $appSetting->email1 ?? '' }}
                     </a>
                 </div>
             </div>
@@ -57,11 +59,19 @@
             </div>
             <div class="col-md-4">
                 <div class="social-media">
-                    Get Connected:
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-instagram"></i></a>
-                    <a href=""><i class="fa fa-youtube"></i></a>
+                    @if($appSetting->facebook)
+                        <a href="{{ $appSetting->facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                    @endif
+                    @if($appSetting->twitter)
+                        <a href="{{ $appSetting->twitter }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                    @endif
+                    @if($appSetting->instagram)
+                        <a href="{{ $appSetting->instagram }}" target="_blank"><i class="fa fa-instagram"></i></a>
+                    @endif
+                    @if($appSetting->youtube)
+                        <a href="{{ $appSetting->youtube }}" target="_blank"><i class="fa fa-youtube"></i></a>
+                    @endif
+
                 </div>
             </div>
         </div>
