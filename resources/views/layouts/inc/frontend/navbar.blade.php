@@ -91,7 +91,7 @@
                         <a class="nav-link" href="{{ route('frontend.products.newArrival') }}">Yeni Gelenler</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Featured Products</a>
+                        <a class="nav-link" href="{{ route('frontend.products.featured') }}">Öne Çıkanlar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Electronics</a>

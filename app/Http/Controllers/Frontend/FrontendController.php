@@ -61,7 +61,12 @@ class FrontendController extends Controller
     }
     public function newArrivals()
     {
-        $newArrivalProducts = $this->productService->getProductsByCondition([])->latest()->take(15)->get();
+        $newArrivalProducts = $this->productService->getProductsByCondition([])->latest()->take(16)->get();
         return view('frontend.pages.new-arrival',compact('newArrivalProducts'));
+    }
+    public function featuredProducts()
+    {
+        $featuredProducts = $this->productService->getProductsByCondition(['featured' => 1])->latest()->take(16)->get();
+        return view('frontend.pages.featured-products',compact('featuredProducts'));
     }
 }

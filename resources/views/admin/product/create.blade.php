@@ -158,6 +158,13 @@
                                             <input type="checkbox" id="trending" name="trending"
                                                    class="status-checkbox">
                                         </div>
+
+                                        <div class="mb-3 col-2">
+                                            <label for="featured">Öne çıkan olsun mu ? </label><br>
+                                            <input type="checkbox" id="featured" name="featured"
+                                                   class="status-checkbox">
+                                        </div>
+
                                         <div class="mb-3 col-2">
                                             <label for="status">Durum aktif olsun mu?</label><br>
                                             <input type="checkbox" id="status" name="status" class="status-checkbox">

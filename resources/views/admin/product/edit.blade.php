@@ -135,6 +135,11 @@
                                             <input type="checkbox" id="trending" name="trending" style="width: 25px; height: 25px;" @checked(old('trending',$product->trending)) >
                                         </div>
                                         <div class="mb-3 col-2">
+                                            <label for="featured">Öne çıkan olsun mu ? </label><br>
+                                            <input type="checkbox" id="featured" name="featured" style="width: 25px; height: 25px;" @checked(old('featured',$product->featured))
+                                                   class="status-checkbox">
+                                        </div>
+                                        <div class="mb-3 col-2">
                                             <label for="status">Durum aktif olsun mu?</label><br>
                                             <input type="checkbox" id="status" name="status" style="width: 25px; height: 25px;" @checked(old('status',$product->status))>
                                         </div>

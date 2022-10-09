@@ -302,6 +302,7 @@ class ProductService implements IProductService
         $productItem->original_price    = $validatedData['original_price'];
         $productItem->quantity          = $validatedData['quantity'];
         $productItem->trending          = $request->trending ? "1" : "0";
+        $productItem->featured          = $request->featured ? "1" : "0";
         $productItem->status            = $request->status ? "1" : "0";
         $productItem->meta_title        = $validatedData['meta_title'];
         $productItem->meta_keyword      = $validatedData['meta_keyword'];
