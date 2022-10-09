@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5 mt-3">
-                <div class="bg-white" wire:ignore.self="">
+                <div class="bg-white" wire:ignore>
                     @if($product->productImages)
                         {{--                        <img src="{{ asset($product->productImages[0]->image) }}" class="w-100" alt="Img"--}}
                         {{--                             style="max-height: 440px;border-radius: 6px;border: solid 1px #e6e6e6;overflow: hidden;">--}}
@@ -72,7 +72,8 @@
                     <div class="mt-2">
                         <div class="input-group">
                             <span class="btn btn1" wire:click="decrementQuantity"><i class="fa fa-minus"></i></span>
-                            <input type="text" wire:model="quantityCount" value="{{ $this->quantityCount }}"
+                            <input type="text" id="qty" wire:model.defer="quantityCount"
+                                   value="{{ $this->quantityCount }}"
                                    class="input-quantity"/>
                             <span class="btn btn1" wire:click="incrementQuantity"><i class="fa fa-plus"></i></span>
                             <button type="button" wire:click="addToWishList({{ $product->id }})" class="btn btn1">
@@ -82,7 +83,8 @@
                         </div>
                     </div>
                     <div class="mt-2">
-                        <button wire:click="addToCart({{ $product->id }})" class="btn btn1" style="width: 272px"><span>Sepete Ekle</span>
+                        <button wire:click="addToCart({{ $product->id }})" class="btn btn1" style="width: 272px"
+                                onClick="return empty()"><span>Sepete Ekle</span>
                         </button>
                     </div>
                     <div class="mt-3">
@@ -116,6 +118,21 @@
 </div>
 @push('scripts')
     <script>
+        // Select your input element.
+        const numInput = document.getElementById('qty');
+
+        numInput.addEventListener("keypress", function (e) {
+            if (e.which < 48 || e.which > 57) {
+                e.preventDefault();
+            }
+        });
+        $("#qty").keyup(function () {
+            let length = $(this).val().length;
+            if (length < 1) {
+                $(this).val(1);
+
+            }
+        });
         $(function () {
             $("#exzoom").exzoom({
                 "navWidth": 60,

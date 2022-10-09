@@ -59,4 +59,9 @@ class FrontendController extends Controller
 
         return view('frontend.collections.products.view');
     }
+    public function newArrivals()
+    {
+        $newArrivalProducts = $this->productService->getProductsByCondition([])->latest()->take(15)->get();
+        return view('frontend.pages.new-arrival',compact('newArrivalProducts'));
+    }
 }
