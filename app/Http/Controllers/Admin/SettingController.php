@@ -3,59 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Setting;
+use App\Services\Interfaces\ISettingService;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+    private ISettingService $settingService;
+
+    public function __construct(ISettingService $ISettingService)
+    {
+        $this->settingService = $ISettingService;
+    }
+
     public function index()
     {
-        $setting = Setting::first();
+        $setting = $this->settingService->getSetting();
         return view('admin.setting.index',compact('setting'));
     }
 
     public function store(Request $request)
     {
-        $setting = Setting::first();
+        $this->settingService->createOrUpdate($request);
 
-        if ($setting) {
-            $setting->update([
-                'website_name'     => $request->website_name,
-                'website_url'      => $request->website_url,
-                'website_title'    => $request->website_title,
-                'meta_keyword'     => $request->meta_keyword,
-                'meta_description' => $request->meta_description,
-                'address'          => $request->address,
-                'phone1'           => $request->phone1,
-                'phone2'           => $request->phone2,
-                'email1'           => $request->email1,
-                'email2'           => $request->email2,
-                'facebook'         => $request->facebook,
-                'twitter'          => $request->twitter,
-                'instagram'        => $request->instagram,
-                'youtube'          => $request->youtube,
-            ]);
-            return redirect()->back()->with('success','Başarıyla Kaydedildi');
-        } else {
-            // Create
-            Setting::create([
-                'website_name'     => $request->website_name,
-                'website_url'      => $request->website_url,
-                'website_title'    => $request->website_title,
-                'meta_keyword'     => $request->meta_keyword,
-                'meta_description' => $request->meta_description,
-                'address'          => $request->address,
-                'phone1'           => $request->phone1,
-                'phone2'           => $request->phone2,
-                'email1'           => $request->email1,
-                'email2'           => $request->email2,
-                'facebook'         => $request->facebook,
-                'twitter'          => $request->twitter,
-                'instagram'        => $request->instagram,
-                'youtube'          => $request->youtube,
-            ]);
-
-            return redirect()->back()->with('success','Başarıyla Kaydedildi');
-        }
+        return redirect()->back()->with('success','Başarıyla Kaydedildi');
     }
 }

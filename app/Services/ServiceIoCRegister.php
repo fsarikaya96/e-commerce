@@ -6,7 +6,8 @@ use App\Services\{
     Implementations\BrandService, Interfaces\IBrandService, Implementations\CategoryService,Interfaces\ICategoryService,
     Implementations\ColorService, Interfaces\IColorService, Implementations\ProductService, Interfaces\IProductService,
     Implementations\SliderService, Interfaces\ISliderService, Implementations\WishlistService, Interfaces\IWishlistService,
-    Implementations\CartService, Interfaces\ICartService, Implementations\OrderService, Interfaces\IOrderService
+    Implementations\CartService, Interfaces\ICartService, Implementations\OrderService, Interfaces\IOrderService,
+    Implementations\SettingService, Interfaces\ISettingService
 };
 
 class ServiceIoCRegister
@@ -26,5 +27,6 @@ class ServiceIoCRegister
         app()->bind(IWishlistService::class, WishlistService::class);
         app()->bind(ICartService::class, CartService::class);
         app()->bind(IOrderService::class, OrderService::class);
+        app()->bind(ISettingService::class, SettingService::class);
     }
 }
