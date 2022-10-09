@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4>Yeni Gelenler</h4>
+                    <h4>Öne Çıkanlar</h4>
                     <div class="underline"></div>
                 </div>
                 @if($featuredProducts)
