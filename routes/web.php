@@ -27,6 +27,7 @@ Route::controller(\App\Http\Controllers\Frontend\FrontendController::class)->gro
     Route::get('/trend-products', 'trendProducts')->name('frontend.products.trends');
     Route::get('/new-arrivals', 'newArrivals')->name('frontend.products.newArrival');
     Route::get('/featured-products', 'featuredProducts')->name('frontend.products.featured');
+    Route::get('/search', 'searchProducts')->name('frontend.products.search');
 });
 Route::middleware('auth')->group(function () {
 

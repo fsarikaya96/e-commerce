@@ -580,3 +580,17 @@ body {
     min-height:100%;
     position:relative;
 }
+.view-btn{
+    background: #f27a1a;
+    border: 1px solid #f27a1a;
+    text-align: center;
+    text-decoration: none;
+    transition: .2s;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+}
+.view-btn:hover{
+    opacity: .8;
+    color:#FFF;
+}

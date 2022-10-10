@@ -9,9 +9,9 @@
                     </a>
                 </div>
                 <div class="col-md-5 my-auto">
-                    <form role="search">
+                    <form action="{{ route('frontend.products.search') }}" method="GET" role="search">
                         <div class="input-group">
-                            <input type="text" placeholder="Search your product" class="form-control shadow-none" />
+                            <input type="text" name="search" value="{{ Request::get('search') }}" placeholder="Ürün adını yazınız." class="form-control shadow-none" />
                             <button class="btn btn-outline-secondary" type="submit">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -20,7 +20,6 @@
                 </div>
                 <div class="col-md-5 my-auto">
                     <ul class="nav justify-content-end">
-
 
                         @guest
                             @if (Route::has('login'))

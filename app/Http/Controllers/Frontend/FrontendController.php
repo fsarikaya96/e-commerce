@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Services\Interfaces\ICategoryService;
 use App\Services\Interfaces\IProductService;
 use App\Services\Interfaces\ISliderService;
+use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
@@ -76,5 +78,17 @@ class FrontendController extends Controller
     {
         $featuredProducts = $this->productService->getProductsByCondition(['featured' => 1])->latest()->take(16)->get();
         return view('frontend.pages.featured-products',compact('featuredProducts'));
+    }
+
+    public function searchProducts(Request $request)
+    {
+        if ($request->search)
+        {
+            $products = Product::where('name','LIKE','%'.$request->search.'%')->Orwhere('brand','LIKE','%'.$request->search.'%')->latest()->paginate(15);
+
+            return view('frontend.pages.search-products',compact('products'));
+        }else{
+            return redirect()->back()->with('error','Aradığınız Ürün Bulunamadı.');
+        }
     }
 }
