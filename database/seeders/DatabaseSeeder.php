@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,12 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::truncate();
-         \App\Models\User::factory(1)->create();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        User::query()->truncate();
+        User::factory(1)->create();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

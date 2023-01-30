@@ -28,11 +28,18 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Paginator::useBootstrap();
-        $webSetting = Setting::first();
-        View::share('appSetting',$webSetting);
+        View::composer('layouts.inc.frontend.sidebar', function ($view) {
+
+            $view->with('appSetting', Setting::query()->first());
+
+        });
+       /* $webSetting = Setting::query()->first();
+
+        View::share('appSetting', $webSetting);*/
+
         Route::pattern('id', '[0-9]+');
     }
 }

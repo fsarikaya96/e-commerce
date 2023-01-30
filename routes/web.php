@@ -69,12 +69,8 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
         Route::get('products/{id}/edit', 'edit')->name('admin.products.edit');
         Route::put('products/{id}', 'update')->name('admin.products.update');
         Route::get('products/product-image/{product}/delete', 'deleteImage')->name('admin.products.deleteImage');
-        Route::post('products/update-product-color/{product?}', 'updateProductColor')->name(
-            'admin.products.updateProductColor'
-        );
-        Route::post('products/delete-product-color/{product?}', 'deleteProductColor')->name(
-            'admin.products.deleteProductColor'
-        );
+        Route::post('products/update-product-color/{product?}', 'updateProductColor')->name('admin.products.updateProductColor');
+        Route::post('products/delete-product-color/{product?}', 'deleteProductColor')->name('admin.products.deleteProductColor');
     });
 
     // Slider
@@ -98,14 +94,14 @@ Route::prefix('admin')->middleware(['auth' => 'isAdmin'])->group(function () {
     // Order
     Route::controller(\App\Http\Controllers\Admin\OrderController::class)->group(function () {
         Route::get('orders', 'index')->name('admin.orders');
-        Route::get('orders/{id}','show')->name('admin.shows');
-        Route::put('orders/{id}','update')->name('admin.orders.update');
-        Route::get('invoice/{id}','viewInvoice')->name('admin.viewInvoice');
-        Route::get('invoice/{id}/generate','generateInvoice')->name('admin.generateInvoice');
+        Route::get('orders/{id}', 'show')->name('admin.shows');
+        Route::put('orders/{id}', 'update')->name('admin.orders.update');
+        Route::get('invoice/{id}', 'viewInvoice')->name('admin.viewInvoice');
+        Route::get('invoice/{id}/generate', 'generateInvoice')->name('admin.generateInvoice');
     });
     // User
-    Route::controller(\App\Http\Controllers\Admin\UserController::class)->group(function (){
-        Route::get('users','index')->name('admin.users');
+    Route::controller(\App\Http\Controllers\Admin\UserController::class)->group(function () {
+        Route::get('users', 'index')->name('admin.users');
     });
 
 
