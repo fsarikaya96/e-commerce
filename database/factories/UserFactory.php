@@ -20,8 +20,8 @@ class UserFactory extends Factory
     {
         return [
             'name' => "Ferhat Sarıkaya",
-            'email' => "admin@gmail.com",
-            'password' => Hash::make('23041988v'),
+            'email' => "admin@admin.com",
+            'password' => Hash::make('password'),
             'role_as' => 1,
         ];
     }
