@@ -14,6 +14,7 @@
   $ php artisan serve
   $ npm install
   $ npm run dev
+  $ cp .env.example .env
 ```
 **3.Backend**
 ```
